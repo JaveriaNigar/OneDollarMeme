@@ -347,14 +347,59 @@ function showDeleteConfirmation(message, onConfirm) {
 /**
  * Global Meme Interaction Logic (Reactions, Comments, etc.)
  */
+
+// Function to trigger sidebar refresh
+function refreshSidebar() {
+    // Trigger leaderboard update if the function exists
+    if (typeof updateLeaderboard === 'function') {
+        updateLeaderboard();
+    }
+    // Trigger live scores update if the function exists
+    if (typeof updateLiveScores === 'function') {
+        updateLiveScores();
+    }
+}
+
 document.addEventListener('DOMContentLoaded', function () {
-    // Meme Deletion - Always allow if the button exists
+    // Meme Deletion - AJAX for instant UI update
     $(document).on('click', '.delete-meme-btn', function (e) {
         e.preventDefault();
         const form = $(this).closest('form');
+        const actionUrl = form.attr('action');
+        const memeCard = $(this).closest('.post-card');
+        const memeId = memeCard.data('id');
 
         showDeleteConfirmation('Are you sure you want to delete this post?', () => {
-            form.submit();
+            $.ajax({
+                url: actionUrl,
+                method: 'DELETE',
+                headers: { 
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                    'Accept': 'application/json'
+                },
+                success: function (data) {
+                    if (data.success) {
+                        // Animate removal for better UX
+                        memeCard.fadeOut(300, function() {
+                            $(this).remove();
+                            // Show success toast if available
+                            if (window.showToast) {
+                                window.showToast('Meme deleted successfully!', 'success');
+                            }
+                        });
+                    }
+                },
+                error: function (xhr) {
+                    console.error('Delete error:', xhr);
+                    let errorMessage = 'Failed to delete meme';
+                    if (xhr.status === 403) {
+                        errorMessage = 'You are not authorized to delete this meme';
+                    }
+                    if (window.showToast) {
+                        window.showToast(errorMessage, 'error');
+                    }
+                }
+            });
         });
     });
 
@@ -479,6 +524,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (reactionsLine.length && data.reactions_html) {
                     reactionsLine.html(data.reactions_html);
                 }
+
+                // Refresh sidebar to update scores instantly
+                refreshSidebar();
             }
         });
     });
@@ -539,6 +587,9 @@ document.addEventListener('DOMContentLoaded', function () {
                             countSpan.text(c + 1);
                         }
                     }
+
+                    // Refresh sidebar to update scores instantly
+                    refreshSidebar();
                 } else {
                     if (window.showToast) {
                         window.showToast(res.message || 'Failed to submit comment', 'error');

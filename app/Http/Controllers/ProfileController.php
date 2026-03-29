@@ -17,6 +17,7 @@ class ProfileController extends Controller
         $user = $request->user()->load(['memes.brand', 'challengePayouts']);
         return view('profile.edit', [
             'user' => $user,
+            'isOwner' => true,
         ]);
     }
 
@@ -27,11 +28,14 @@ class ProfileController extends Controller
     {
            // + ko space se replace karo
         $name = str_replace('+', ' ', $name);
-    
+
         $user = \App\Models\User::with(['memes.brand', 'challengePayouts'])
         ->where('name', $name)
         ->firstOrFail();
-        return view('profile.edit', compact('user'));
+        
+        $isOwner = auth()->check() && auth()->id() === $user->id;
+        
+        return view('profile.edit', compact('user', 'isOwner'));
     }
 
     /**

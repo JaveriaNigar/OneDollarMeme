@@ -92,6 +92,7 @@ class MemeController extends Controller
             ->get()
             ->map(function($user) {
                 return (object) [
+                    'user_id' => $user->id,
                     'user_name' => $user->name,
                     'user_avatar' => $user->profile_photo_url,
                     'score' => $user->total_score ?? 0,
@@ -261,12 +262,17 @@ class MemeController extends Controller
 
         // Trending/Contest feed: prioritize current paid contest memes, then sort by score (desc) and date
     $highlightMemeId = $request->input('highlight') ?: session('highlight_meme_id');
+    
+    // Filter memes from the last 30 days for home page feed
+    $thirtyDaysAgo = now()->subDays(30);
+    
     $query = Meme::with(['reactions', 'comments.user', 'user', 'shareEvents', 'brand'])
         ->where('status', '!=', 'rejected')
-        ->whereNull('brand_id');
+        ->whereNull('brand_id')
+        ->where('created_at', '>=', $thirtyDaysAgo);
 
     // 1. Paid / Contest Memes ALWAYS First
-        
+
         // 2. Highlighted Meme (Floats to top of its respective section)
         if ($highlightMemeId) {
             $query->orderByRaw("CASE WHEN id = ? THEN 0 ELSE 1 END ASC", [$highlightMemeId]);
@@ -277,17 +283,17 @@ class MemeController extends Controller
         // Since we already ordered by is_contest desc, we can just order by score desc for the paid block
         // However, to strictly follow "This week's uploaded paid memes... highest score at top"
         // And "Unpaid below all paid"
-        
+
         // Let's rely on standard multi-column sort:
         // Level 1: Paid vs Unpaid (is_contest DESC)
         // Level 2: Contest Week (Current week first) (contest_week_id DESC)
         // Level 3: Score (DESC) -- This applies to paid memes principally
         // Level 4: Created At (DESC) -- Tie breaker
-        
+
         $query->orderBy('contest_week_id', 'desc')
               ->orderBy('score', 'desc')
               ->orderBy('created_at', 'desc');
-        
+
         $memes = $query->take(20)->get();
 
         // Add user selected emoji for each meme
@@ -355,6 +361,7 @@ class MemeController extends Controller
                     'id' => $meme->id,
                     'title' => $meme->title,
                     'image_path' => $meme->image_path ? asset('storage/' . $meme->image_path) : null,
+                    'user_id' => $meme->user_id,
                     'user_name' => $meme->user->name,
                     'user_avatar' => $meme->user->profile_photo_url,
                     'score' => $meme->score,
@@ -601,10 +608,13 @@ class MemeController extends Controller
     }
 
     // Delete meme
-    public function destroy(Meme $meme)
+    public function destroy(Meme $meme, Request $request)
     {
         // Check if the authenticated user is the owner of the meme
         if ($meme->user_id !== Auth::id()) {
+            if ($request->expectsJson()) {
+                return response()->json(['success' => false, 'message' => 'Unauthorized to delete this meme'], 403);
+            }
             abort(403, 'Unauthorized to delete this meme');
         }
 
@@ -614,6 +624,10 @@ class MemeController extends Controller
         }
 
         $meme->delete();
+
+        if ($request->expectsJson()) {
+            return response()->json(['success' => true, 'message' => 'Meme deleted successfully!', 'meme_id' => $meme->id]);
+        }
 
         return redirect('/')->with('success', 'Meme deleted successfully!');
     }
