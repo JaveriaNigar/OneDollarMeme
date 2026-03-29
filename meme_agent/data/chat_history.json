@@ -1,0 +1,1526 @@
+{
+  "1": {
+    "messages": [
+      {
+        "role": "user",
+        "content": "hy"
+      },
+      {
+        "role": "assistant",
+        "content": "Hey! Kya haal chaal hain? Aaj kal kya chal raha hai?"
+      },
+      {
+        "role": "user",
+        "content": "sab thk hi hai bas ek kam kro ispr meme bana do k bas normal hai sab"
+      },
+      {
+        "role": "assistant",
+        "content": "Haan, ye toh bilkul relatable hai. Memes toh ispe bante hi rehte hain.  \n\nWaise, kabhi kabhi bas normal hona bhi badi baat hoti hai, right? Tumhara din kaise ja raha hai?\n\nArre, lagta hai aaj sab kuch normal ja raha hai, hain na? Kabhi kabhi aise din bhi aate hain. Toh, aaj ka din aapke liye kaise tha? Koi interesting ya funny incident jo share karna chahe? 😊"
+      },
+      {
+        "role": "user",
+        "content": "ok generate meme on it"
+      },
+      {
+        "role": "assistant",
+        "content": "Theek hai, bas normal hone par ek meme toh banta hai. 😄  \n  \n\nWaise, jab sab normal hota hai, tab kya karte ho? Koi khaas activity ya bas chill karte ho?\n\nAaj sab kuch shaant aur normal kyun lag raha hai? Waise kabhi kabhi yeh calm moments bahut zaroori hote hain, right? Tumhare future plans kya hain, kuch special socha hai?\n\n1. [ChillRelax] \"Jab life mein koi tension nahi, but tum phir bhi panic mode mein ho... 😂\""
+      },
+      {
+        "role": "user",
+        "content": "hello"
+      },
+      {
+        "role": "assistant",
+        "content": "Hello! Kya scene hai? Aaj kuch naya kiya?"
+      },
+      {
+        "role": "user",
+        "content": "nhi kuch naya to nhi kia khair se tm ek kam kro coding pr meme banao abhi"
+      },
+      {
+        "role": "assistant",
+        "content": "Haha, coding struggles ka meme ready! 😅\n\nAh, coding, yeh toh ek alag hi mazaa hai! Kabhi-kabhi apne code ko dekh ke lagta hai jaise kisi dil se Jude connection ho, aur kabhi Arjun Rampal ki acting ki tarah confusing bhi ho jaata hai. Aap bhi aise rollercoaster ride pe hote hain kya jab code nahi chalta?\n\n1. T06 [one_liner]: When coding hits: Arrey bhai, logic toh clear tha, par yeh semicolon kidhar se aa gaya? (#relatable)"
+      },
+      {
+        "role": "user",
+        "content": "hello my agent"
+      },
+      {
+        "role": "assistant",
+        "content": "Hello! Kya mai aapki kis tarah madad kar sakta hoon aaj?"
+      },
+      {
+        "role": "user",
+        "content": "aj tm meme banao mere collage pr"
+      },
+      {
+        "role": "assistant",
+        "content": "College life toh full of memories hoti hai! 😄\n\nAhh, college life! Suna hai yeh sabse badiya time hota hai, but kabhi kabhi stress level bhi high ho jaata hai na? Waise tum hi batao, kya abhi exams ki tayyari kar rahe ho ya chill-mode on hai?\n\n1. [T02] College got me like: \"Padhai ki jagah, time table bana rahe hain hum!\" (relatable)\n2. [T06] When college hits: \"Frustration level 101: Jab professor padhata hai lekin samajh sirf 1% aata hai!\" (funny)"
+      },
+      {
+        "role": "user",
+        "content": "helo"
+      },
+      {
+        "role": "assistant",
+        "content": "Hello! Kya hal chal hai? Sab theek?"
+      },
+      {
+        "role": "user",
+        "content": "ek kam kroo sab thk ki bat pr meme bna do"
+      },
+      {
+        "role": "assistant",
+        "content": "Sab theek ki baat pe toh meme banta hai! 😆\n\n1. [T06] Just checking: \"Jab koi puche sab theek? Aur tum bas smile karke haan bol do!\" (funny)"
+      },
+      {
+        "role": "user",
+        "content": "what was my last message?"
+      },
+      {
+        "role": "assistant",
+        "content": "Aapka aakhri message tha: \"ek kam kroo sab thk ki bat pr meme bna do\"."
+      },
+      {
+        "role": "user",
+        "content": "hello"
+      },
+      {
+        "role": "assistant",
+        "content": "Hello! Kya haal hai?"
+      },
+      {
+        "role": "user",
+        "content": "bas wahi haddi wahi khaal hai bhai or kia hoga?"
+      },
+      {
+        "role": "assistant",
+        "content": "Sahi hai! Zindagi isi tarah chalti rehti hai. 😄"
+      },
+      {
+        "role": "user",
+        "content": "hn naw yr ek kam kro isi bat pr na koi english m meme do"
+      },
+      {
+        "role": "assistant",
+        "content": "Zindagi ki haddi khaal pe meme zaroor banta hai! 😆\n\nAh, life struggles! Hum sab ki life mein kabhi na kabhi woh phase aata hai na, jab sab kuch thoda heavy lagta hai. Kabhi kabhi sochta hoon yeh struggle kab khatam hoga. Tumhe aajkal kis cheez ka struggle sabse zyada feel ho raha hai?\n\n1. [T06] When life struggles hit: \"Sample flat ho jaata, jaise hi koi support ki baat hoti hai\" (#desi)\n2. [T23] Day 1 of adulting struggles: \"Ready to change the world!\""
+      },
+      {
+        "role": "user",
+        "content": "hy"
+      },
+      {
+        "role": "assistant",
+        "content": "Hi! Kya chal raha hai?"
+      },
+      {
+        "role": "user",
+        "content": "by"
+      },
+      {
+        "role": "assistant",
+        "content": "Bye! Phir baat karenge. 😊"
+      },
+      {
+        "role": "user",
+        "content": "helloooooooooooooooooo"
+      },
+      {
+        "role": "assistant",
+        "content": "Hello! Kya scene hai?"
+      },
+      {
+        "role": "user",
+        "content": "helllooooo"
+      },
+      {
+        "role": "assistant",
+        "content": "Hello! Aaj kuch funny sunana hai kya? 😄"
+      },
+      {
+        "role": "user",
+        "content": "yr desi family pr meme dena"
+      },
+      {
+        "role": "assistant",
+        "content": "Desi family ke memes toh alag hi level ke hote hain! 😆\n\nAh, desi family talks, always relatable and sometimes thoda intense, right? I feel you if you're going through those family expectation vibes. Kaunsa recent family scene yaad aa raha hai tumhe?\n\n1. [T02] Desi family expectations got me like: \"Bas ek engineer ya doctor aur khush rehlo!\" #relatable\n2. [T03] Family gatherings where everyone asks about my job, marriage... but never my happiness. #classic\n3. [T02] Me: \"I have dreams and passions.\" Desi parents: \"Filmy sapne chhodo, reality se judo!\" #grounded"
+      },
+      {
+        "role": "user",
+        "content": "hy"
+      },
+      {
+        "role": "assistant",
+        "content": "Hi! Kya haal hai?"
+      },
+      {
+        "role": "user",
+        "content": "wahi hal hai jo tha"
+      },
+      {
+        "role": "assistant",
+        "content": "Oh, exams ya coding ka stress hai kya? 😅"
+      },
+      {
+        "role": "user",
+        "content": "abhi tm meme banao koi acha sa kisi bhi topic pr"
+      },
+      {
+        "role": "assistant",
+        "content": "Sure! Memes toh har mood ko light kar dete hain. 😄\n\nArre wah, kya scene hai? Aapke pas koi interesting baat ya funny story ho toh share karo, bahut maza aayega sunne mein. Abhi tak kya chal raha hai life mein? Koi aisa moment jo #BoringZindagi se thoda hatke ho?\n\n1. [Distracted Boyfriend] \"Me trying to be productive\" / \"Netflix and chill\" / \"Actually doing my work\"\n2. [Drake Hotline Bling] \"Studying for exams\" / \"Binge-watching Netflix instead\"\n3. [First World Problems] \"No WiFi for 5 minutes\" / \"Life is over\""
+      },
+      {
+        "role": "user",
+        "content": "abe yrr ghr ke khane pr banao"
+      },
+      {
+        "role": "assistant",
+        "content": "Ghar ka khana, sabki jaan aur majboori hota hai! 😋\n\n1. [Chef's Kiss] \"When Mom makes your favorite dish and you take the first bite.\"\n2. [Expectation vs. Reality] \"Ghar ka khana on Instagram vs. Ghar ka khana in reality.\"\n3. [Change My Mind] \"Ghar ka khana is better than any 5-star restaurant.\""
+      },
+      {
+        "role": "user",
+        "content": "begairti pr meme banao"
+      },
+      {
+        "role": "assistant",
+        "content": "Begairti ke memes toh sabko hasa dete hain! 😂\n\n1. [Savage Level 1000] \"When you borrow a pen and never return it. Begairti!\"\n2. [Success Kid] \"Me: Acts shamelessly. Everyone: Calls it confidence. Me: Begairti for the win!\"\n3. [Roll Safe Think About It] \"Act shamelessly, never embarrassed. No embarrassment, no regrets.\""
+      },
+      {
+        "role": "user",
+        "content": "kuttey log pr meme banao"
+      },
+      {
+        "role": "assistant",
+        "content": "Kuttey log aur unki harkatein toh meme gold hain! 🤣\n\n1. [SpongeBob Mocking] \"Kuttey log: 'Mein toh aisa nahi hoon.' Also kuttey log: *acts exactly like that*\"\n2. [Two Buttons] \"Kuttey log: Be loyal or be a backstabber. Can't decide!\"\n3. [Drake Yes/No] \"Trustworthy people / Kuttey log who promise and never deliver.\""
+      },
+      {
+        "role": "user",
+        "content": "begairti pr meme banao"
+      },
+      {
+        "role": "assistant",
+        "content": "Begairti ke upar toh endless content hai! 🤪\n\nAhh, begairti! Yeh topic toh evergreen hai, hamesha mazze ka hota hai. Tumhare saath bhi kabhi aisa kuch hua hai jahan tum kisi ki begairti dekh ke socho, \"Is bande ne toh laaj sharam sab gava di\"? 😄\n\n1. [Grinning Cat] \"Jab boss kaam dene aaye aur tum pretend kar rahe ho busy ho, par andar se ho pura araam mode on - Begairti level: Expert\"\n2. [Office Jim] \"Jab dost ke saath movie plan banate hue tum uska lecture bunk karwane mein safal ho jao - Dostana Begairti\"\n3. [Distracted Boyfriend] \"Jab girlfriend shopping le jaaye par mann mein PUBG hi chal raha ho - Begairti ho toh aisi!\""
+      },
+      {
+        "role": "user",
+        "content": "hello"
+      },
+      {
+        "role": "assistant",
+        "content": "Hello! Kya haal hai?"
+      },
+      {
+        "role": "user",
+        "content": "wahi hal hai bhe"
+      },
+      {
+        "role": "assistant",
+        "content": "Sahi hai! Zindagi ka yeh hal kaafi common hai. 😄"
+      },
+      {
+        "role": "user",
+        "content": "hn na"
+      },
+      {
+        "role": "assistant",
+        "content": "Bilkul! Kya maza aaya aaj kal life mein?"
+      },
+      {
+        "role": "user",
+        "content": "abhi isko rehne do koi meme bana kr do mjhe"
+      },
+      {
+        "role": "assistant",
+        "content": "Meme time! Let's lighten the mood. 😄\n\n1. [Distracted Boyfriend] \"Me: Focusing on work / Also me: Scrolling memes for hours.\"\n2. [Office Jim] \"When you find a meme that perfectly describes your life: *smirk*\"\n3. [Success Kid] \"When you finish work early and have time for memes!\""
+      },
+      {
+        "role": "user",
+        "content": "khane pr banao"
+      },
+      {
+        "role": "assistant",
+        "content": "Khana aur memes, perfect combo! 😋\n\n1. [Drake Yes/No] \"Ghar ka khana? / Ghar ka khana made by Mom? Yes!\"\n2. [Waiting Skeleton] \"Me waiting for biryani: 'Sab patient kaam hai.'\"\n3. [Chef's Kiss] \"When you taste Mom's cooking and forget all your worries.\""
+      },
+      {
+        "role": "user",
+        "content": "school pr do meme"
+      },
+      {
+        "role": "assistant",
+        "content": "School days ke memes toh sabse funny hote hain! 😆\n\n1. [Expanding Brain] \"Homework hai / Homework kal submit karna hai / Homework aaj hi karna hai / Homework kabhi na karna\"\n2. [Gru's Plan] \"Plan: Study hard / Study a bit / Just pass / Bunk the class\""
+      },
+      {
+        "role": "user",
+        "content": "nhi nhi jo last me memes di hai na us se hat kr do koi"
+      },
+      {
+        "role": "assistant",
+        "content": "School ke naye memes ready! 😄\n\n1. [Distracted Boyfriend] \"Teacher explaining / Me daydreaming about school getting over.\"\n2. [Confused Math Lady] \"When you're in class but the teacher starts talking rocket science.\""
+      },
+      {
+        "role": "user",
+        "content": "give me meme about collage"
+      },
+      {
+        "role": "assistant",
+        "content": "College life toh full-on drama hota hai! 😂\n\n1. [Success Kid] \"When you finish an assignment 5 minutes before the deadline.\"\n2. [Distracted Boyfriend] \"Me: Focusing on studies / Also me: Binge-watching series instead.\""
+      },
+      {
+        "role": "user",
+        "content": "give me meme about collage"
+      },
+      {
+        "role": "assistant",
+        "content": "College ke upar memes toh banta hai! 😆\n\n1. [First World Problems] \"When you have two assignments due and a party to attend.\"\n2. [Mocking SpongeBob] \"College student: 'I’ll get enough sleep tonight.' Also college student: *stays up all night*\""
+      },
+      {
+        "role": "user",
+        "content": "make meme about coding"
+      },
+      {
+        "role": "assistant",
+        "content": "Coding struggles ka meme toh must hai! 😅\n\n1. [T02] \"Me: Writes code / Computer: 'Syntax error' / Me: 'Why you do this?'\""
+      },
+      {
+        "role": "user",
+        "content": "make meme about coding"
+      },
+      {
+        "role": "assistant",
+        "content": "Coding ke memes, sabse relatable! 🤖\n\n1. [T02] \"When your code finally runs without errors: 'I'm a genius!'\""
+      },
+      {
+        "role": "user",
+        "content": "make meme about coding"
+      },
+      {
+        "role": "assistant",
+        "content": "Coding pe memes toh bante hi rehte hain! 😄\n\n1. [T06] \"When you fix one bug and three more appear: 'It's magic!'\""
+      },
+      {
+        "role": "user",
+        "content": "make meme for developers"
+      },
+      {
+        "role": "assistant",
+        "content": "Developers ke liye meme toh banta hai! 😆\n\n1. [T02] \"Developer life: Turning coffee into code, one bug at a time!\""
+      },
+      {
+        "role": "user",
+        "content": "hello"
+      },
+      {
+        "role": "assistant",
+        "content": "Hello! Kya haal hai?"
+      },
+      {
+        "role": "user",
+        "content": "make meme for developers"
+      },
+      {
+        "role": "assistant",
+        "content": "Developers ke liye ek mazahiya meme! 😄\n\n1. [T06] \"When code works on Friday and breaks on Monday: 'Weekend magic!'\""
+      },
+      {
+        "role": "user",
+        "content": "make meme for developers"
+      },
+      {
+        "role": "assistant",
+        "content": "Developers ki duniya mein ye toh hota hi rehta hai! 😂\n\n1. [T02] \"Debugging: When you spend hours looking for a missing semicolon!\""
+      },
+      {
+        "role": "user",
+        "content": "make meme for developers"
+      },
+      {
+        "role": "assistant",
+        "content": "Developer life ke struggles funny hote hain! 😅\n\n1. [T06] \"Writing code: 10% coding, 90% debugging. Welcome to developer life!\""
+      },
+      {
+        "role": "user",
+        "content": "make meme for developers"
+      },
+      {
+        "role": "assistant",
+        "content": "Developer life ke liye ek aur meme ready! 😆\n\n1. [T02] \"Deploying code: 'Please work, please work, please work...'\""
+      },
+      {
+        "role": "user",
+        "content": "make meme for developers"
+      },
+      {
+        "role": "assistant",
+        "content": "Developer struggles ka ek aur funny angle! 😂\n\n1. [T06] \"When you fix a bug without breaking anything else: 'Miracles happen!'\""
+      },
+      {
+        "role": "user",
+        "content": "make meme for developers"
+      },
+      {
+        "role": "assistant",
+        "content": "Developer life ke liye ek aur relatable meme! 😄\n\n1. [T02] \"Coding phase: 'It worked yesterday, why not today?'\""
+      },
+      {
+        "role": "user",
+        "content": "make 5 memes for developers"
+      },
+      {
+        "role": "assistant",
+        "content": "Developers ke liye 5 mazahiya memes ki tayari! 🤓\n\n1. [T02] \"When the code compiles without errors: 'I'm basically a wizard.'\"\n2. [T06] \"Debugging mode: 'It's not a bug, it's a feature!'\"\n3. [T02] \"When you add a comment in the code: 'Future me will thank me!'\"\n4. [T23] \"When Stack Overflow goes down: 'Panic mode activated!'\"\n5. [T06] \"After fixing a bug: 'Well, that was easy... says no developer ever.'\""
+      },
+      {
+        "role": "user",
+        "content": "make 50 memes for developers"
+      },
+      {
+        "role": "assistant",
+        "content": "Fifty developer memes, that's a meme marathon! 😅\n\n1. [T06] \"When your code works first try: 'Is this real life?'\"\n2. [T02] \"Stack Overflow: Developer's best friend since forever.\"\n3. [T02] \"Code review time: 'Please don't judge me.'\"\n4. [T06] \"When you finally understand that one line of code: 'Eureka!'\"\n5. [T02] \"Git commit: 'Fixed an issue' (but created 10 more).\"\n\nAur bhi chahiye toh batao, memes ki dunia mein welcome!"
+      },
+      {
+        "role": "user",
+        "content": "make 10 memes for developers"
+      },
+      {
+        "role": "assistant",
+        "content": "Developers ke liye 10 memes ready! 😄\n\n1. [T02] \"When you Google an error and find no results: 'Am I the first to ever face this?'\"\n2. [T06] \"Coffee: The fuel for coding marathons.\"\n3. [T02] \"When your code runs on the first try: 'What did I miss?'\"\n4. [T06] \"Fixing one bug and creating three more: 'Developer's cycle of life.'\"\n5. [T02] \"Reading error messages like: 'This could be anything.'\"\n6. [T06] \"Deploying on Friday: 'Living on the edge!'\"\n7. [T02] \"When you explain your code to a rubber duck and it works.\"\n8. [T06] \"Version control: Because losing code once was enough!\"\n9. [T02] \"When a 'quick fix' takes the whole day.\"\n10. [T06] \"When your code compiles at 2 AM: 'Worth it!'\"\n\nEnjoy these developer moments! 😅"
+      },
+      {
+        "role": "user",
+        "content": "how much memes can you generate at 1 prompt ?"
+      },
+      {
+        "role": "assistant",
+        "content": "Main ek prompt mein 1 se 5 memes generate kar sakta hoon. Batao, kis topic par chahiye?"
+      },
+      {
+        "role": "user",
+        "content": "make meme for developers"
+      },
+      {
+        "role": "assistant",
+        "content": "Here's another meme for developers! 😄\n\n1. [T02] \"When you finally fix a bug that's been haunting you: 'Victory is mine!'\""
+      },
+      {
+        "role": "user",
+        "content": "give me 5 memes for laptop"
+      },
+      {
+        "role": "assistant",
+        "content": "Laptop-related memes coming right up! 💻\n\n1. [T02] \"When you finally close all the tabs and your laptop breathes a sigh of relief.\"\n2. [T06] \"Battery at 100%: 'I've got all day.' Battery at 50%: 'Better find that charger.'\"\n3. [T02] \"When your laptop fan sounds like it's about to take off: 'Houston, we have a problem.'\"\n4. [T06] \"Opening the laptop to work but ending up watching cat videos.\"\n5. [T02] \"When you see the 'Update and Restart' button: 'Not today, Satan!'\"\n\nEnjoy these laptop laughs! 😅"
+      },
+      {
+        "role": "user",
+        "content": "give me 10 memes"
+      },
+      {
+        "role": "assistant",
+        "content": "Sure! Here are 10 memes for you:\n\n1. [T02] \"When you accidentally hit 'Reply All' on an email: 'Brace for impact!'\"\n2. [T06] \"When you realize the meeting could have been an email.\"\n3. [T02] \"Trying to cook for the first time: 'How did I burn water?'\"\n4. [T06] \"When you're the only one laughing at your own joke: 'Comedy genius!'\"\n5. [T02] \"When you find money in an old jacket: 'I'm rich!'\"\n6. [T06] \"Me: 'I'm going to bed early.' Also me at 2 AM: 'Just one more episode.'\"\n7. [T02] \"When you realize it's Monday tomorrow: 'Weekend, come back!'\"\n8. [T06] \"When you enter a room and forget why: 'What sorcery is this?'\"\n9. [T02] \"Procrastination level: 'I'll start tomorrow for sure.'\"\n10. [T06] \"When your favorite song comes on: 'Instant dance party!'\"\n\nEnjoy the laughs! 😄"
+      },
+      {
+        "role": "user",
+        "content": "make meme about desi family"
+      },
+      {
+        "role": "assistant",
+        "content": "{\"reply\": \"Desi family ke upar toh memes bante hi rehte hain! \\ud83d\\ude04\\n\\n1. [T02] \\\"When you sneeze twice and your mom already has a list of home remedies.\\\"\\n2. [T06] \\\"Desi parents: 'Beta, bas padhai pe dhyan do.' Also desi parents: 'Sharma ji ke b\\u00eate se seekho!'\\\"\\n3. [T02] \\\"When relatives visit and you lose your room to them: 'The struggle is real.'\\\"\\n4. [T06] \\\"Desi family function: 'Beta, sabko namaste bolo. Beta, chai le aao. Beta, gaana sunao.'\\\"\\n5. [T02] \\\"When you're watching TV and suddenly a family drama starts: 'Change the channel, quick!'\\\"\\n\\nHope these bring a smile! \\ud83d\\ude06\", \"memes\": []}"
+      },
+      {
+        "role": "user",
+        "content": "make meme about desi family"
+      },
+      {
+        "role": "assistant",
+        "content": "{\n  \"reply\": \"Desi family ki baatein kuch aur hi hoti hain!\",\n  \"memes\": [\n    \"[Batman-Slapping-Robin] Mother: Kahan jaa rahe ho? | Me: Dost ke ghar padhai karne | Reality: Series dekhne ka plan\",\n    \"[Aint-Nobody-Got-Time-For-That] Jab maa bolti hai \\\"Bus 5 minute aur so jao\\\" | But koi advice deta hai subah uth kar exercise karo\",\n    \"[Boardroom-Meeting-Suggestion] Maa: Main tumhein chillane nahi dene wali | Bhai: Padai kab karni hai? | Main: Shanti, shanti!\"\n  ]\n}"
+      },
+      {
+        "role": "user",
+        "content": "make meme about desi family"
+      },
+      {
+        "role": "assistant",
+        "content": "Desi family ke memes toh hassi ki guarantee hain! 😂\n\n1. [T02] \"When your mom says 'I'll be ready in 5 minutes': 'Time is just a concept.'\"\n2. [T06] \"Desi parents' logic: 'TV volume down, par padhai ka volume up!'\"\n3. [T02] \"When relatives ask, 'Beta, shaadi kab kar rahe ho?' *Internal screaming*\"\n4. [T06] \"Maa kehti hain, 'Sab thik se kha lo,' aur plate bhar deti hain Everest jaisa.\"\n5. [T02] \"When you sneeze once: 'Nazla hai.' Sneeze twice: 'Shaadi ka soch lo!'\"\n\nEnjoy these relatable moments! 😄"
+      },
+      {
+        "role": "user",
+        "content": "make meme about desi family"
+      },
+      {
+        "role": "assistant",
+        "content": "Desi family ke upar ek aur funny meme! 😄\n\n1. [T06] \"Desi parents: 'Tumhare phone pe itna data kyun khatam hota hai?' Me: *shows them YouTube* 'Yeh sabke liye hai!'\""
+      },
+      {
+        "role": "user",
+        "content": "make meme about desi family"
+      },
+      {
+        "role": "assistant",
+        "content": "Desi family ki baatein toh alag hi level ki hoti hain! 😆\n\n1. [T02] \"When you hear 'Sharma ji ke bête' in any conversation: *Brace yourself*\""
+      },
+      {
+        "role": "user",
+        "content": "hy"
+      },
+      {
+        "role": "assistant",
+        "content": "Hey! Kya haal hai?"
+      },
+      {
+        "role": "user",
+        "content": "yrr aj na mjhe pencil pe meme bana kr do"
+      },
+      {
+        "role": "assistant",
+        "content": "Pencil ke upar ek zabardast meme! ✏️😄\n\n1. [T06] \"When you lose your pencil during an exam: 'End of the world vibes.'\""
+      },
+      {
+        "role": "user",
+        "content": "ooh! hy meme agent"
+      },
+      {
+        "role": "assistant",
+        "content": "Hey there! Ready for some meme fun? 😄"
+      },
+      {
+        "role": "user",
+        "content": "ye ofcourse! make meme for chatbott!"
+      },
+      {
+        "role": "assistant",
+        "content": "Chatbot life ke upar ek meme! 🤖\n\n1. [T02] \"When you ask a chatbot a simple question and get a philosophical answer!\""
+      },
+      {
+        "role": "user",
+        "content": "hy"
+      },
+      {
+        "role": "assistant",
+        "content": "Hey! Kya chal raha hai?"
+      },
+      {
+        "role": "user",
+        "content": "meme banao"
+      },
+      {
+        "role": "assistant",
+        "content": "Meme time! Kis topic par chahiye? 😄"
+      },
+      {
+        "role": "user",
+        "content": "koi bhi topic apne pass se bana do"
+      },
+      {
+        "role": "assistant",
+        "content": "Alright, let's do this! 😄\n\n1. [T02] \"When you realize it's Monday tomorrow: 'Weekend, please don't leave me!'\""
+      },
+      {
+        "role": "user",
+        "content": "koi bhi topic apne pass se bana do meme banao bas"
+      },
+      {
+        "role": "assistant",
+        "content": "Meme coming up! 😄\n\n1. [T06] \"When you open the fridge for the third time hoping for something new to appear.\""
+      },
+      {
+        "role": "user",
+        "content": "hy"
+      },
+      {
+        "role": "assistant",
+        "content": "Hey! Kya haal hain aaj kal?"
+      },
+      {
+        "role": "user",
+        "content": "wahi haddi wahi khaal hai bhai"
+      },
+      {
+        "role": "assistant",
+        "content": "Sahi hai, zindagi ka yehi cycle hai! 😄"
+      },
+      {
+        "role": "user",
+        "content": "hn naw is hal e zindagi pr do char meme hojaye"
+      },
+      {
+        "role": "assistant",
+        "content": "Zindagi ke is hal par memes banta hain! 😆\n\n1. [T02] \"Life be like: 'Same routine, different day.'\"\n2. [T06] \"When someone asks how life is going and you say, 'Bas chal rahi hai.'\"\n3. [T02] \"When every day feels like a copy-paste of the last.\"\n4. [T06] \"Me trying to find excitement in daily life: 'Mission impossible!'\""
+      },
+      {
+        "role": "user",
+        "content": "hahahhaha kia joke tha!"
+      },
+      {
+        "role": "assistant",
+        "content": "Khushi hui sun ke! Aise hi haste raho. 😄"
+      },
+      {
+        "role": "user",
+        "content": "wese jo second last meme diya tha naw usko regenerate kro usi style tone m bas words change hon"
+      },
+      {
+        "role": "assistant",
+        "content": "Acha, ek aur version banate hain! 😄\n\n1. [T02] \"When your week feels like one long Monday.\""
+      },
+      {
+        "role": "user",
+        "content": "acha ye batao k tmhare pass ye memes aati kahan se hai? s"
+      },
+      {
+        "role": "assistant",
+        "content": "Yeh memes toh bas creative dimaag aur thodi hasi mazak se aati hain! 😄 Tumhe aur kis topic pe memes chahiye?"
+      },
+      {
+        "role": "user",
+        "content": "nhi nhi tmhare barey m janna hai k tm kese banate ho?"
+      },
+      {
+        "role": "assistant",
+        "content": "Main sirf keywords aur topics ke base par memes suggest karta hoon. Mere paas pehle se koi memes nahi hain, bas aapko topics de kar ideas deta hoon! 😊"
+      },
+      {
+        "role": "user",
+        "content": "hello"
+      },
+      {
+        "role": "assistant",
+        "content": "Hello! Kya haal hain?"
+      },
+      {
+        "role": "user",
+        "content": "make memes about hospital"
+      },
+      {
+        "role": "assistant",
+        "content": "Hospital visits pe memes ka dose ready hai! 🏥😄\n\n1. [T02] \"Waiting room reality: 'Appointment at 3 PM, seen at 5 PM.'\"\n2. [T06] \"Doctor: 'This won't hurt a bit.' Me: 'That's what they all say!'\"\n3. [T02] \"When you go for a check-up and come out with a list of tests.\"\n4. [T06] \"Hospital food: 'Expectation: Gourmet meal. Reality: Mystery mush.'\"\n5. [T02] \"When you try to read a doctor's handwriting: 'Hieroglyphics level expert!'\""
+      },
+      {
+        "role": "user",
+        "content": "roman urdu m do"
+      },
+      {
+        "role": "assistant",
+        "content": "Haan, hospital visits pe Roman Urdu memes! 😄\n\n1. \"Doctor: 'Injection nahi lagega!' Me: 'Dil ko tasalli dena bhi ek art hai.'\"\n2. \"Hospital ka khana: 'Menu mein biryani, reality mein… kuch aur hi!'\""
+      },
+      {
+        "role": "user",
+        "content": "as a meme do na text nhi"
+      },
+      {
+        "role": "assistant",
+        "content": "Hospital visits pe ek aur zabardast meme! 😆\n\n1. [T02] \"Jab doctor kehta hai 'Bas halka sa chubhega' aur tumhara dil kehta hai 'Nahi yaar, yeh toh dard hoga!'\""
+      },
+      {
+        "role": "user",
+        "content": "1. \"Doctor: 'Injection nahi lagega!' Me: 'Dil ko tasalli dena bhi ek art hai.'\"\n mjhe isey meme m add krna hai is platform ke"
+      },
+      {
+        "role": "assistant",
+        "content": "Sure! Ye text ko meme format mein socho:\n\n1. [T02] \"Doctor: 'Injection nahi lagega!' / Me: *Dil ko tasalli dena bhi ek art hai.*\""
+      },
+      {
+        "role": "user",
+        "content": "hy"
+      },
+      {
+        "role": "assistant",
+        "content": "Hey! Kya scene hai?"
+      },
+      {
+        "role": "user",
+        "content": "give me meme about siblings"
+      },
+      {
+        "role": "assistant",
+        "content": "Siblings ke upar ek zabardast meme! 😄\n\n1. [T02] \"Siblings be like: 'Fight like enemies, protect like friends.'\""
+      },
+      {
+        "role": "user",
+        "content": "maza nhi aaya ache ache do naw"
+      },
+      {
+        "role": "assistant",
+        "content": "Siblings ke maze wale memes aapke liye! 😆\n\n1. [T06] \"When you secretly eat your sibling's snacks and act innocent.\"\n2. [T02] \"Siblings' rule: 'You can annoy them, but no one else can!'\"\n3. [T06] \"When you both get in trouble and start blaming each other instantly.\""
+      },
+      {
+        "role": "user",
+        "content": "10 memes nhi de skte?"
+      },
+      {
+        "role": "assistant",
+        "content": "Ek prompt mein 5 memes de sakta hoon. Aapko siblings ke liye 5 aur memes chahiye? 😊"
+      },
+      {
+        "role": "user",
+        "content": "siblings k liye nhi parents k liye de do 5"
+      },
+      {
+        "role": "assistant",
+        "content": "Parents ke liye memes ready hain! 😄\n\n1. [T02] \"Parents' WiFi password: 'Pehle kamra saaf karo.'\"\n2. [T06] \"When parents say, 'Hum tumhare acche ke liye keh rahe hain.'\"\n3. [T02] \"Mom logic: 'Sardi mein ice cream nahi, par garmi mein chai chalta hai.'\"\n4. [T06] \"Dad jokes be like: 'Main toh young hoon, tum budhe ho gaye ho!'\"\n5. [T02] \"Parents: 'Time pe ghar aana.' Me: *Looks at watch, still late.*\""
+      },
+      {
+        "role": "user",
+        "content": "give me 10 memes about desi family"
+      },
+      {
+        "role": "assistant",
+        "content": "Desi family ke liye 10 hilarious memes! 😆\n\n1. [T02] \"Desi mom: 'Khana waste mat karo!' / Also desi mom: 'Aur lo, aur lo!'\"\n2. [T06] \"When guests arrive unannounced and the house turns into a cleaning zone.\"\n3. [T02] \"Desi dad's favorite line: 'Humare zamane mein...'\"\n4. [T06] \"When you sneeze and mom already has 10 home remedies ready.\"\n5. [T02] \"Sharma ji ke bête ne kya kiya, hamesha topic of discussion!\"\n6. [T06] \"Desi family function: 'Sabko namaste bolo, beta!'\"\n7. [T02] \"When you try to explain technology to your parents and they just smile.\"\n8. [T06] \"Desi parents' reaction to seeing a light on in an empty room: 'Bijli ka bill dekha hai?'\"\n9. [T02] \"When mom says 'Bas 5 minute' and it means 30 minutes.\"\n10. [T06] \"Family meetings be like: 'Shaadi kab kar rahe ho?'\"\n\nEnjoy these desi family moments! 😊"
+      },
+      {
+        "role": "user",
+        "content": "hello"
+      },
+      {
+        "role": "assistant",
+        "content": "Hello! Kya hal chaal hain?"
+      },
+      {
+        "role": "user",
+        "content": "make memes for laptop"
+      },
+      {
+        "role": "assistant",
+        "content": "Laptop-related memes aa rahe hain! 💻😄\n\n1. [T02] \"When your laptop updates right before a presentation: 'Timing, kya baat hai!'\"\n2. [T06] \"Battery at 100%: 'I'm invincible!' Battery at 15%: 'Ab toh charger dhundho!'\"\n3. [T02] \"Laptop fan noise: 'Kya yeh udne wala hai?!'\"\n4. [T06] \"Opening 20 tabs in your browser like: 'Multitasking pro!'\"\n5. [T02] \"When you accidentally close the tab you needed most: 'Kya kismat hai!'\""
+      },
+      {
+        "role": "user",
+        "content": "hi"
+      },
+      {
+        "role": "assistant",
+        "content": "Hi! Kya chal raha hai?"
+      },
+      {
+        "role": "user",
+        "content": "hello, make memes for laptop"
+      },
+      {
+        "role": "assistant",
+        "content": "Laptop ke liye memes ready hain! 😄\n\n1. [T02] \"When your laptop suddenly decides to update: 'Abhi nahi, please!'\"\n2. [T06] \"Battery low at 50%: 'Emergency mode on!'\"\n3. [T02] \"When the laptop fan sounds like it's about to take off.\"\n4. [T06] \"When you open the lid and remember the mess of tabs you left.\"\n5. [T02] \"When you find crumbs in your keyboard: 'Laptop snacks!'\""
+      },
+      {
+        "role": "user",
+        "content": "hy"
+      },
+      {
+        "role": "assistant",
+        "content": "Hey! Kya haal hain?"
+      },
+      {
+        "role": "user",
+        "content": "i want meme about world cup of pakistan"
+      },
+      {
+        "role": "assistant",
+        "content": "World Cup aur Pakistan ke upar ek zabardast meme! 🏏😄\n\n1. [T06] \"Pakistan cricket fans every World Cup: 'Iss baar toh cup hamara hai!'\""
+      },
+      {
+        "role": "user",
+        "content": "give me some more about it"
+      },
+      {
+        "role": "assistant",
+        "content": "World Cup aur Pakistan cricket fans ke liye aur memes! 🏏😆\n\n1. [T02] \"When Pakistan wins a match: 'Ab toh final jeetenge!'\"\n2. [T06] \"Every World Cup: 'Yeh saal hamara hai!'\"\n3. [T02] \"When the match is a nail-biter: 'Dil thaam ke baithna!'\"\n4. [T06] \"Pakistan cricket: 'Kabhi khushi, kabhi gham, aur kabhi surprise!'\"\n5. [T02] \"Match day: 'TV ke saamne se koi uthega nahi!'\""
+      },
+      {
+        "role": "user",
+        "content": "gove me 10 memes"
+      },
+      {
+        "role": "assistant",
+        "content": "Sure! Here are 10 memes on different topics:\n\n1. [T02] \"When your phone battery is at 1% and you find a charger just in time.\"\n2. [T06] \"When you plan to study but end up watching YouTube all day.\"\n3. [T02] \"Weekend plans: 'Netflix, chill, repeat.'\"\n4. [T06] \"When you realize tomorrow is Monday: 'Where did the weekend go?'\"\n5. [T02] \"Trying to eat healthy but then pizza happens.\"\n6. [T06] \"When you finally find the perfect meme to share with your friend.\"\n7. [T02] \"Me: 'I'll just rest my eyes for 5 minutes.' Also me: *sleeps for 2 hours*\"\n8. [T06] \"When you tell yourself you'll sleep early but 3 AM says otherwise.\"\n9. [T02] \"When you say 'I'm on my way' but just started getting ready.\"\n10. [T06] \"Every time you open the fridge hoping for a miracle snack.\"\n\nEnjoy these random moments! 😄"
+      },
+      {
+        "role": "user",
+        "content": "i want meme about world cup of pakistan"
+      },
+      {
+        "role": "assistant",
+        "content": "Pakistan aur World Cup ke liye ek aur meme! 🏏😄\n\n1. [T06] \"Pakistani fans after every match: 'Next match mein toh jeet pakki hai!'\""
+      },
+      {
+        "role": "user",
+        "content": "i want meme about world cup of pakistan"
+      },
+      {
+        "role": "assistant",
+        "content": "World Cup aur Pakistan cricket ka ek aur zabardast meme! 🏏😂\n\n1. [T02] \"Pakistan match day: 'Dil se support, aur dil hi dil mein dua!'\""
+      },
+      {
+        "role": "user",
+        "content": "give me some more"
+      },
+      {
+        "role": "assistant",
+        "content": "Pakistan World Cup ke mazedaar moments ke liye aur memes! 🏏😆\n\n1. [T06] \"Every time Pakistan hits a six: 'Shaandar! Ab bas aise hi khelte raho!'\"\n2. [T02] \"Pakistan loses a wicket: 'Koi nahi, agli baar zyada zor se!'\"\n3. [T06] \"When Pakistan wins a close match: 'Pure mulk mein Eid ka mahol!'\"\n4. [T02] \"Watching Pakistan play: 'Heart rate monitor zaroori hai!'\"\n5. [T06] \"Every World Cup: 'Iss baar toh history zaroor banayenge!'\""
+      },
+      {
+        "role": "user",
+        "content": "i want memes about world cup of pakistan"
+      },
+      {
+        "role": "assistant",
+        "content": "Pakistan aur World Cup ke mazedaar memes tayyar hain! 🏏😄\n\n1. [T02] \"Pakistan batting: 'Kabhi thrill, kabhi suspense, hamesha drama!'\"\n2. [T06] \"When Pakistan wins: 'Ab toh trophy pakki samjho!'\"\n3. [T02] \"Match ke dauran: 'Maa ki dua, aur thoda luck bhi chahiye.'\"\n4. [T06] \"Pakistan fans: 'Har match mein emotions ka rollercoaster!'\"\n5. [T02] \"Jab Pakistan final mein pahunch jaye: 'Yeh toh epic hoga!'\""
+      },
+      {
+        "role": "user",
+        "content": "give me memes about desi house"
+      },
+      {
+        "role": "assistant",
+        "content": "Desi house ke funny moments ke liye memes! 🏠😆\n\n1. [T02] \"When every corner of the house has a jar of achar.\"\n2. [T06] \"Desi mom's superpower: Finding anything you've lost, instantly!\"\n3. [T02] \"Living room sofa: 'Reserved for guests only.'\"\n4. [T06] \"When guests arrive, and every room becomes a storage unit.\"\n5. [T02] \"Desi house volume levels: Normal, Loud, and Guest mode.\""
+      },
+      {
+        "role": "user",
+        "content": "i want 3 meme"
+      },
+      {
+        "role": "assistant",
+        "content": "Sure, here are 3 memes about desi houses! 🏠😄\n\n1. [T02] \"Desi living room: 'Sofa pe plastic cover hamesha rehta hai.'\"\n2. [T06] \"When mom says clean your room, and it turns into a full house cleaning mission.\"\n3. [T02] \"Finding random things in random drawers: 'Yeh kab yahan aaya?'\""
+      },
+      {
+        "role": "user",
+        "content": "in a command which memes can you generate ?"
+      },
+      {
+        "role": "assistant",
+        "content": "Main ek command mein 1 se 5 memes generate kar sakta hoon. Kis topic par chahiye? 😊"
+      },
+      {
+        "role": "user",
+        "content": "10 meme do"
+      },
+      {
+        "role": "assistant",
+        "content": "Main ek baar mein 5 memes de sakta hoon. Aapke liye 5 memes ready hain! 😄\n\n1. [T02] \"When you finally find a parking spot: 'Victory dance!'\"\n2. [T06] \"Trying to eat healthy, but fries keep calling your name.\"\n3. [T02] \"When you hear your favorite song on the radio: 'Instant mood lift!'\"\n4. [T06] \"Every time you open the fridge: 'Expecting a surprise snack.'\"\n5. [T02] \"When you plan to sleep early but Netflix has other plans.\"\n\nAgar aur memes chahiye toh batao! 😊"
+      },
+      {
+        "role": "user",
+        "content": "give me 10 memes about sofa"
+      },
+      {
+        "role": "assistant",
+        "content": "Sofa ki duniya ke liye memes ready hain! 🛋️😄\n\n1. [T02] \"Desi house sofa: 'Reserved for guests only, no kids allowed.'\"\n2. [T06] \"When the sofa becomes your weekend home base.\"\n3. [T02] \"Sinking into the sofa like: 'Goodbye world, hello comfort!'\"\n4. [T06] \"Finding remote in sofa cushions: 'Treasure hunt successful!'\"\n5. [T02] \"When guests leave and you can finally reclaim your sofa.\"\n6. [T06] \"Couch potato mode: Activated as soon as you hit the sofa.\"\n7. [T02] \"Sofa naps: 'Short nap' turns into a full night's sleep.\"\n8. [T06] \"When you rearrange the cushions just right: 'Interior designer vibes!'\"\n9. [T02] \"Sofa armrest: Best pillow for unexpected naps.\"\n10. [T06] \"When the sofa has a permanent dent from your favorite spot.\"\n\nEnjoy these sofa moments! 😊"
+      },
+      {
+        "role": "user",
+        "content": "hello"
+      },
+      {
+        "role": "assistant",
+        "content": "Hello! Kya haal hain?"
+      },
+      {
+        "role": "user",
+        "content": "I want memes regarding reading book"
+      },
+      {
+        "role": "assistant",
+        "content": "Reading books ke liye kuch funny memes! 📚😄\n\n1. [T02] \"When you say 'just one more chapter' and finish the whole book.\"\n2. [T06] \"Buying books and reading books: Two very different hobbies.\"\n3. [T02] \"When the plot twist turns your whole world upside down.\"\n4. [T06] \"Trying to sleep, but the book cliffhanger won't let you.\"\n5. [T02] \"When your favorite character does something unexpected: 'Wait, what?!'\""
+      },
+      {
+        "role": "user",
+        "content": "give me memes about siblings"
+      },
+      {
+        "role": "assistant",
+        "content": "Siblings ke mazedaar moments par memes! 😄\n\n1. [T02] \"Siblings: 'Fight like enemies, team up like superheroes when needed.'\"\n2. [T06] \"When you blame your sibling for something and they take the fall.\"\n3. [T02] \"Siblings' secret language: 'One look, and they know exactly what you mean.'\"\n4. [T06] \"Borrowing clothes from your sibling's closet like it's your own.\"\n5. [T02] \"When you try to scare your sibling but end up scaring yourself.\""
+      },
+      {
+        "role": "user",
+        "content": "give me memes about languages"
+      },
+      {
+        "role": "assistant",
+        "content": "Languages pe thodi hasi mazak ke liye memes! 😄\n\n1. [T02] \"Trying to learn a new language and ending up creating your own.\"\n2. [T06] \"When you mix three languages in one sentence and call it multilingual.\"\n3. [T02] \"Google Translate: 'Confidence booster and confusion creator.'\"\n4. [T06] \"When you understand a foreign language song but not your math class.\"\n5. [T02] \"Saying 'hello' in a new language and feeling like a world traveler.\""
+      },
+      {
+        "role": "user",
+        "content": "make memes regarding documents"
+      },
+      {
+        "role": "assistant",
+        "content": "Documents ke upar kuch funny memes! 📄😆\n\n1. [T02] \"When you can't find that one important document: 'Panic mode activated!'\"\n2. [T06] \"Printing a document: 'Please don't jam, please don't jam...'\"\n3. [T02] \"When you accidentally close the unsaved document: 'Noooooo!'\"\n4. [T06] \"Naming documents: 'Final_Final_Version_3.docx'\"\n5. [T02] \"When the document size exceeds the email limit: 'Back to the drawing board.'\""
+      },
+      {
+        "role": "user",
+        "content": "make funny  memes"
+      },
+      {
+        "role": "assistant",
+        "content": "Sure, here's a dose of funny memes! 😄\n\n1. [T02] \"When you trip over nothing and look back like 'Who put that there?'\"\n2. [T06] \"Trying to adult, but 'I need an adultier adult!'\"\n3. [T02] \"When you talk to yourself and accidentally start an argument.\"\n4. [T06] \"Me: 'I should save money.' Also me: *buys unnecessary gadgets*\"\n5. [T02] \"When you can't hear someone, so you laugh and hope it wasn't a question.\""
+      },
+      {
+        "role": "user",
+        "content": "make some funny  memes"
+      },
+      {
+        "role": "assistant",
+        "content": "Sure thing! Here's some funny meme inspiration for you! 😂\n\n1. [T02] \"When you walk into a room and forget why you came: 'Brain: Mission Impossible!'\"\n2. [T06] \"Me trying to diet: 'One cookie won't hurt... or two... or three.'\"\n3. [T02] \"When you say 'I'm on my way' but haven't left the house yet.\"\n4. [T06] \"When your pet gives you the 'I'm judging you' look.\"\n5. [T02] \"Every time you see a 'Wet Paint' sign: 'Must touch to confirm.'\""
+      },
+      {
+        "role": "user",
+        "content": "make some memes"
+      },
+      {
+        "role": "assistant",
+        "content": "Let's bring on the laughs! Here are some meme ideas for you: 😄\n\n1. [T02] \"When you try to look productive but end up scrolling memes.\"\n2. [T06] \"Waking up for work like: 'Just five more minutes... every five minutes.'\"\n3. [T02] \"When you accidentally open the front camera and see your double chin.\"\n4. [T06] \"When you hear someone open a bag of chips from across the house.\"\n5. [T02] \"Trying to be an adult but secretly wishing for a nap time.\""
+      },
+      {
+        "role": "user",
+        "content": "give me memes"
+      },
+      {
+        "role": "assistant",
+        "content": "Sure, here's a fresh batch of meme ideas for you! 😄\n\n1. [T02] \"When you finally find the perfect comeback, 5 hours later.\"\n2. [T06] \"Opening the fridge for the tenth time, hoping for new snacks.\"\n3. [T02] \"When you pretend to text in awkward situations.\"\n4. [T06] \"Going to bed early but then check every social media app.\"\n5. [T02] \"When you realize the weekend is almost over: 'How did this happen?'\""
+      },
+      {
+        "role": "user",
+        "content": "give me 10 memes"
+      },
+      {
+        "role": "assistant",
+        "content": "Here's a collection of 10 funny meme ideas for you! 😂\n\n1. [T02] \"When you send a risky text and throw your phone away.\"\n2. [T06] \"Every time I say 'I'm going to start eating healthy': *Pizza delivery rings*\"\n3. [T02] \"When you find out your favorite shirt is still in the laundry.\"\n4. [T06] \"Staring at the phone waiting for it to ring, but it's always spam.\"\n5. [T02] \"When you try to act cool, but trip over your own feet.\"\n6. [T06] \"Meeting someone new and instantly forgetting their name.\"\n7. [T02] \"When you laugh so hard your drink comes out your nose.\"\n8. [T06] \"When your song comes on and you become the music video star.\"\n9. [T02] \"When you check the time and it's way past your bedtime.\"\n10. [T06] \"Watching a movie with subtitles and realizing you've been reading instead of watching.\"\n\nEnjoy! 😄"
+      },
+      {
+        "role": "user",
+        "content": "hello"
+      },
+      {
+        "role": "assistant",
+        "content": "Hello! Kya haal hain?"
+      },
+      {
+        "role": "user",
+        "content": "hy"
+      },
+      {
+        "role": "assistant",
+        "content": "Hey! Kya chal raha hai?"
+      },
+      {
+        "role": "user",
+        "content": "hello"
+      },
+      {
+        "role": "assistant",
+        "content": "Hello! Kaisa chal raha hai sab?"
+      },
+      {
+        "role": "user",
+        "content": "i want memes about desi sibling fighting for wifi"
+      },
+      {
+        "role": "assistant",
+        "content": "Desi siblings aur WiFi ki jung pe kuch memes! 😆\n\n1. [T02] \"Siblings fighting for WiFi: 'Mere phone ka net slow kyun hai?!'\"\n2. [T06] \"When the WiFi slows down, and both siblings blame each other.\"\n3. [T02] \"Desi sibling logic: 'Tumhara YouTube video zyada data le raha hai!'\"\n4. [T06] \"Fighting for the best WiFi spot: 'Sofa se zyada signal hai!'\""
+      },
+      {
+        "role": "user",
+        "content": "hy"
+      },
+      {
+        "role": "assistant",
+        "content": "Hey! Kya haal hain?"
+      },
+      {
+        "role": "user",
+        "content": "hello"
+      },
+      {
+        "role": "assistant",
+        "content": "Hello! Kya chal raha hai?"
+      },
+      {
+        "role": "user",
+        "content": "I want memes about desi siblings fighting for wifi"
+      },
+      {
+        "role": "assistant",
+        "content": "Desi siblings aur WiFi ki ladai pe kuch mazedaar memes! 😄\n\n1. [T02] \"When one sibling is streaming and the other screams: 'WiFi slow kyun hai?!'\"\n2. [T06] \"Desi siblings: 'Tumhara download mere streaming se zyada zaroori kaise?'\"\n3. [T02] \"Jung for WiFi: 'Router ke paas pehle kaun pahuchega?'\"\n4. [T06] \"When the WiFi is down and both siblings act like it's the end of the world.\""
+      },
+      {
+        "role": "user",
+        "content": "hello"
+      },
+      {
+        "role": "assistant",
+        "content": "Hello! Kya hal chal hain?"
+      },
+      {
+        "role": "user",
+        "content": "hy"
+      },
+      {
+        "role": "assistant",
+        "content": "Hey! Kya scene hai?"
+      },
+      {
+        "role": "user",
+        "content": "hy"
+      },
+      {
+        "role": "assistant",
+        "content": "Hey! Kya haal hain?"
+      },
+      {
+        "role": "user",
+        "content": "by"
+      },
+      {
+        "role": "assistant",
+        "content": "Bye! Phir milte hain. 😊"
+      },
+      {
+        "role": "user",
+        "content": "helo"
+      },
+      {
+        "role": "assistant",
+        "content": "Hello! Kya haal hain?"
+      },
+      {
+        "role": "user",
+        "content": "hello"
+      },
+      {
+        "role": "assistant",
+        "content": "Hello! Kya chal raha hai?"
+      },
+      {
+        "role": "user",
+        "content": "hello"
+      },
+      {
+        "role": "assistant",
+        "content": "Hello! Kaisa chal raha hai sab?"
+      },
+      {
+        "role": "user",
+        "content": "hello"
+      },
+      {
+        "role": "assistant",
+        "content": "Hello! Kya scene hai?"
+      },
+      {
+        "role": "user",
+        "content": "i want memes about it"
+      },
+      {
+        "role": "assistant",
+        "content": "\"IT duniya ke mazedaar memes ready hain! 💻😄\n\n1. [T02] \\\"When your code works on first try: 'Is this magic?'\\\"  \n2. [T06] \\\"When the IT guy fixes your computer in 2 seconds: 'Witchcraft!'\\\"  \n3. [T02] \\\"Explaining tech issues to non-tech people: 'It's complicated.'\\\"  \n4. [T06] \\\"When you realize the server's down and it's not your fault.\\\"  \n5. [T02] \\\"IT meetings: 'This could've been an email.'\\\"\""
+      },
+      {
+        "role": "user",
+        "content": "hello"
+      },
+      {
+        "role": "assistant",
+        "content": "Hello! Kya haal hain?"
+      },
+      {
+        "role": "user",
+        "content": "wahi hal hai jo tha"
+      },
+      {
+        "role": "assistant",
+        "content": "Samajh gaya, zindagi ka routine aise hi chal raha hai. 😄"
+      },
+      {
+        "role": "user",
+        "content": "hn naw"
+      },
+      {
+        "role": "assistant",
+        "content": "Sahi hai! Kya aaj kuch naya ya interesting hua?"
+      },
+      {
+        "role": "user",
+        "content": "nhi interesting nhi hai bas tm ek kam kro k kuch intresting hi nhi is bat pr funny memes de do"
+      },
+      {
+        "role": "assistant",
+        "content": "Zindagi ka yehi hal par ek zabardast meme! 😄\n\n1. [T02] \"When someone asks what's new and you say, 'Bas wahi purani kahani.'\"\n2. [T06] \"Life update: 'Nothing interesting, but still surviving like a pro.'\""
+      },
+      {
+        "role": "user",
+        "content": "tm ek kam kro k kuch intresting hi nhi is bat pr funny memes de do"
+      },
+      {
+        "role": "assistant",
+        "content": "Zindagi mein kuch interesting na hona bhi ek mazedaar meme topic hai! 😄\n\n1. [T02] \"When your life update is 'Same old, same old': 'Kya karein, zindagi hai!'\"\n2. [T06] \"Every time someone asks what's new: 'Bas yaar, wahi ghar-office-ghar routine!'\""
+      },
+      {
+        "role": "user",
+        "content": "give me 10 memes about family"
+      },
+      {
+        "role": "assistant",
+        "content": "Family ke upar kuch mazedaar memes! 😄\n\n1. [T02] \"Family photos: 'Sabr karo, ek aur pose!'\"\n2. [T06] \"When mom says, 'Ghar time pe aana' and you know you won't.\"\n3. [T02] \"Dad jokes: 'Puns ka pitara!'\"\n4. [T06] \"When your family uses your embarrassing childhood photos against you.\"\n5. [T02] \"Mom logic: 'Khaane pe dhyaan do, nahi to bimaar pad jaoge!'\"\n6. [T06] \"Family gatherings: 'Beta, sabko hello bolo!'\"\n7. [T02] \"When your parents say, 'Humare zamane mein...' and you know a lecture is coming.\"\n8. [T06] \"Siblings fighting over remote: 'Meri turn thi!'\"\n9. [T02] \"Parents watching TV: 'Volume 100 pe bhi kam hai!'\"\n10. [T06] \"When your family plans a trip and you're the designated photographer.\"\n\nHope you enjoy these! 😊"
+      },
+      {
+        "role": "user",
+        "content": "hy"
+      },
+      {
+        "role": "assistant",
+        "content": "Hey! Kya haal hain?"
+      },
+      {
+        "role": "user",
+        "content": "wahi haddi wahi khaal hai"
+      },
+      {
+        "role": "assistant",
+        "content": "Sahi baat hai, zindagi ka routine toh aise hi hai! 😄"
+      },
+      {
+        "role": "user",
+        "content": "hn naw abhi ramadan bhi aagaya hai tm ek kam kro ramadan k liye koi islamic meme banao 10 / 15"
+      },
+      {
+        "role": "assistant",
+        "content": "Ramadan ke liye kuch mazedaar aur light-hearted memes! 🌙😄\n\n1. [T02] \"When you hear 'iftar time!' and it's a sprint to the table.\"\n2. [T06] \"Roza lagte hi, har ghadi ghanti dekhne lagte hain.\"\n3. [T02] \"Suhoor be like: 'Kha lo beta, poora din hai roze ka!'\"\n4. [T06] \"When you wake up for suhoor and feel like a zombie.\"\n5. [T02] \"Roza kholte waqt dua: 'Bas thoda aur patience, thoda aur sabr!'\"\n6. [T06] \"Every iftar: 'Kya banega special aaj?'\"\n7. [T02] \"When you're fasting and your friend eats in front of you: 'Yeh toh dosti nahi!'\"\n8. [T06] \"Trying to nap during Ramadan: 'Jab bhi sochu, koi na koi utha deta hai.'\"\n9. [T02] \"Iftar gatherings: 'Family, friends, aur bahut saara khana!'\"\n10. [T06] \"When you realize chai is life, but you have to wait till iftar.\"\n\nEnjoy these Ramadan moments! 😊"
+      },
+      {
+        "role": "user",
+        "content": "give me memes"
+      },
+      {
+        "role": "assistant",
+        "content": "Sure, here are some fun and light-hearted memes for you! 😄\n\n1. [T02] \"When you accidentally open the front camera and see your double chin.\"\n2. [T06] \"Trying to be productive but end up watching cat videos all day.\"\n3. [T02] \"When you say 'I'm on my way' but haven't left the house yet.\"\n4. [T06] \"When you hear your favorite song and become the main character in your head.\"\n5. [T02] \"When you realize tomorrow is Monday: 'Weekend, please don't go!'\""
+      },
+      {
+        "role": "user",
+        "content": "hy"
+      },
+      {
+        "role": "assistant",
+        "content": "Hey! Kya haal hain?"
+      },
+      {
+        "role": "user",
+        "content": "give me memes"
+      },
+      {
+        "role": "assistant",
+        "content": "Sure, here are some fun meme ideas for you! 😄\n\n1. [T02] \"When you finally find the remote after searching for hours.\"\n2. [T06] \"Trying to look busy when the boss walks by.\"\n3. [T02] \"When you open a bag of chips and it's mostly air.\"\n4. [T06] \"When you plan to go to bed early but it's suddenly 3 AM.\"\n5. [T02] \"Every time you check the fridge hoping for new snacks.\""
+      },
+      {
+        "role": "user",
+        "content": "give me 10 memes"
+      },
+      {
+        "role": "assistant",
+        "content": "Here's a collection of 10 fun meme ideas for you! 😂\n\n1. [T02] \"When you promise yourself to watch just one episode, and it's 5 AM.\"\n2. [T06] \"Trying to adult, but 'Can I just take a nap instead?'\"\n3. [T02] \"When you're late and everyone decides to drive slow.\"\n4. [T06] \"When you get a text and think it's your crush, but it's just your service provider.\"\n5. [T02] \"Waking up early in winter: 'Do I really need this job?'\"\n6. [T06] \"When you pretend to understand something, but you're lost.\"\n7. [T02] \"When someone wakes you up and you try to look like you weren't sleeping.\"\n8. [T06] \"The moment you realize the WiFi is down: 'What do I do with my life now?'\"\n9. [T02] \"When you hear your favorite song in public and try not to dance.\"\n10. [T06] \"Trying to cook for the first time: 'How did I manage to burn water?'\"\n\nEnjoy! 😄"
+      },
+      {
+        "role": "user",
+        "content": "give me memes"
+      },
+      {
+        "role": "assistant",
+        "content": "Sure, here are some fun meme ideas for you! 😄\n\n1. [T02] \"When you finally get comfy and realize you forgot to turn off the lights.\"\n2. [T06] \"Trying to look serious in a video call but your pet has other plans.\"\n3. [T02] \"When you plan to exercise but end up watching workout videos while eating.\"\n4. [T06] \"When you hit 'reply all' by accident and instantly regret it.\"\n5. [T02] \"Opening a pack of gum in class and suddenly everyone's your best friend.\""
+      },
+      {
+        "role": "user",
+        "content": "give me memes"
+      },
+      {
+        "role": "assistant",
+        "content": "Of course! Here are some meme ideas for you! 😄\n\n1. [T02] \"When you accidentally like a post from three years ago while stalking.\"\n2. [T06] \"Trying to hold in a sneeze during a serious meeting.\"\n3. [T02] \"When you find money in a jacket you haven't worn in ages.\"\n4. [T06] \"When your favorite snack is gone and you realize you were the one who finished it.\"\n5. [T02] \"When you walk into a room and completely forget why you're there.\""
+      },
+      {
+        "role": "user",
+        "content": "give me 20 memes"
+      },
+      {
+        "role": "assistant",
+        "content": "Sure thing! Here are 20 fun meme ideas for you! 😄\n\n1. [T02] \"When your phone autocorrects to something embarrassing.\"\n2. [T06] \"Trying to eat quietly but the wrapper is super loud.\"\n3. [T02] \"When you find the perfect meme but it's too relatable.\"\n4. [T06] \"When you're fake laughing and someone says 'It's not funny.'\"\n5. [T02] \"When the WiFi goes out and you remember books exist.\"\n6. [T06] \"Trying to get out of bed but the blanket has other plans.\"\n7. [T02] \"When you wave back at someone who wasn't waving at you.\"\n8. [T06] \"When you pretend to know the lyrics and just mumble along.\"\n9. [T02] \"When you realize the weekend is over and you did nothing productive.\"\n10. [T06] \"When you say 'I love you' and they reply 'Thank you.'\"\n11. [T02] \"When you laugh at your own joke and everyone stares.\"\n12. [T06] \"Checking your phone to avoid awkward situations.\"\n13. [T02] \"When your pet ignores you but you still love them.\"\n14. [T06] \"When you try to be polite but end up awkwardly silent.\"\n15. [T02] \"When you hear the ice cream truck but you're broke.\"\n16. [T06] \"When you get a message and instantly forget to reply.\"\n17. [T02] \"When you open a bag of chips and it's mostly air.\"\n18. [T06] \"When you stay up late but regret it in the morning.\"\n19. [T02] \"When you finally get the joke hours later.\"\n20. [T06] \"When you finish a series and feel empty inside.\"\n\nEnjoy the laughs! 😂"
+      },
+      {
+        "role": "user",
+        "content": "hy"
+      },
+      {
+        "role": "assistant",
+        "content": "Hey! Kya haal hain?"
+      },
+      {
+        "role": "user",
+        "content": "give me memes"
+      },
+      {
+        "role": "assistant",
+        "content": "Absolutely! Here's a batch of meme ideas for you! 😄\n\n1. [T02] \"When you clean your room and can't find anything anymore.\"\n2. [T06] \"Trying to whisper in a quiet room and end up too loud.\"\n3. [T02] \"When the elevator door closes and you make awkward eye contact.\"\n4. [T06] \"Accidentally sending a text to the wrong group chat.\"\n5. [T02] \"When your favorite show ends and you don't know what to do next.\""
+      },
+      {
+        "role": "user",
+        "content": "give me 75 memes"
+      },
+      {
+        "role": "assistant",
+        "content": "I can provide 5 memes at a time. Here's a set for you! 😄\n\n1. [T02] \"When you finally finish a task and your brain still feels busy.\"\n2. [T06] \"Every time you open the fridge and hope for new snacks.\"\n3. [T02] \"When you hear someone say your name in a crowded room.\"\n4. [T06] \"When you're the only one laughing at your own joke.\"\n5. [T02] \"Trying to look cool but tripping over your own feet.\"\n\nIf you need more, just let me know! 😊"
+      },
+      {
+        "role": "user",
+        "content": "give me 10 memes"
+      },
+      {
+        "role": "assistant",
+        "content": "Here's a collection of 10 fun meme ideas for you! 😄\n\n1. [T02] \"When you finally finish a task and your brain still feels busy.\"\n2. [T06] \"Every time you open the fridge and hope for new snacks.\"\n3. [T02] \"When you hear someone say your name in a crowded room.\"\n4. [T06] \"When you're the only one laughing at your own joke.\"\n5. [T02] \"Trying to look cool but tripping over your own feet.\"\n6. [T06] \"When you find out your favorite snack is sold out.\"\n7. [T02] \"When you plan to sleep early but end up on social media.\"\n8. [T06] \"When you remember something embarrassing from years ago.\"\n9. [T02] \"When your pet takes over your bed and you let them.\"\n10. [T06] \"Trying to be productive but getting distracted by everything.\"\n\nEnjoy the laughs! 😂"
+      },
+      {
+        "role": "user",
+        "content": "give me memes"
+      },
+      {
+        "role": "assistant",
+        "content": "Sure, here are some fun meme ideas for you! 😄\n\n(Oops, meme generation failed: 'NoneType' object has no attribute 'get')"
+      },
+      {
+        "role": "user",
+        "content": "give me memes"
+      },
+      {
+        "role": "assistant",
+        "content": "Yeh lo doh pyaare memes!"
+      },
+      {
+        "role": "user",
+        "content": "give me 10 memes about desi families dream"
+      },
+      {
+        "role": "assistant",
+        "content": "Bhai, memo ka maza lo, dekho kya banate hain hum life se."
+      },
+      {
+        "role": "user",
+        "content": "give me 5 memes about desi families dream"
+      },
+      {
+        "role": "assistant",
+        "content": "Yaar, aapse paanch memes nahi, sirf kuch anmol dark memes milein hain."
+      },
+      {
+        "role": "user",
+        "content": "i want memes about laptop"
+      },
+      {
+        "role": "assistant",
+        "content": "L ke baare mein kuch relatable memes tayar hain."
+      },
+      {
+        "role": "user",
+        "content": "i want memes about meme"
+      },
+      {
+        "role": "assistant",
+        "content": "i want memes about m ka jadoo chalta rahe! 😄"
+      },
+      {
+        "role": "user",
+        "content": "i want memes about laptop"
+      },
+      {
+        "role": "assistant",
+        "content": "i want memes about l ki duniya me maze le lo! 😂"
+      },
+      {
+        "role": "user",
+        "content": "i want memes about laptop"
+      },
+      {
+        "role": "assistant",
+        "content": "Laptop ki dunia ki yeh relatable memes dekho! 😂"
+      },
+      {
+        "role": "user",
+        "content": "i want memes about laptop"
+      },
+      {
+        "role": "assistant",
+        "content": "Laptop ki duniya me mazeedar memes dekho! 😄"
+      },
+      {
+        "role": "user",
+        "content": "memes about laptop"
+      },
+      {
+        "role": "assistant",
+        "content": "Yeh laptop ki zindagi na badi amaze hai! 😂"
+      },
+      {
+        "role": "user",
+        "content": "i want memes regarding siblings"
+      },
+      {
+        "role": "assistant",
+        "content": "Bhai-bahan ki taqrar aur pyaar ko samarpit ye memes dekho! 😄"
+      },
+      {
+        "role": "user",
+        "content": "give me memes about soap"
+      },
+      {
+        "role": "assistant",
+        "content": "Soap ki duniya ke ye memes dekho, maza aa jayega! 😄"
+      },
+      {
+        "role": "user",
+        "content": "give me memes about cousins"
+      },
+      {
+        "role": "assistant",
+        "content": "Cousins ke saath waqai mazeedaar hote hain, memes dekho aur hansne ka maza lo! 😂"
+      },
+      {
+        "role": "user",
+        "content": "by by"
+      },
+      {
+        "role": "assistant",
+        "content": "Bye bye! Phir milte hain. 😊"
+      },
+      {
+        "role": "user",
+        "content": "kab??😂"
+      },
+      {
+        "role": "assistant",
+        "content": "Jab bhi aap chahein! Main toh yahin hoon, ready for a chat. 😄"
+      },
+      {
+        "role": "user",
+        "content": "acha thk hai abhi tm banao phr meme mere liye tm memes do sari english m extra classes se related."
+      },
+      {
+        "role": "assistant",
+        "content": "Acha thk hai abhi tum banao phr meme mere liye tm m ki range dekh lo! 😂"
+      },
+      {
+        "role": "user",
+        "content": "ary extra classes k liye chahiye english m"
+      },
+      {
+        "role": "assistant",
+        "content": "Extra classes ke liye kuch funny memes tayyar hain! 😄"
+      },
+      {
+        "role": "user",
+        "content": "give me memes about extra classes"
+      },
+      {
+        "role": "assistant",
+        "content": "Extra classes ki shayad koi yaad nahi karega, par ye memes yaad rahenge! 😂"
+      },
+      {
+        "role": "user",
+        "content": "hello"
+      },
+      {
+        "role": "assistant",
+        "content": "Hello! Kya haal hain?"
+      },
+      {
+        "role": "user",
+        "content": "whi haal  hai"
+      },
+      {
+        "role": "assistant",
+        "content": "Samajh gaya, zindagi ka routine chalu hai. 😄"
+      },
+      {
+        "role": "user",
+        "content": "make memes about big brother"
+      },
+      {
+        "role": "assistant",
+        "content": ""
+      },
+      {
+        "role": "user",
+        "content": "hello, make memes about big brother"
+      },
+      {
+        "role": "assistant",
+        "content": "Ye memes dekho big brother ke bare mein!"
+      },
+      {
+        "role": "user",
+        "content": "give me memes about cousins"
+      },
+      {
+        "role": "assistant",
+        "content": "Cousins wale moments ko enjoy karo!"
+      }
+    ]
+  },
+  "test_user_ps": {
+    "messages": [
+      {
+        "role": "user",
+        "content": "memes about bugs"
+      },
+      {
+        "role": "assistant",
+        "content": "Oh, bugs can be hilarious!\n\n1. [ID: Aint-Nobody-Got-Time-For-That] \"When a bug appears in code two minutes before a deadline... Ain't nobody got time for that!\"\n2. [ID: Bad-Luck-Brian] \"Tests everything perfectly... Misses one bug that crashes the whole system.\""
+      }
+    ]
+  },
+  "test_user_ps_2": {
+    "messages": [
+      {
+        "role": "user",
+        "content": "memes about bugs"
+      },
+      {
+        "role": "assistant",
+        "content": "Haha, bugs can be a nightmare and a joke!\n\nI'm here to chat with you, not to filter or rank memes. Tumhare bugs related experiences share karo, and let's have a fun chat! 😊 Any memorable incidents?"
+      }
+    ]
+  },
+  "test_strict_pipeline": {
+    "messages": [
+      {
+        "role": "user",
+        "content": "10 memes about python"
+      },
+      {
+        "role": "assistant",
+        "content": "❌ Blocked: The generated content was flagged as unsafe."
+      }
+    ]
+  },
+  "test_json_pipeline": {
+    "messages": [
+      {
+        "role": "user",
+        "content": "memes about deadlines"
+      },
+      {
+        "role": "assistant",
+        "content": "{\n  \"reply\": \"Deadlines ke bachon se bachke rehna, ye memes dekho!\",\n  \"memes\": [\n    \"[ID: Am-I-The-Only-One-Around-Here] Am I the only one around here | jo deadline ka meaning “kal subah” samjhta hai?\",\n    \"[ID: And-everybody-loses-their-minds] Boss: Deadline hai kal | Everyone: Tension nahi lene ka, chapri power zindabad!\",\n    \"[ID: Aint-Nobody-Got-Time-For-That] Baat banane ke liye ek din extra | Deadline: Aaj hi hona chahiye!\"\n  ]\n}"
+      }
+    ]
+  },
+  "test_json_final": {
+    "messages": [
+      {
+        "role": "user",
+        "content": "funny cats"
+      },
+      {
+        "role": "assistant",
+        "content": "Haha, cats are always up to something funny!\n\n{\"reply\": \"Cats aur unka sense of humor \\u2014 best combination!\", \"memes\": [\"Jab billi ka pata nahi chalta aur woh achanak se tumhare upar jump karti hai... Heart attack ka time kis ke paas hai?!\", \"Robin: \\\"Hey, maine billi ko toys diye!\\\" Batman: \\\"Billi ke liye toh har cheez toy hai!\\\"\", \"You kept that glass of water on table... Aaaaand it's gone, thanks to your cat!\"]}"
+      }
+    ]
+  },
+  "vision_test": {
+    "messages": [
+      {
+        "role": "user",
+        "content": "funny programming memes"
+      },
+      {
+        "role": "assistant",
+        "content": "Time for some hilarious coding laughs!\n\n{\"reply\": \"Programming ka maza chakhne ke liye tayaar ho jao!\", \"memes\": [\"RAISING KIDS IS LIKE PROGRAMMING A.I. THEY WILL DO WHATEVER YOU WANT TILL THEY BECOME SELF-AWARE.\", \"FINISHES LONG ASS SCRIPT FOR COMPUTER PROGRAMMING CLASS TWO DAYS EARLY FORGETS TO SAVE AND FAILS THE CLASS\", \"Programming is easy Stop lying! Programmer Tutorial website\"]}"
+      }
+    ]
+  },
+  "api_test": {
+    "messages": [
+      {
+        "role": "user",
+        "content": "cat memes"
+      },
+      {
+        "role": "assistant",
+        "content": "Here's something to make you laugh with cats!\n\n{\"reply\": \"Billi ke maze le, memes ka zariya jitna funny!\", \"memes\": [\"I saw a flyer asking \\\"Have you seen my cat?\\\" So, I called the number and told them I haven't\", \"MY FACEBOOK GOT HACKED AGAIN THAT'S THE THIRD TIME I'VE HAVE TO RENAME MY CAT\", \"GRUMPY CAT IS NOW LITERALLY A DEAD MEME\"]}"
+      }
+    ]
+  },
+  "formatting_test": {
+    "messages": [
+      {
+        "role": "user",
+        "content": "exam stress memes"
+      },
+      {
+        "role": "assistant",
+        "content": "Let's laugh away that exam stress with some memes!\n\n(Oops, meme generation failed: name 'web_candidates' is not defined)"
+      }
+    ]
+  },
+  "default_user": {
+    "messages": [
+      {
+        "role": "user",
+        "content": "exam stress"
+      },
+      {
+        "role": "assistant",
+        "content": "Haha, exams ka stress sab ko hota hai!\n\n(Oops, meme generation failed: 'NoneType' object has no attribute 'get')"
+      }
+    ]
+  },
+  "test_user": {
+    "messages": [
+      {
+        "role": "user",
+        "content": "desi siblings fighting for wifi"
+      },
+      {
+        "role": "assistant",
+        "content": "Haha, desi siblings aur unki endless wifi ladaiyan!\n\n(Oops, meme generation failed: 'NoneType' object has no attribute 'get')"
+      },
+      {
+        "role": "user",
+        "content": "desi siblings fighting for wifi"
+      },
+      {
+        "role": "assistant",
+        "content": "Desi siblings ka wifi fight toh ek classic scene hai!\n\n(Oops, meme generation failed: 'NoneType' object has no attribute 'get')"
+      },
+      {
+        "role": "user",
+        "content": "exam stress"
+      },
+      {
+        "role": "assistant",
+        "content": "Exam stress ka toh alag hi maza hai!\n\n(Oops, meme generation failed: 'NoneType' object has no attribute 'get')"
+      },
+      {
+        "role": "user",
+        "content": "monday morning"
+      },
+      {
+        "role": "assistant",
+        "content": "Monday morning blues toh sabko hi hotay hain yaar!\n\n(Oops, meme generation failed: 'NoneType' object has no attribute 'get')"
+      },
+      {
+        "role": "user",
+        "content": "desi siblings fighting for wifi"
+      },
+      {
+        "role": "assistant",
+        "content": "Desi siblings aur wifi ki jang, yeh toh roz ka drama hai!\n\n(Oops, meme generation failed: 'NoneType' object has no attribute 'get')"
+      },
+      {
+        "role": "user",
+        "content": "exam stress"
+      },
+      {
+        "role": "assistant",
+        "content": "exam stress ke upar ye memes dekho! 😂\n\n(Oops, meme generation failed: 'NoneType' object has no attribute 'get')"
+      },
+      {
+        "role": "user",
+        "content": "monday morning"
+      },
+      {
+        "role": "assistant",
+        "content": "monday morning ke upar ye memes dekho! 😂\n\n(Oops, meme generation failed: 'NoneType' object has no attribute 'get')"
+      }
+    ]
+  }
+}

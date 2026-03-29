@@ -1,0 +1,53 @@
+version: '3.8'
+
+services:
+  # 🚀 FastAPI Backend (Service scaled to 2 instances)
+  api:
+    build: .
+    image: meme-agent-api
+    deploy:
+      replicas: 2
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - REDIS_URL=redis://redis:6379/0
+      - DATABASE_URL=sqlite:///../database/database.sqlite
+    depends_on:
+      - redis
+    networks:
+      - meme-network
+
+  # 📦 Redis (For Celery Queue and Caching)
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+    networks:
+      - meme-network
+
+  # 👷 Celery Worker (Handles the heavy LLM tasks)
+  worker:
+    build: .
+    command: celery -A tasks worker --loglevel=info
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - REDIS_URL=redis://redis:6379/0
+    depends_on:
+      - redis
+    networks:
+      - meme-network
+
+  # ⚖️ Nginx Load Balancer
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "8001:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - api
+    networks:
+      - meme-network
+
+networks:
+  meme-network:
+    driver: bridge

@@ -1,0 +1,492 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meme Agent - Hinglish Meme Generator</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .card {
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            border: none;
+            transition: transform 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .agent-avatar {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            margin: 0 auto 15px;
+        }
+        .meme-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-left: 5px solid #6a11cb;
+        }
+        .btn-gradient {
+            background: linear-gradient(45deg, #6a11cb, #2575fc);
+            border: none;
+            color: white;
+        }
+        .btn-gradient:hover {
+            background: linear-gradient(45deg, #2575fc, #6a11cb);
+            color: white;
+            transform: scale(1.05);
+        }
+        .typing-indicator {
+            display: none;
+            padding: 15px;
+            text-align: center;
+        }
+        .dot-flashing {
+            position: relative;
+            width: 10px;
+            height: 10px;
+            border-radius: 5px;
+            background-color: #6a11cb;
+            color: #6a11cb;
+            animation: dotFlashing 1s infinite linear alternate;
+            animation-delay: .5s;
+        }
+        .dot-flashing::before, .dot-flashing::after {
+            content: '';
+            display: inline-block;
+            position: absolute;
+            top: 0;
+            width: 10px;
+            height: 10px;
+            border-radius: 5px;
+            background-color: #6a11cb;
+            color: #6a11cb;
+        }
+        .dot-flashing::before {
+            left: -15px;
+            animation: dotFlashing 1s infinite alternate;
+            animation-delay: 0s;
+        }
+        .dot-flashing::after {
+            left: 15px;
+            animation: dotFlashing 1s infinite alternate;
+            animation-delay: 1s;
+        }
+        @keyframes dotFlashing {
+            0% { background-color: #6a11cb; }
+            50%, 100% { background-color: #a4a1ff; }
+        }
+        .style-tag {
+            display: inline-block;
+            background: rgba(106, 17, 203, 0.1);
+            color: #6a11cb;
+            padding: 3px 8px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            margin: 2px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="text-center mb-5">
+                    <div class="agent-avatar">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h1 class="text-white mb-3">Meme Agent</h1>
+                    <p class="text-light">Generate hilarious Hinglish memes with AI</p>
+                </div>
+
+                <div class="card mb-4">
+                    <div class="card-body p-4">
+                        <h5 class="card-title mb-4"><i class="fas fa-comment-dots me-2"></i>Generate a Meme</h5>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Topic</label>
+                            <input type="text" class="form-control" id="topicInput" placeholder="Enter a topic for your meme (e.g., programming, coffee, Monday)">
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label">Style</label>
+                                <select class="form-select" id="styleSelect">
+                                    <option value="relatable">Relatable</option>
+                                    <option value="savage">Savage</option>
+                                    <option value="wholesome">Wholesome</option>
+                                    <option value="desi">Desi</option>
+                                    <option value="absurd">Absurd</option>
+                                    <option value="observational">Observational</option>
+                                </select>
+                            </div>
+                            
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label">Tone</label>
+                                <select class="form-select" id="toneSelect">
+                                    <option value="funny">Funny</option>
+                                    <option value="sarcastic">Sarcastic</option>
+                                    <option value="dark">Dark</option>
+                                    <option value="wholesome">Wholesome</option>
+                                    <option value="cringe">Cringe</option>
+                                </select>
+                            </div>
+                            
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label">Template</label>
+                                <select class="form-select" id="templateSelect">
+                                    <option value="AUTO">Auto</option>
+                                    <option value="T01">Me When</option>
+                                    <option value="T02">Got Me Like</option>
+                                    <option value="T03">Style Take</option>
+                                    <option value="T04">Trying To</option>
+                                    <option value="T05">POV</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="d-flex gap-2">
+                            <button class="btn btn-gradient flex-grow-1" id="generateBtn">
+                                <i class="fas fa-bolt me-2"></i>Generate Meme
+                            </button>
+                            <button class="btn btn-outline-light flex-grow-1" id="historyBtn">
+                                <i class="fas fa-history me-2"></i>View History
+                            </button>
+                        </div>
+
+                        <div class="typing-indicator" id="typingIndicator">
+                            <span class="dot-flashing"></span> <span class="ms-2">Meme Agent is thinking...</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card meme-card">
+                    <div class="card-body p-4">
+                        <h5 class="card-title mb-4"><i class="fas fa-masks-theater me-2"></i>Generated Memes</h5>
+                        <div id="memesContainer">
+                            <div class="text-center text-muted py-5">
+                                <i class="fas fa-meh fa-3x mb-3"></i>
+                                <p>Your generated memes will appear here</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const topicInput = document.getElementById('topicInput');
+            const styleSelect = document.getElementById('styleSelect');
+            const toneSelect = document.getElementById('toneSelect');
+            const templateSelect = document.getElementById('templateSelect');
+            const generateBtn = document.getElementById('generateBtn');
+            const memesContainer = document.getElementById('memesContainer');
+            const typingIndicator = document.getElementById('typingIndicator');
+
+            // Load available styles and tones from the backend
+            async function loadOptions() {
+                try {
+                    const [stylesRes, tonesRes] = await Promise.all([
+                        fetch('http://127.0.0.1:8000/styles'),
+                        fetch('http://127.0.0.1:8000/tones')
+                    ]);
+                    
+                    const stylesData = await stylesRes.json();
+                    const tonesData = await tonesRes.json();
+                    
+                    // Update style select options
+                    styleSelect.innerHTML = '';
+                    stylesData.styles.forEach(style => {
+                        const option = document.createElement('option');
+                        option.value = style;
+                        option.textContent = style.charAt(0).toUpperCase() + style.slice(1);
+                        styleSelect.appendChild(option);
+                    });
+                    
+                    // Update tone select options
+                    toneSelect.innerHTML = '';
+                    tonesData.tones.forEach(tone => {
+                        const option = document.createElement('option');
+                        option.value = tone;
+                        option.textContent = tone.charAt(0).toUpperCase() + tone.slice(1);
+                        toneSelect.appendChild(option);
+                    });
+                } catch (error) {
+                    console.error('Error loading options:', error);
+                }
+            }
+
+            // Generate memes using the backend API
+            async function generateMemes() {
+                const topic = topicInput.value.trim();
+                if (!topic) {
+                    alert('Please enter a topic for your meme');
+                    return;
+                }
+
+                // Show typing indicator
+                typingIndicator.style.display = 'block';
+                generateBtn.disabled = true;
+                
+                try {
+                    const response = await fetch('http://127.0.0.1:8000/chat', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            message: topic,
+                            style: styleSelect.value,
+                            tone: toneSelect.value,
+                            template: templateSelect.value
+                        })
+                    });
+
+                    const data = await response.json();
+                    
+                    if (data.status === 'success') {
+                        displayMemes(data.data.memes, data.data.style, data.data.tone);
+                    } else {
+                        throw new Error(data.message || 'Error generating memes');
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                    memesContainer.innerHTML = `
+                        <div class="alert alert-danger">
+                            <i class="fas fa-exclamation-triangle me-2"></i>
+                            Error: ${error.message}
+                        </div>
+                    `;
+                } finally {
+                    typingIndicator.style.display = 'none';
+                    generateBtn.disabled = false;
+                }
+            }
+
+            // Display memes in the container
+            function displayMemes(memes, style, tone) {
+                if (!memes || memes.length === 0) {
+                    memesContainer.innerHTML = `
+                        <div class="text-center text-muted py-5">
+                            <i class="fas fa-meh fa-3x mb-3"></i>
+                            <p>No memes generated. Try a different topic!</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                let memesHTML = '';
+                memes.forEach((meme, index) => {
+                    memesHTML += `
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div class="flex-grow-1">
+                                        <p class="card-text fs-5">${meme}</p>
+                                    </div>
+                                    <div class="ms-3">
+                                        <span class="style-tag">${style}</span>
+                                        <span class="style-tag">${tone}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                memesContainer.innerHTML = memesHTML;
+                
+                // Save to history in localStorage
+                saveToHistory(memes, style, tone, topicInput.value.trim());
+            }
+
+            // Save meme generation to history
+            function saveToHistory(memes, style, tone, topic) {
+                // Check if user is logged in by checking for session token or user data
+                // For now, we'll assume if they can generate memes, they're logged in
+                // In a real implementation, we might check for a session token
+                const history = JSON.parse(localStorage.getItem('memeHistory') || '[]');
+                
+                // Add current generation to history
+                const newEntry = {
+                    timestamp: new Date().toISOString(),
+                    topic: topic,
+                    style: style,
+                    tone: tone,
+                    memes: [...memes] // Clone the memes array
+                };
+                
+                // Add to beginning of array (most recent first)
+                history.unshift(newEntry);
+                
+                // Limit history to 50 entries to prevent localStorage overflow
+                if (history.length > 50) {
+                    history.splice(50);
+                }
+                
+                // Save back to localStorage
+                localStorage.setItem('memeHistory', JSON.stringify(history));
+            }
+
+            // Display meme history in a modal
+            function showHistory() {
+                const history = JSON.parse(localStorage.getItem('memeHistory') || '[]');
+                
+                if (history.length === 0) {
+                    alert('No meme generation history found.');
+                    return;
+                }
+
+                // Create modal HTML
+                const modalHTML = `
+                    <div id="historyModal" class="modal fade show d-block" tabindex="-1" style="background-color: rgba(0,0,0,0.5);">
+                        <div class="modal-dialog modal-xl modal-dialog-scrollable">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Meme Generation History</h5>
+                                    <button type="button" class="btn-close" id="closeHistoryModal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div id="historyContent">
+                                        ${history.map((entry, index) => `
+                                            <div class="card mb-3">
+                                                <div class="card-header">
+                                                    <div class="d-flex justify-content-between">
+                                                        <div>
+                                                            <strong>Topic:</strong> ${entry.topic} |
+                                                            <strong>Style:</strong> ${entry.style} |
+                                                            <strong>Tone:</strong> ${entry.tone}
+                                                        </div>
+                                                        <small class="text-muted">${new Date(entry.timestamp).toLocaleString()}</small>
+                                                    </div>
+                                                </div>
+                                                <div class="card-body">
+                                                    ${entry.memes.map(meme => `
+                                                        <div class="card mb-2">
+                                                            <div class="card-body">
+                                                                <p class="card-text">${meme}</p>
+                                                            </div>
+                                                        </div>
+                                                    `).join('')}
+                                                </div>
+                                            </div>
+                                        `).join('')}
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" id="clearHistoryBtn">Clear History</button>
+                                    <button type="button" class="btn btn-primary" id="closeHistoryModalBtn">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                // Remove any existing modals
+                const existingModal = document.getElementById('historyModal');
+                if (existingModal) {
+                    existingModal.remove();
+                }
+
+                // Add the modal to the page
+                document.body.insertAdjacentHTML('beforeend', modalHTML);
+
+                // Add event listeners to the modal
+                document.getElementById('closeHistoryModal').addEventListener('click', closeHistoryModal);
+                document.getElementById('closeHistoryModalBtn').addEventListener('click', closeHistoryModal);
+                document.getElementById('clearHistoryBtn').addEventListener('click', clearHistory);
+            }
+
+            // Close the history modal
+            function closeHistoryModal() {
+                const modal = document.getElementById('historyModal');
+                if (modal) {
+                    modal.remove();
+                }
+            }
+
+            // Clear the history
+            function clearHistory() {
+                if (confirm('Are you sure you want to clear your meme generation history?')) {
+                    localStorage.removeItem('memeHistory');
+                    closeHistoryModal();
+                    alert('History cleared successfully.');
+                }
+            }
+
+            // Clear history on logout by listening for navigation to logout
+            function setupLogoutListener() {
+                // Listen for clicks on logout links/buttons
+                document.addEventListener('click', function(e) {
+                    const target = e.target.closest('a, button');
+                    if (target && (target.getAttribute('href')?.includes('logout') || 
+                                   target.getAttribute('onclick')?.includes('logout') ||
+                                   target.id === 'logout' || 
+                                   target.classList.contains('logout'))) {
+                        // Clear history when logging out
+                        localStorage.removeItem('memeHistory');
+                    }
+                });
+                
+                // Also periodically check if user is still logged in by making a request to a protected endpoint
+                // This is a fallback method - in a real app, you'd have a better way to detect logout
+                setInterval(checkAuthStatus, 30000); // Check every 30 seconds
+                
+                // Listen for beforeunload event to detect when user leaves the page
+                window.addEventListener('beforeunload', function() {
+                    // Only clear history if user is navigating away from the site (not just refreshing)
+                    // We'll use sessionStorage to track if this is a refresh vs leaving
+                    sessionStorage.setItem('lastPage', window.location.href);
+                });
+            }
+            
+            // Function to check if user is still authenticated
+            function checkAuthStatus() {
+                // Make a request to a protected endpoint to check if session is still valid
+                fetch('/profile', { method: 'GET', credentials: 'same-origin' })
+                    .then(response => {
+                        if (!response.ok) {
+                            // If not authenticated (401/403), clear history
+                            localStorage.removeItem('memeHistory');
+                        }
+                    })
+                    .catch(error => {
+                        // If there's an error (likely due to not being authenticated), clear history
+                        localStorage.removeItem('memeHistory');
+                    });
+            }
+
+            // Event listeners
+            generateBtn.addEventListener('click', generateMemes);
+            document.getElementById('historyBtn').addEventListener('click', showHistory);
+            
+            // Allow Enter key to trigger generation
+            topicInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    generateMemes();
+                }
+            });
+
+            // Load options on page load
+            loadOptions();
+            
+            // Setup logout listener
+            setupLogoutListener();
+        });
+    </script>
+</body>
+</html>

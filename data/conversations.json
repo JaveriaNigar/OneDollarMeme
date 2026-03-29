@@ -1,0 +1,72 @@
+{
+    "15": {
+        "conversation_id": "15",
+        "messages": [
+            {
+                "role": "user",
+                "content": "make meme for my ugly face",
+                "timestamp": "2026-02-14 01:59:08"
+            },
+            {
+                "role": "assistant",
+                "content": "School ki yaadein aur ye Ugly Face Problem, dono hi badi relatable hain yaar!",
+                "timestamp": "2026-02-14 01:59:35"
+            },
+            {
+                "role": "assistant",
+                "content": "[MEME][T06] When school teacher asks a question and you didn't do last night's homework: \"Udhay Chopra ki acting jaisa blank face\" (Relatable) #SchoolLife",
+                "timestamp": "2026-02-14 01:59:35"
+            },
+            {
+                "role": "assistant",
+                "content": "[MEME][T03] The relatable take on being the 'ugly friend': \"Mere friends post Insta-worthy selfies. Main? Crop-out material\" #FriendGoals",
+                "timestamp": "2026-02-14 01:59:35"
+            },
+            {
+                "role": "assistant",
+                "content": "[MEME][T04] Me trying to look cute for school photo day: \"Result? Failed attempt by Fair & Lovely ka ad\" (Funny)",
+                "timestamp": "2026-02-14 01:59:35"
+            },
+            {
+                "role": "user",
+                "content": "make meme for my ugly face",
+                "timestamp": "2026-02-14 01:59:36"
+            }
+        ]
+    },
+    "18": {
+        "conversation_id": "18",
+        "messages": [
+            {
+                "role": "user",
+                "content": "make meme for my school",
+                "timestamp": "2026-02-14 02:05:31"
+            },
+            {
+                "role": "assistant",
+                "content": "School ki yaad hai toh Chai aur Bunty aur Babli ki film ki tarha lagegi - wohi puraana drama aur isi liye relatable!",
+                "timestamp": "2026-02-14 02:05:56"
+            },
+            {
+                "role": "assistant",
+                "content": "[MEME][T07] My last two braincells about school: \"Homework hai ya jail ki saza?\" (Relatable)",
+                "timestamp": "2026-02-14 02:05:56"
+            },
+            {
+                "role": "assistant",
+                "content": "[MEME][T01] Me when the teacher asks a question: \"Wahi sawal repeat kar do, meri wifi slow hai!\" (Relatable)",
+                "timestamp": "2026-02-14 02:05:56"
+            },
+            {
+                "role": "assistant",
+                "content": "[MEME][T06] When school gets cancelled: \"Dil garden garden ho gaya!\" (Relatable)",
+                "timestamp": "2026-02-14 02:05:56"
+            },
+            {
+                "role": "user",
+                "content": "make meme for my school",
+                "timestamp": "2026-02-14 02:05:57"
+            }
+        ]
+    }
+}

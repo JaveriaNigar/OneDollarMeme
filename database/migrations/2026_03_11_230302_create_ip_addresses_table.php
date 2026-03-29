@@ -1,0 +1,38 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('ip_addresses', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->string('ip_address', 45);
+            $table->string('device_fingerprint')->nullable();
+            $table->string('browser_version')->nullable();
+            $table->string('operating_system')->nullable();
+            $table->string('user_agent')->nullable();
+            $table->timestamp('last_login_at')->nullable();
+            $table->integer('login_count')->default(1);
+            $table->timestamps();
+
+            $table->index(['ip_address', 'user_id']);
+            $table->index('device_fingerprint');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('ip_addresses');
+    }
+};

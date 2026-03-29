@@ -1,0 +1,16 @@
+fastapi
+uvicorn
+openai
+python-dotenv
+pydantic
+openai-agents
+requests
+beautifulsoup4
+faiss-cpu
+sentence-transformers
+scikit-learn
+torch
+faiss-cpu
+sentence-transformers
+scikit-learn
+torch
