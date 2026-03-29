@@ -93,21 +93,21 @@
 
     <!-- BOX 3: TOP CREATORS -->
     @if(empty($hideTopCreators))
-    <div class="card border-0 shadow-sm rounded-4">
+    <div class="card border-0 shadow-sm rounded-4" id="top-creators-card">
         <div class="card-header bg-white border-0 py-3 text-center">
             <h6 class="fw-bold mb-0 text-uppercase small" style="color: var(--brand-purple);">TOP CREATORS</h6>
         </div>
         <div class="card-body p-0">
-            <div class="list-group list-group-flush">
+            <div class="list-group list-group-flush" id="top-creators-list">
                 @if(empty($sidebarTop3) || count($sidebarTop3) === 0)
                     <div class="text-center p-3 text-muted small">No top creators yet</div>
                 @else
                     @foreach($sidebarTop3 as $creator)
-                        <div class="list-group-item border-0 d-flex align-items-center px-4 py-2">
+                        <div class="list-group-item border-0 d-flex align-items-center px-4 py-2" data-user-id="{{ $creator->user_id }}" data-username="{{ $creator->user_name }}">
                              <img src="{{ $creator->user_avatar }}" class="rounded-circle me-3" style="width: 32px; height: 32px; object-fit: cover;">
                              <div class="flex-grow-1">
                                  <span class="fw-bold small d-block">{{ $creator->user_name }}</span>
-                                 <span style="font-size: 0.75rem; color: var(--brand-purple); font-weight: 800;">Score: {{ $creator->score }}</span>
+                                 <span style="font-size: 0.75rem; color: var(--brand-purple); font-weight: 800;">Score: <span class="creator-score-value">{{ $creator->score }}</span></span>
                              </div>
                              @auth
                              <button class="btn btn-sm btn-light border fw-bold px-3 py-0 small" style="color: var(--brand-purple); font-size: 0.75rem;">Follow</button>
@@ -216,7 +216,40 @@ function updateLiveScores() {
     });
 }
 
-// Update scores every 10 seconds to match live behavior
-setInterval(updateLiveScores, 10000);
+// Function to update TOP CREATORS scores
+function updateTopCreators() {
+    fetch('/api/leaderboard')
+        .then(response => response.json())
+        .then(data => {
+            if (data.top_contestants && data.top_contestants.length > 0) {
+                const creatorsList = document.getElementById('top-creators-list');
+                if (!creatorsList) return;
+
+                // Get all creator items
+                const creatorItems = creatorsList.querySelectorAll('[data-username]');
+                
+                // Update scores based on username match
+                data.top_contestants.forEach((contestant, index) => {
+                    creatorItems.forEach(item => {
+                        const username = item.getAttribute('data-username');
+                        if (username === contestant.user_name) {
+                            const scoreElement = item.querySelector('.creator-score-value');
+                            if (scoreElement) {
+                                scoreElement.textContent = contestant.score;
+                            }
+                        }
+                    });
+                });
+            }
+        })
+        .catch(error => {
+            console.warn('Could not update top creators:', error);
+        });
+}
+
+// Update scores every 5 seconds for instant updates
+setInterval(updateLiveScores, 5000);
+setInterval(updateTopCreators, 5000);
 updateLiveScores(); // Initial update
+updateTopCreators(); // Initial update
 </script>

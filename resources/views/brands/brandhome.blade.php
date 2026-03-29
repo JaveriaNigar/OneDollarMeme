@@ -127,6 +127,207 @@
         .comment-list::-webkit-scrollbar-thumb:hover {
             background: #d0d0d0;
         }
+
+        /* Mobile Bottom Navigation */
+        @media (max-width: 991px) {
+            .mobile-bottom-nav {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                background: white;
+                border-top: 1px solid #e5e7eb;
+                z-index: 1000;
+                padding: 8px 0;
+                padding-bottom: max(8px, env(safe-area-inset-bottom));
+                box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            }
+
+            .mobile-bottom-nav .nav-item {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                text-decoration: none;
+                color: #6b7280;
+                font-size: 0.65rem;
+                font-weight: 600;
+                padding: 4px 6px;
+                transition: color 0.2s;
+            }
+
+            .mobile-bottom-nav .nav-item i {
+                font-size: 1.2rem;
+                margin-bottom: 2px;
+            }
+
+            .mobile-bottom-nav .nav-item:hover,
+            .mobile-bottom-nav .nav-item.active {
+                color: var(--brand-purple);
+            }
+
+            .mobile-bottom-nav .nav-item.active i {
+                transform: scale(1.1);
+            }
+
+            /* Main content padding for mobile */
+            .mobile-main-content {
+                padding-bottom: 70px;
+            }
+            
+            /* Mobile sidebar content */
+            .mobile-sidebar-content {
+                padding-bottom: 80px !important;
+            }
+
+            /* Center memes on mobile */
+            .mobile-feed-container {
+                max-width: 100%;
+                margin: 0;
+                padding: 0 10px;
+            }
+
+            /* Hide desktop sidebar on mobile */
+            .desktop-sidebar {
+                display: none !important;
+            }
+
+            /* Hero section mobile adjustments */
+            .hero-box {
+                padding: 1rem;
+                min-height: auto;
+            }
+
+            .hero-title {
+                font-size: 1.3rem;
+            }
+
+            .hero-subtitle {
+                font-size: 0.85rem;
+            }
+
+            .btn-hero-orange,
+            .btn-hero-purple {
+                padding: 0.4rem 0.9rem;
+                font-size: 0.8rem;
+            }
+
+            /* Brand header mobile */
+            .brand-header {
+                padding: 1.5rem 1rem !important;
+                min-height: auto !important;
+                border-radius: 12px !important;
+            }
+            
+            .brand-header h1 {
+                font-size: 1.3rem !important;
+            }
+            
+            .brand-header p {
+                font-size: 0.85rem !important;
+            }
+
+            .right-sidebar {
+                display: none !important;
+            }
+            
+            /* Mobile sidebar content styling */
+            .mobile-sidebar-content .card {
+                margin-bottom: 1rem;
+            }
+        }
+        
+        /* Small phones (max-width: 375px) */
+        @media (max-width: 375px) {
+            .mobile-bottom-nav .nav-item {
+                font-size: 0.6rem;
+                padding: 4px 4px;
+            }
+            
+            .mobile-bottom-nav .nav-item i {
+                font-size: 1.1rem;
+            }
+            
+            .mobile-bottom-nav .nav-item span {
+                font-size: 0.55rem;
+            }
+            
+            .hero-title {
+                font-size: 1.2rem;
+            }
+            
+            .btn-hero-orange,
+            .btn-hero-purple {
+                padding: 0.35rem 0.7rem;
+                font-size: 0.75rem;
+            }
+            
+            .mobile-feed-container {
+                padding: 0 5px;
+            }
+            
+            .post-card {
+                padding: 0.5rem;
+            }
+            
+            .brand-header h1 {
+                font-size: 1.1rem !important;
+            }
+        }
+        
+        /* Tablets (768px - 991px) */
+        @media (min-width: 768px) and (max-width: 991px) {
+            .mobile-feed-container {
+                max-width: 720px;
+                margin: 0 auto;
+            }
+            
+            .hero-title {
+                font-size: 1.5rem;
+            }
+            
+            .btn-hero-orange,
+            .btn-hero-purple {
+                padding: 0.45rem 1rem;
+                font-size: 0.85rem;
+            }
+        }
+
+        /* Desktop - hide mobile nav and keep original layout */
+        @media (min-width: 992px) {
+            .mobile-bottom-nav {
+                display: none !important;
+            }
+            
+            .mobile-main-content {
+                padding-bottom: 0 !important;
+            }
+            
+            .mobile-feed-container {
+                max-width: none !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+            
+            .mobile-sidebar-content {
+                display: none !important;
+            }
+        }
+        
+        /* Large Desktop (min-width: 1400px) */
+        @media (min-width: 1400px) {
+            .container {
+                max-width: 1320px;
+            }
+            
+            .post-card {
+                padding: 1.25rem;
+            }
+            
+            .hero-title {
+                font-size: 2rem;
+            }
+        }
     </style>
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -232,15 +433,15 @@
 
 <!-- Main Content -->
 <!-- Main Content Layout -->
-<div class="container mt-0 pt-0">
+<div class="container mt-0 pt-0 mobile-main-content">
     <div class="row">
-        <!-- LEFT SIDEBAR -->
-        <div class="col-lg-3 d-none d-lg-block">
+        <!-- LEFT SIDEBAR - Desktop Only -->
+        <div class="col-lg-3 d-none d-lg-block desktop-sidebar">
              <div class="sticky-top" style="top: 80px; z-index: 10;">
                  <div class="left-sidebar-box mt-2">
                      <a href="{{ route('home') }}" class="ls-link">Home</a>
                      <a href="{{ route('brands.index') }}" class="ls-link">For Brands</a>
-                     
+
                      <div style="border-top: 1px solid #f3f4f6; margin: 10px 0;"></div>
                      <div class="px-3 py-1 text-muted fw-bold small uppercase italic">Brand Campaigns</div>
                      @if(isset($brands) && count($brands) > 0)
@@ -266,13 +467,15 @@
                      <a href="#" class="ls-link">#RelatableVibes</a>
                      <a href="#" class="ls-link">#DankHumor</a>
                      <a href="#" class="ls-link">#CatLife</a>
-                     
+
                  </div>
              </div>
         </div>
-        
+
         <!-- MAIN FEED -->
         <div class="col-lg-6">
+            <!-- Mobile-only container for centered feed -->
+            <div class="mobile-feed-container d-lg-block">
             <!-- Hero Section removed from here -->
             
             <div class="text-center fw-bold text-muted small mb-2 d-lg-none">MAIN FEED</div>
@@ -483,12 +686,56 @@
 
             </div>
             @endforeach
+            </div> <!-- Close mobile-feed-container -->
         </div>
 
-        <div class="col-lg-3">
+        <div class="col-lg-3 right-sidebar">
             <!-- Sidebar cards -->
-            @include('partials._leaderboard-widget', ['hideTopCreators' => true, 'hideWinnerSpotlight' => true])
+            <div class="sticky-top" style="top: 80px; z-index: 10;">
+                @include('partials._leaderboard-widget', ['hideTopCreators' => true, 'hideWinnerSpotlight' => true])
+            </div>
+        </div>
     </div>
+</div>
+
+<!-- Mobile Bottom Navigation -->
+<nav class="mobile-bottom-nav d-lg-none">
+    <div class="container-fluid">
+        <div class="d-flex justify-content-around align-items-center">
+            <a href="{{ route('home') }}" class="nav-item {{ request()->routeIs('home') ? 'active' : '' }}">
+                <i class="bi bi-house-door-fill"></i>
+                <span>Home</span>
+            </a>
+            <a href="{{ route('memes.index', ['sort' => 'trending']) }}" class="nav-item {{ request()->routeIs('memes.index') ? 'active' : '' }}">
+                <i class="bi bi-fire"></i>
+                <span>Trending</span>
+            </a>
+            <a href="{{ route('upload-meme.create') }}" class="nav-item {{ request()->routeIs('upload-meme.create') ? 'active' : '' }}">
+                <i class="bi bi-plus-circle-fill" style="font-size: 1.8rem; color: var(--brand-purple);"></i>
+                <span>Upload</span>
+            </a>
+            <a href="{{ route('brands.public') }}" class="nav-item {{ request()->routeIs('brands.public') ? 'active' : '' }}">
+                <i class="bi bi-buildings"></i>
+                <span>Brands</span>
+            </a>
+            @auth
+            <a href="{{ route('profile.edit') }}" class="nav-item">
+                <i class="bi bi-person-circle"></i>
+                <span>Profile</span>
+            </a>
+            @else
+            <a href="{{ route('login') }}" class="nav-item">
+                <i class="bi bi-person"></i>
+                <span>Login</span>
+            </a>
+            @endauth
+        </div>
+    </div>
+</nav>
+
+<!-- Mobile Sidebar Content (Above Bottom Nav) -->
+<div class="d-lg-none mobile-sidebar-content" style="padding: 10px; max-width: 600px; margin: 0 auto;">
+    @include('partials._leaderboard-widget', ['hideTopCreators' => true, 'hideWinnerSpotlight' => true])
 </div>
 
 <div id="toast-container" style="position: fixed; top: 20px; right: 20px; z-index: 9999;"></div>
@@ -974,10 +1221,10 @@ $(document).ready(function() {
             });
     }
 
-    // Update leaderboard every 30 seconds
+    // Update leaderboard every 5 seconds for instant updates
     if (document.querySelector('.weekly-battle-leaderboard')) {
         updateLeaderboard(); // Initial update after page load
-        setInterval(updateLeaderboard, 30000); // Update every 30 seconds
+        setInterval(updateLeaderboard, 5000); // Update every 5 seconds
     }
 
     // Filtering functionality for trending memes

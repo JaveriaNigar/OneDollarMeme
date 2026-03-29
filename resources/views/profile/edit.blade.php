@@ -124,6 +124,7 @@
                                 </div>
 
                                 <!-- Action Buttons (Now below Bio) -->
+                                @if($isOwner ?? false)
                                 <div class="d-flex justify-content-center justify-content-md-start gap-2 mt-3" style="margin-left: -3px;">
                                     <button class="btn btn-purple-outline rounded-pill px-4 fw-bold" onclick="toggleEditMode()">
                                         Edit Profile
@@ -135,6 +136,7 @@
                                         Drafts
                                     </a>
                                 </div>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -147,7 +149,7 @@
                     <div class="bg-purple text-white p-2 rounded-3 me-3">
                         <i class="bi bi-grid-3x3-gap-fill fs-5"></i>
                     </div>
-                    <h3 class="h4 fw-black italic uppercase mb-0 tracking-tight">My Memes</h3>
+                    <h3 class="h4 fw-black italic uppercase mb-0 tracking-tight">{{ ($isOwner ?? false) ? 'My Memes' : $user->name . "'s Memes" }}</h3>
                 </div>
 
                 <div class="row g-4">
@@ -210,7 +212,9 @@
                                     <i class="bi bi-images fs-1"></i>
                                 </div>
                                 <h5 class="text-muted mb-0">Start your journey! Upload your first meme.</h5>
+                                @if($isOwner ?? false)
                                 <a href="{{ route('upload-meme.create') }}" class="btn btn-purple-solid rounded-pill px-4 mt-3">Upload Now</a>
+                                @endif
                             </div>
                         </div>
                     @endforelse

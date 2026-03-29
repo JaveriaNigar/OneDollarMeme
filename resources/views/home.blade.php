@@ -24,7 +24,7 @@
             --brand-bg: #f3f4f6;
         }
         body { background-color: var(--brand-bg); color: #333; font-family: 'Figtree', sans-serif; }
-        
+
         /* Dropdown */
         .dropdown { position: relative; }
         .dropdown-menu { max-height: 300px; overflow-y: auto; }
@@ -55,7 +55,7 @@
         .btn-hero-orange:hover { color: white; opacity: 0.9; }
         .btn-hero-purple { background-color: var(--brand-purple); color: white; font-weight: 700; border: none; padding: 0.5rem 1.25rem; border-radius: 6px; text-decoration: none; display: inline-block; transition: opacity 0.2s; }
         .btn-hero-purple:hover { color: white; opacity: 0.9; }
-        
+
         .featured-card { background: #f8f0fc; border-radius: 12px; min-height: 50vh; height: auto; border: 1px solid #e5e7eb; overflow: hidden; }
         .featured-header { padding: 8px 12px; border-bottom: 1px solid #f0f0f0; font-weight: 700; font-size: 0.8rem; text-transform: uppercase; color: #6b7280; }
         .featured-card .flex-grow-1 img { width: 100% !important; object-fit: cover !important; height: 100% !important; display: block !important; }
@@ -66,7 +66,7 @@
         .ls-link { display: block; padding: 10px 20px; color: #4b5563; font-weight: 600; font-size: 0.9rem; text-decoration: none; border-left: 3px solid transparent; }
         .ls-link:hover, .ls-link.active { background-color: #f9fafb; color: var(--brand-purple); border-left-color: var(--brand-purple); }
         .ls-header { padding: 15px 20px 5px; font-weight: 800; font-size: 0.8rem; color: #9ca3af; text-transform: uppercase; }
-        
+
         .arena-box { background: white; border-radius: 12px; border: 1px solid #e9d5ff; padding: 1.5rem; margin-bottom: 2rem; }
         .arena-title { color: var(--brand-purple); font-weight: 800; text-transform: uppercase; font-size: 1rem; }
 
@@ -89,12 +89,12 @@
 
         /* Buttons from existing styles preserved but tweaked */
         .reaction-emoji { font-size: 1.2rem; }
-        
+
         /* Dark Mode overrides (preserving minimal functionality) */
         body.dark-mode { background-color: #121212; color: #e5e5e5; }
         body.dark-mode .custom-navbar, body.dark-mode .left-sidebar-box, body.dark-mode .post-card, body.dark-mode .featured-card, body.dark-mode .hero-box { background-color: #1e1e1e; border-color: #333; }
         body.dark-mode .brand-logo, body.dark-mode .hero-title, body.dark-mode .arena-title { color: #bb86fc !important; }
-        body.dark-mode .ls-link { color: #ccc; } 
+        body.dark-mode .ls-link { color: #ccc; }
         body.dark-mode .ls-link:hover { background-color: #333; }
 
         .comment-list {
@@ -119,6 +119,205 @@
 
         .comment-list::-webkit-scrollbar-thumb:hover {
             background: #d0d0d0;
+        }
+
+        /* Mobile Bottom Navigation */
+        @media (max-width: 991px) {
+            .mobile-bottom-nav {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                background: white;
+                border-top: 1px solid #e5e7eb;
+                z-index: 1000;
+                padding: 8px 0;
+                padding-bottom: max(8px, env(safe-area-inset-bottom));
+                box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            }
+
+            .mobile-bottom-nav .nav-item {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                text-decoration: none;
+                color: #6b7280;
+                font-size: 0.65rem;
+                font-weight: 600;
+                padding: 4px 6px;
+                transition: color 0.2s;
+            }
+
+            .mobile-bottom-nav .nav-item i {
+                font-size: 1.2rem;
+                margin-bottom: 2px;
+            }
+
+            .mobile-bottom-nav .nav-item:hover,
+            .mobile-bottom-nav .nav-item.active {
+                color: var(--brand-purple);
+            }
+
+            .mobile-bottom-nav .nav-item.active i {
+                transform: scale(1.1);
+            }
+
+            /* Main content padding for mobile */
+            .mobile-main-content {
+                padding-bottom: 70px;
+            }
+            
+            /* Mobile sidebar content */
+            .mobile-sidebar-content {
+                padding-bottom: 80px !important;
+            }
+
+            /* Center memes on mobile */
+            .mobile-feed-container {
+                max-width: 100%;
+                margin: 0;
+                padding: 0 10px;
+            }
+
+            /* Hide desktop sidebar on mobile */
+            .desktop-sidebar {
+                display: none !important;
+            }
+
+            /* Hero section mobile adjustments */
+            .hero-box {
+                padding: 1rem;
+                min-height: auto;
+            }
+
+            .hero-title {
+                font-size: 1.3rem;
+            }
+
+            .hero-subtitle {
+                font-size: 0.85rem;
+            }
+
+            .btn-hero-orange,
+            .btn-hero-purple {
+                padding: 0.4rem 0.9rem;
+                font-size: 0.8rem;
+            }
+
+            /* Arena box mobile */
+            .arena-box {
+                padding: 1rem;
+                margin-bottom: 1rem;
+            }
+
+            .arena-title {
+                font-size: 1rem;
+            }
+
+            /* Post card mobile */
+            .post-card {
+                padding: 0.75rem;
+                margin-bottom: 1rem;
+            }
+
+            /* Right sidebar hidden on mobile */
+            .right-sidebar {
+                display: none !important;
+            }
+            
+            /* Mobile sidebar content styling */
+            .mobile-sidebar-content .card {
+                margin-bottom: 1rem;
+            }
+        }
+        
+        /* Small phones (max-width: 375px) */
+        @media (max-width: 375px) {
+            .mobile-bottom-nav .nav-item {
+                font-size: 0.6rem;
+                padding: 4px 4px;
+            }
+            
+            .mobile-bottom-nav .nav-item i {
+                font-size: 1.1rem;
+            }
+            
+            .mobile-bottom-nav .nav-item span {
+                font-size: 0.55rem;
+            }
+            
+            .hero-title {
+                font-size: 1.2rem;
+            }
+            
+            .btn-hero-orange,
+            .btn-hero-purple {
+                padding: 0.35rem 0.7rem;
+                font-size: 0.75rem;
+            }
+            
+            .mobile-feed-container {
+                padding: 0 5px;
+            }
+            
+            .post-card {
+                padding: 0.5rem;
+            }
+        }
+        
+        /* Tablets (768px - 991px) */
+        @media (min-width: 768px) and (max-width: 991px) {
+            .mobile-feed-container {
+                max-width: 720px;
+                margin: 0 auto;
+            }
+            
+            .hero-title {
+                font-size: 1.5rem;
+            }
+            
+            .btn-hero-orange,
+            .btn-hero-purple {
+                padding: 0.45rem 1rem;
+                font-size: 0.85rem;
+            }
+        }
+
+        /* Desktop - hide mobile nav and keep original layout */
+        @media (min-width: 992px) {
+            .mobile-bottom-nav {
+                display: none !important;
+            }
+            
+            .mobile-main-content {
+                padding-bottom: 0 !important;
+            }
+            
+            .mobile-feed-container {
+                max-width: none !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+            
+            .mobile-sidebar-content {
+                display: none !important;
+            }
+        }
+        
+        /* Large Desktop (min-width: 1400px) */
+        @media (min-width: 1400px) {
+            .container {
+                max-width: 1320px;
+            }
+            
+            .post-card {
+                padding: 1.25rem;
+            }
+            
+            .hero-title {
+                font-size: 2rem;
+            }
         }
     </style>
 
@@ -165,10 +364,10 @@
 
 <!-- Main Content -->
 <!-- Main Content Layout -->
-<div class="container mt-0 pt-0">
+<div class="container mt-0 pt-0 mobile-main-content">
     <div class="row">
-        <!-- LEFT SIDEBAR -->
-        <div class="col-lg-3 d-none d-lg-block">
+        <!-- LEFT SIDEBAR - Desktop Only -->
+        <div class="col-lg-3 d-none d-lg-block desktop-sidebar">
              <div class="sticky-top" style="top: 80px; z-index: 10;">
                  <div class="left-sidebar-box mt-2">
                      <a href="{{ route('home') }}" class="ls-link active">Home</a>
@@ -191,15 +390,17 @@
                  </div>
              </div>
         </div>
-        
+
         <!-- MAIN FEED -->
         <div class="col-lg-6">
-            <!-- Hero Section removed from here -->
-            
-            <div class="text-center fw-bold text-muted small mb-2 d-lg-none">MAIN FEED</div>
-            
-            <!-- Weekly Battle Arena Widget (In Feed) -->
-            <div class="arena-box text-center relative">
+            <!-- Mobile-only container for centered feed -->
+            <div class="mobile-feed-container d-lg-block">
+                <!-- Hero Section removed from here -->
+
+                <div class="text-center fw-bold text-muted small mb-2 d-lg-none">MAIN FEED</div>
+
+                <!-- Weekly Battle Arena Widget (In Feed) -->
+                <div class="arena-box text-center relative">
                  <h2 class="arena-title mb-1 text-start fw-bold" style="font-size: 1.4rem;">WEEKLY BATTLE ARENA</h2>
                  <div class="fw-bold text-start" style="font-size: 1.1rem;">Prize: $100</div>
                  <p class="mb-3 text-muted small text-start" style="font-size: 0.9rem;">Ends in: <span id="weekly-battle-timer" class="js-battle-timer" data-end-time="{{ $currentChallengeEndTime ?? $sidebarEndTime ?? '' }}">Loading...</span></p>
@@ -452,12 +653,56 @@
 
             </div>
             @endforeach
+            </div> <!-- Close mobile-feed-container -->
         </div>
 
-        <div class="col-lg-3">
+        <div class="col-lg-3 right-sidebar">
             <!-- Sidebar cards -->
-            @include('partials._leaderboard-widget', ['hideBrandWinners' => true])
+            <div class="sticky-top" style="top: 80px; z-index: 10;">
+                @include('partials._leaderboard-widget', ['hideBrandWinners' => true])
+            </div>
+        </div>
     </div>
+</div>
+
+<!-- Mobile Bottom Navigation -->
+<nav class="mobile-bottom-nav d-lg-none">
+    <div class="container-fluid">
+        <div class="d-flex justify-content-around align-items-center">
+            <a href="{{ route('home') }}" class="nav-item {{ request()->routeIs('home') ? 'active' : '' }}">
+                <i class="bi bi-house-door-fill"></i>
+                <span>Home</span>
+            </a>
+            <a href="{{ route('memes.index', ['sort' => 'trending']) }}" class="nav-item {{ request()->routeIs('memes.index') ? 'active' : '' }}">
+                <i class="bi bi-fire"></i>
+                <span>Trending</span>
+            </a>
+            <a href="{{ route('upload-meme.create') }}" class="nav-item {{ request()->routeIs('upload-meme.create') ? 'active' : '' }}">
+                <i class="bi bi-plus-circle-fill" style="font-size: 1.8rem; color: var(--brand-purple);"></i>
+                <span>Upload</span>
+            </a>
+            <a href="{{ route('brands.public') }}" class="nav-item {{ request()->routeIs('brands.public') ? 'active' : '' }}">
+                <i class="bi bi-buildings"></i>
+                <span>Brands</span>
+            </a>
+            @auth
+            <a href="{{ route('profile.edit') }}" class="nav-item">
+                <i class="bi bi-person-circle"></i>
+                <span>Profile</span>
+            </a>
+            @else
+            <a href="{{ route('login') }}" class="nav-item">
+                <i class="bi bi-person"></i>
+                <span>Login</span>
+            </a>
+            @endauth
+        </div>
+    </div>
+</nav>
+
+<!-- Mobile Sidebar Content (Above Bottom Nav) -->
+<div class="d-lg-none mobile-sidebar-content" style="padding: 10px; max-width: 600px; margin: 0 auto;">
+    @include('partials._leaderboard-widget', ['hideBrandWinners' => true])
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -918,10 +1163,10 @@ $(document).ready(function() {
             });
     }
 
-    // Update leaderboard every 30 seconds
+    // Update leaderboard every 5 seconds for instant updates
     if (document.querySelector('.weekly-battle-leaderboard')) {
         updateLeaderboard(); // Initial update after page load
-        setInterval(updateLeaderboard, 30000); // Update every 30 seconds
+        setInterval(updateLeaderboard, 5000); // Update every 5 seconds
     }
 
     // Filtering functionality for trending memes

@@ -41,15 +41,19 @@ class BrandController extends Controller
             ->get();
 
         $highlightMemeId = $request->input('highlight') ?: session('highlight_meme_id');
-        
+
+        // Filter memes from the last 30 days for brand page feed
+        $thirtyDaysAgo = now()->subDays(30);
+
         $query = \App\Models\Meme::with(['reactions', 'comments.user', 'user', 'shareEvents', 'brand'])
             ->where('status', '!=', 'rejected')
-            ->whereNotNull('brand_id');
+            ->whereNotNull('brand_id')
+            ->where('created_at', '>=', $thirtyDaysAgo);
 
         // Sponsored Memes FIRST
         $query->orderByRaw('CASE WHEN brand_id IS NOT NULL THEN 0 ELSE 1 END ASC');
         $query->orderBy('is_contest', 'desc');
-            
+
         if ($highlightMemeId) {
             $query->orderByRaw("CASE WHEN id = ? THEN 0 ELSE 1 END ASC", [$highlightMemeId]);
         }
@@ -57,7 +61,7 @@ class BrandController extends Controller
         $query->orderBy('contest_week_id', 'desc')
               ->orderBy('score', 'desc')
               ->orderBy('created_at', 'desc');
-        
+
         $memes = $query->get();
 
         // Add user selected emoji
@@ -111,6 +115,7 @@ class BrandController extends Controller
             ->get()
             ->map(function($user) {
                 return (object) [
+                    'user_id' => $user->id,
                     'user_name' => $user->name,
                     'user_avatar' => $user->profile_photo_url,
                     'score' => $user->total_score ?? 0,
