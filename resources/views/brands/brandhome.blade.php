@@ -365,13 +365,13 @@
 <div class="container my-4">
 @if(isset($featuredBrand))
     <!-- Show Dynamic Brand Header if exists -->
-    <div class="brand-header p-5 rounded-[40px] text-white mb-2 position-relative overflow-hidden" 
+    <div class="brand-header p-5 rounded-[40px] text-white mb-2 position-relative overflow-hidden"
          style="background: linear-gradient(135deg, {{ $featuredBrand->theme_color ?? '#6f42c1' }} 0%, #000 100%); min-height: 250px; border-radius: 20px;">
-        
+
         <!-- Background Pattern -->
-        <div class="position-absolute top-0 end-0 opacity-10 w-100 h-100" 
+        <div class="position-absolute top-0 end-0 opacity-10 w-100 h-100"
              style="background-image: radial-gradient(#fff 1px, transparent 1px); background-size: 20px 20px;"></div>
-        
+
         <div class="position-relative z-1 d-flex flex-column align-items-center text-center">
             @if($featuredBrand->logo)
                 <img src="{{ asset('storage/' . $featuredBrand->logo) }}" alt="{{ $featuredBrand->company_name }}"
@@ -385,42 +385,42 @@
 
             <h1 class="h2 fw-black uppercase italic tracking-tight mb-1" style="font-weight: 900; text-transform: uppercase; font-style: italic; letter-spacing: -0.025em;">{{ $featuredBrand->company_name }}</h1>
             <p class="lead opacity-75 small mb-3" style="max-width: 600px;">{{ $featuredBrand->brand_description ?? 'Participate in our brand campaign and win amazing prizes!' }}</p>
-            
+
             <div class="d-flex gap-2">
-                <a href="{{ route('brands.show', $featuredBrand->id) }}" 
-                   class="btn rounded-pill px-4 fw-bold" 
+                <a href="{{ route('brands.show', $featuredBrand->id) }}"
+                   class="btn rounded-pill px-4 fw-bold"
                    style="background-color: white; color: {{ $featuredBrand->theme_color ?? '#6f42c1' }}; border: none; transition: none;">JOIN CAMPAIGN</a>
                 @if($featuredBrand->website)
-                    <a href="{{ $featuredBrand->website }}" target="_blank" 
-                       class="btn rounded-pill px-4 fw-bold" 
+                    <a href="{{ $featuredBrand->website }}" target="_blank"
+                       class="btn rounded-pill px-4 fw-bold"
                        style="background-color: white; color: {{ $featuredBrand->theme_color ?? '#6f42c1' }}; border: none; transition: none;">Brand Site</a>
                 @endif
             </div>
         </div>
     </div>
 @else
-    <div class="row g-4 align-items-stretch">
-        <!-- Hero Left -->
-        <div class="col-lg-8">
-            <div class="hero-box">
-                <h1 class="hero-title">Post Memes. Win Prizes.</h1>
-                <p class="hero-subtitle">Enter the Weekly Battle for $1</p>
-                <div class="d-flex gap-3">
-                    <a href="{{ route('upload-meme.create') }}" class="btn-hero-orange">join Battle</a>
-                    <a href="{{ route('upload-meme.create') }}" class="btn-hero-purple">Upload Meme</a>
-                </div>
-            </div>
-        </div>
-        <!-- Hero Right: Featured Meme -->
-        <div class="col-lg-4">
-            <div class="featured-card d-flex flex-column">
+    <!-- Show OneDollarMeme Header when no active brand campaign -->
+    <div class="brand-header p-5 rounded-[40px] text-white mb-2 position-relative overflow-hidden"
+         style="background: linear-gradient(135deg, #5B2E91 0%, #000 100%); min-height: 250px; border-radius: 20px;">
 
-                <div class="flex-grow-1 d-flex align-items-center justify-content-center position-relative overflow-hidden">
-                    <img src="{{ asset('image/my-cat.png') }}" class="img-fluid w-100 h-100" style="object-fit: cover;" alt="Featured">
-                     <div class="position-absolute d-flex align-items-center justify-content-center w-100 h-100">
-                         <i class="bi bi-image fs-1 text-white shadow-sm"></i>
-                     </div>
-                </div>
+        <!-- Background Pattern -->
+        <div class="position-absolute top-0 end-0 opacity-10 w-100 h-100"
+             style="background-image: radial-gradient(#fff 1px, transparent 1px); background-size: 20px 20px;"></div>
+
+        <div class="position-relative z-1 d-flex flex-column align-items-center text-center">
+            <img src="{{ asset('image/my-logo.jpg') }}" alt="OneDollarMeme"
+                 class="rounded-circle shadow-lg mb-3 border border-4 border-white" style="width: 100px; height: 100px; object-fit: cover;">
+
+            <h1 class="h2 fw-black uppercase italic tracking-tight mb-1" style="font-weight: 900; text-transform: uppercase; font-style: italic; letter-spacing: -0.025em;">OneDollarMeme</h1>
+            <p class="lead opacity-75 small mb-3" style="max-width: 600px;">Post Memes. Win Prizes. Join the weekly meme battle and earn cash rewards!</p>
+
+            <div class="d-flex gap-2">
+                <a href="{{ route('upload-meme.create') }}"
+                   class="btn rounded-pill px-4 fw-bold"
+                   style="background-color: white; color: #5B2E91; border: none; transition: none;">UPLOAD MEME</a>
+                <a href="{{ route('memes.winners') }}"
+                   class="btn rounded-pill px-4 fw-bold"
+                   style="background-color: #f2994a; color: white; border: none; transition: none;">VIEW WINNERS</a>
             </div>
         </div>
     </div>
@@ -1295,6 +1295,32 @@ $(document).ready(function() {
 
     });
 
+</script>
+<style>
+@keyframes meme-pulse {
+    0%   { box-shadow: 0 0 0 0 rgba(91,46,145,0.7); border-color: #5B2E91; }
+    50%  { box-shadow: 0 0 0 12px rgba(91,46,145,0.15), 0 0 25px 5px rgba(91,46,145,0.2); border-color: #5B2E91; }
+    100% { box-shadow: 0 0 0 0 rgba(91,46,145,0); border-color: #5B2E91; }
+}
+.meme-highlighted {
+    border: 3px solid #5B2E91 !important;
+    animation: meme-pulse 1s ease-in-out 3;
+    border-radius: 20px;
+}
+</style>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    @if($highlightMemeId ?? false)
+    const el = document.getElementById('meme-{{ $highlightMemeId }}');
+    if (el) {
+        setTimeout(() => {
+            el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            el.classList.add('meme-highlighted');
+            setTimeout(() => el.classList.remove('meme-highlighted'), 4000);
+        }, 400);
+    }
+    @endif
+});
 </script>
 <script src="{{ asset('js/memes-interactions.js') }}"></script>
 </body>

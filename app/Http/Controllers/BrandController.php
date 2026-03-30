@@ -71,7 +71,13 @@ class BrandController extends Controller
         }
 
         // Pick the first active brand to show as featured header on /brands route
-        $featuredBrand = Brand::where('status', 'active')->first();
+        $featuredBrand = Brand::where('status', 'active')
+            ->where('is_completed', false)
+            ->where(function($q) {
+                $q->whereNull('end_date')
+                  ->orWhere('end_date', '>=', now());
+            })
+            ->first();
 
         // Get sidebar data (using the same logic as MemeController)
         $sidebarData = $this->getSidebarDataForPublic($featuredBrand);
@@ -80,7 +86,7 @@ class BrandController extends Controller
         $brands = Brand::where('status', 'active')->orderBy('start_date', 'asc')->take(5)->get();
 
         return view('brands.brandhome', array_merge(
-            compact('memes', 'currentChallengeId', 'leaderboard', 'brands', 'featuredBrand'), 
+            compact('memes', 'currentChallengeId', 'leaderboard', 'brands', 'featuredBrand', 'highlightMemeId'),
             $sidebarData
         ));
     }
@@ -176,13 +182,22 @@ class BrandController extends Controller
     /**
      * Display the specified brand's page with its memes.
      */
-    public function show(Brand $brand)
+    public function show(Request $request, Brand $brand)
     {
+        // Handle highlight parameter from shared links
+        $highlightMemeId = $request->input('highlight') ?: session('highlight_meme_id');
+
         $memes = \App\Models\Meme::where('brand_id', $brand->id)
             ->whereNotIn('status', ['rejected', 'removed', 'hidden'])
             ->with(['user', 'reactions', 'comments'])
-            ->orderBy('score', 'desc')
-            ->paginate(12);
+            ->orderBy('score', 'desc');
+
+        // Highlight the shared meme at the top
+        if ($highlightMemeId) {
+            $memes->orderByRaw("CASE WHEN id = ? THEN 0 ELSE 1 END ASC", [$highlightMemeId]);
+        }
+
+        $memes = $memes->paginate(12);
 
         // Calculate scores for display
         $memes->getCollection()->each(function($meme) {
@@ -191,8 +206,8 @@ class BrandController extends Controller
 
         // Get sidebar data
         $sidebarData = $this->getSidebarDataForPublic($brand);
-            
-        return view('brands.show', array_merge(compact('brand', 'memes'), $sidebarData));
+
+        return view('brands.show', array_merge(compact('brand', 'memes', 'highlightMemeId'), $sidebarData));
     }
 
     /**
