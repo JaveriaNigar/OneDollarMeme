@@ -199,9 +199,13 @@
 
                                 <div class="mt-auto pt-2 d-flex justify-content-between align-items-center">
                                     <div class="badge bg-purple/10 text-purple rounded-pill px-3 py-2 fw-bold" style="font-size: 0.75rem;">
-                                        Score: {{ $meme->score ?? 0 }}
+                                        Score: {{ $meme->calculated_score ?? 0 }}
                                     </div>
-                                    <a href="{{ route('home') }}#meme-{{ $meme->id }}" class="btn btn-sm btn-light border rounded-pill px-3 fw-bold" style="font-size: 0.75rem;">View</a>
+                                    @if($meme->brand_id)
+                                        <a href="{{ route('brands.show', ['brand' => $meme->brand_id, 'highlight' => $meme->id]) }}#meme-{{ $meme->id }}" class="btn btn-sm btn-light border rounded-pill px-3 fw-bold" style="font-size: 0.75rem;">View</a>
+                                    @else
+                                        <a href="{{ route('home', ['highlight' => $meme->id]) }}#meme-{{ $meme->id }}" class="btn btn-sm btn-light border rounded-pill px-3 fw-bold" style="font-size: 0.75rem;">View</a>
+                                    @endif
                                 </div>
                             </div>
                         </div>

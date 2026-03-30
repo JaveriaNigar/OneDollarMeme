@@ -14,7 +14,15 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): View
     {
-        $user = $request->user()->load(['memes.brand', 'challengePayouts']);
+        $user = $request->user()->load(['memes.brand', 'memes.reactions', 'memes.comments', 'challengePayouts']);
+        
+        // Calculate scores for each meme
+        $user->memes->each(function($meme) {
+            $meme->calculated_score = ($meme->reactions->count() * 2) + 
+                                      ($meme->comments->count() * 3) + 
+                                      (($meme->shares_count ?? 0) * 5);
+        });
+        
         return view('profile.edit', [
             'user' => $user,
             'isOwner' => true,
@@ -29,12 +37,19 @@ class ProfileController extends Controller
            // + ko space se replace karo
         $name = str_replace('+', ' ', $name);
 
-        $user = \App\Models\User::with(['memes.brand', 'challengePayouts'])
+        $user = \App\Models\User::with(['memes.brand', 'memes.reactions', 'memes.comments', 'challengePayouts'])
         ->where('name', $name)
         ->firstOrFail();
-        
+
         $isOwner = auth()->check() && auth()->id() === $user->id;
         
+        // Calculate scores for each meme
+        $user->memes->each(function($meme) {
+            $meme->calculated_score = ($meme->reactions->count() * 2) + 
+                                      ($meme->comments->count() * 3) + 
+                                      (($meme->shares_count ?? 0) * 5);
+        });
+
         return view('profile.edit', compact('user', 'isOwner'));
     }
 

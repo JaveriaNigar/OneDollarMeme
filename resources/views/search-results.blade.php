@@ -126,9 +126,13 @@
                                 @if($meme->is_contest)
                                     <span class="badge bg-warning text-dark border border-warning rounded-pill ms-1" title="Paid Meme" style="font-size: 0.9rem;">⭐</span>
                                 @endif
-                                
+
                                 <!-- View Details -->
-                                <a href="{{ route('home') }}#meme-{{ $meme->id }}" class="btn btn-sm btn-outline-primary rounded-pill">View</a>
+                                @if($meme->brand_id)
+                                    <a href="{{ route('brands.show', ['brand' => $meme->brand_id, 'highlight' => $meme->id]) }}#meme-{{ $meme->id }}" class="btn btn-sm btn-outline-primary rounded-pill">View</a>
+                                @else
+                                    <a href="{{ route('home', ['highlight' => $meme->id]) }}#meme-{{ $meme->id }}" class="btn btn-sm btn-outline-primary rounded-pill">View</a>
+                                @endif
                             </div>
 
                             <!-- User-specific reactions line -->
