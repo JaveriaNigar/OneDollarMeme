@@ -99,6 +99,13 @@
             @else
                 <a href="{{ route('login') }}" class="btn btn-outline-secondary btn-sm rounded-circle"><i class="bi bi-person"></i></a>
             @endauth
+
+            <!-- Mobile Sidebar Trigger -->
+            @if(request()->routeIs('home') || request()->routeIs('brands.public'))
+            <button class="btn btn-link link-dark d-lg-none p-0 ms-1 fs-5 text-decoration-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileSidebarOffcanvas" aria-controls="mobileSidebarOffcanvas">
+                <i class="bi bi-three-dots-vertical" style="color: var(--brand-purple);"></i>
+            </button>
+            @endif
         </div>
     </div>
 </nav>

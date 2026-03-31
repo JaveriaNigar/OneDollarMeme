@@ -356,6 +356,11 @@
             @else
                 <a href="{{ route('login') }}" class="btn btn-outline-secondary btn-sm rounded-circle"><i class="bi bi-person"></i></a>
             @endauth
+
+            <!-- Mobile Sidebar Trigger -->
+            <button class="btn btn-link link-dark d-lg-none p-0 ms-1 fs-5 text-decoration-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileSidebarOffcanvas" aria-controls="mobileSidebarOffcanvas">
+                <i class="bi bi-three-dots-vertical" style="color: var(--brand-purple);"></i>
+            </button>
         </div>
     </div>
 </nav>
@@ -733,9 +738,48 @@
     </div>
 </nav>
 
-<!-- Mobile Sidebar Content (Above Bottom Nav) -->
-<div class="d-lg-none mobile-sidebar-content" style="padding: 10px; max-width: 600px; margin: 0 auto;">
-    @include('partials._leaderboard-widget', ['hideTopCreators' => true, 'hideWinnerSpotlight' => true])
+<!-- Mobile Sidebar Offcanvas -->
+<div class="offcanvas offcanvas-end d-lg-none" tabindex="-1" id="mobileSidebarOffcanvas" aria-labelledby="mobileSidebarOffcanvasLabel" style="width: 320px;">
+  <div class="offcanvas-header border-bottom">
+    <h5 class="offcanvas-title fw-bold text-uppercase" id="mobileSidebarOffcanvasLabel" style="color: var(--brand-purple); font-size: 1rem;">Menu & Leaderboard</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body" style="padding: 15px; background-color: var(--brand-bg);">
+      <!-- Mobile Navigation Links (same as desktop left sidebar) -->
+      <div class="left-sidebar-box mb-3">
+          <a href="{{ route('home') }}" class="ls-link">Home</a>
+          <a href="{{ route('brands.index') }}" class="ls-link">For Brands</a>
+
+          <div style="border-top: 1px solid #f3f4f6; margin: 10px 0;"></div>
+          <div class="px-3 py-1 text-muted fw-bold small uppercase italic">Brand Campaigns</div>
+          @if(isset($brands) && count($brands) > 0)
+             @foreach($brands->take(5) as $brand)
+                 <a href="{{ route('brands.show', $brand->id) }}" class="ls-link d-flex align-items-center gap-2">
+                     @if($brand->logo)
+                         <img src="{{ asset('storage/' . $brand->logo) }}" alt="" style="width: 20px; height: 20px; object-fit: cover;" class="rounded-circle">
+                     @else
+                         <div class="rounded-circle bg-purple text-white d-flex align-items-center justify-content-center" style="width: 20px; height: 20px; font-size: 0.6rem;">
+                             {{ strtoupper(substr($brand->company_name, 0, 1)) }}
+                         </div>
+                     @endif
+                     {{ $brand->company_name }}
+                 </a>
+             @endforeach
+          @endif
+
+          <div style="border-top: 1px solid #f3f4f6; margin: 10px 0;"></div>
+          <a href="{{ route('brands.work') }}" class="ls-link" style="color: var(--brand-purple);">How it works</a>
+
+          <div style="border-top: 1px solid #f3f4f6; margin: 10px 0;"></div>
+          <div class="px-3 py-1 text-muted fw-bold small uppercase italic">Trending Tags</div>
+          <a href="#" class="ls-link">#RelatableVibes</a>
+          <a href="#" class="ls-link">#DankHumor</a>
+          <a href="#" class="ls-link">#CatLife</a>
+      </div>
+
+      <!-- Leaderboard Widget -->
+      @include('partials._leaderboard-widget', ['hideTopCreators' => true, 'hideWinnerSpotlight' => true])
+  </div>
 </div>
 
 <div id="toast-container" style="position: fixed; top: 20px; right: 20px; z-index: 9999;"></div>

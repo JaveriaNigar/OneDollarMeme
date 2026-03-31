@@ -237,6 +237,93 @@
                         </div>
                     </div>
 
+                    <!-- Brand Logo Upload (Moved after Website & Tags) -->
+                    <div class="mt-6">
+                        <label class="block text-sm font-semibold text-gray-700 mb-2 text-center">Brand Logo</label>
+                        <div class="flex flex-col items-center justify-center gap-3">
+                            <div class="group relative">
+                                <div class="w-64 h-100 relative rounded-xl shadow-md overflow-hidden bg-gray-50 border-2 border-dashed border-gray-300 hover:border-purple-500 hover:bg-purple-50 transition cursor-pointer" onclick="document.getElementById('brand_logo_input').click()">
+                                    <img id="logo-preview-img" src="{{ asset('WhatsApp Image 2026-02-12 at 12.16.49 PM.jpeg') }}" alt="Brand Logo" class="w-full h-full object-contain">
+                                    <div class="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                                        <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <input type="file" name="brand_logo" id="brand_logo_input" class="hidden" accept="image/*" onchange="previewLogo(event)">
+                                <button type="button" class="btn-sm bg-purple-50 text-purple-700 px-6 py-2 rounded-lg font-semibold hover:bg-purple-100 transition" onclick="document.getElementById('brand_logo_input').click()">
+                                    Upload Logo
+                                </button>
+                                <p class="text-xs text-gray-500 mt-2">Recommended: 500x500px PNG or JPG</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Theme Color Selection -->
+                    <div class="mt-6 pt-6 border-t border-gray-200">
+                        <label class="block text-sm font-semibold text-gray-700 mb-3">🎨 Campaign Theme Color</label>
+                        <p class="text-xs text-gray-500 mb-3">Choose a theme color for your campaign page. This color will be used throughout your brand page design.</p>
+                        
+                        <div class="grid grid-cols-5 md:grid-cols-5 gap-3">
+                            <!-- Purple Theme -->
+                            <label class="theme-option cursor-pointer" data-color="#6f42c1">
+                                <input type="radio" name="theme_color" value="#6f42c1" class="sr-only" checked>
+                                <div class="theme-preview-card border-2 border-gray-200 rounded-xl p-3 text-center hover:border-purple-500 transition">
+                                    <div class="w-full h-12 rounded-lg mb-2" style="background: linear-gradient(135deg, #6f42c1 0%, #000 100%);"></div>
+                                    <span class="text-xs font-semibold text-gray-700">Purple</span>
+                                </div>
+                            </label>
+                            
+                            <!-- Blue Theme -->
+                            <label class="theme-option cursor-pointer" data-color="#2563eb">
+                                <input type="radio" name="theme_color" value="#2563eb" class="sr-only">
+                                <div class="theme-preview-card border-2 border-gray-200 rounded-xl p-3 text-center hover:border-blue-500 transition">
+                                    <div class="w-full h-12 rounded-lg mb-2" style="background: linear-gradient(135deg, #2563eb 0%, #000 100%);"></div>
+                                    <span class="text-xs font-semibold text-gray-700">Blue</span>
+                                </div>
+                            </label>
+                            
+                            <!-- Green Theme -->
+                            <label class="theme-option cursor-pointer" data-color="#059669">
+                                <input type="radio" name="theme_color" value="#059669" class="sr-only">
+                                <div class="theme-preview-card border-2 border-gray-200 rounded-xl p-3 text-center hover:border-green-500 transition">
+                                    <div class="w-full h-12 rounded-lg mb-2" style="background: linear-gradient(135deg, #059669 0%, #000 100%);"></div>
+                                    <span class="text-xs font-semibold text-gray-700">Green</span>
+                                </div>
+                            </label>
+                            
+                            <!-- Red Theme -->
+                            <label class="theme-option cursor-pointer" data-color="#dc2626">
+                                <input type="radio" name="theme_color" value="#dc2626" class="sr-only">
+                                <div class="theme-preview-card border-2 border-gray-200 rounded-xl p-3 text-center hover:border-red-500 transition">
+                                    <div class="w-full h-12 rounded-lg mb-2" style="background: linear-gradient(135deg, #dc2626 0%, #000 100%);"></div>
+                                    <span class="text-xs font-semibold text-gray-700">Red</span>
+                                </div>
+                            </label>
+                            
+                            <!-- Orange Theme -->
+                            <label class="theme-option cursor-pointer" data-color="#f59e0b">
+                                <input type="radio" name="theme_color" value="#f59e0b" class="sr-only">
+                                <div class="theme-preview-card border-2 border-gray-200 rounded-xl p-3 text-center hover:border-orange-500 transition">
+                                    <div class="w-full h-12 rounded-lg mb-2" style="background: linear-gradient(135deg, #f59e0b 0%, #000 100%);"></div>
+                                    <span class="text-xs font-semibold text-gray-700">Orange</span>
+                                </div>
+                            </label>
+                        </div>
+                        
+                        <!-- Custom Color Picker -->
+                        <div class="mt-4">
+                            <label class="block text-xs font-semibold text-gray-600 mb-2">Or choose custom color:</label>
+                            <div class="flex items-center gap-3">
+                                <input type="color" id="custom-theme-color" class="w-12 h-10 border border-gray-300 rounded-lg cursor-pointer" value="#6f42c1">
+                                <input type="text" id="custom-theme-color-text" class="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-sm font-mono" value="#6f42c1" placeholder="#6f42c1" maxlength="7">
+                                <input type="hidden" id="theme_color" name="theme_color" value="#6f42c1">
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
@@ -1728,4 +1815,87 @@ document.addEventListener('DOMContentLoaded', function() {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
 }
+
+/* Theme Selector Styles */
+.theme-option input:checked + .theme-preview-card {
+    border-color: #6f42c1 !important;
+    background-color: #f3e8ff;
+    transform: scale(1.05);
+}
+.theme-option:hover .theme-preview-card {
+    transform: translateY(-2px);
+}
 </style>
+
+<script>
+// Theme Color Selector Logic
+document.addEventListener('DOMContentLoaded', function() {
+    const themeOptions = document.querySelectorAll('.theme-option');
+    const customColorPicker = document.getElementById('custom-theme-color');
+    const customColorText = document.getElementById('custom-theme-color-text');
+    const themeColorInput = document.getElementById('theme_color');
+    
+    // Handle preset theme selection
+    if (themeOptions.length > 0) {
+        themeOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                const color = this.dataset.color;
+                themeColorInput.value = color;
+                customColorPicker.value = color;
+                customColorText.value = color;
+                
+                // Update visual selection
+                themeOptions.forEach(opt => opt.querySelector('.theme-preview-card').classList.remove('border-purple-500', 'bg-purple-50'));
+                this.querySelector('.theme-preview-card').classList.add('border-purple-500', 'bg-purple-50');
+            });
+        });
+    }
+    
+    // Handle custom color picker
+    if (customColorPicker) {
+        customColorPicker.addEventListener('input', function() {
+            themeColorInput.value = this.value;
+            customColorText.value = this.value;
+            
+            // Update visual selection
+            themeOptions.forEach(opt => {
+                const card = opt.querySelector('.theme-preview-card');
+                card.classList.remove('border-purple-500', 'bg-purple-50');
+                if (opt.dataset.color === this.value) {
+                    card.classList.add('border-purple-500', 'bg-purple-50');
+                }
+            });
+        });
+    }
+    
+    // Handle custom color text input
+    if (customColorText) {
+        customColorText.addEventListener('change', function() {
+            let color = this.value;
+            if (!color.startsWith('#')) {
+                color = '#' + color;
+            }
+            if (/^#[0-9A-Fa-f]{6}$/.test(color)) {
+                themeColorInput.value = color;
+                customColorPicker.value = color;
+            }
+        });
+    }
+});
+
+function previewLogo(event) {
+    const input = event.target;
+    const preview = document.getElementById('logo-preview-img');
+
+    if (input.files && input.files[0]) {
+        const file = input.files[0];
+        if (file.type.startsWith('image/')) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                preview.src = e.target.result;
+            }
+            reader.readAsDataURL(file);
+        }
+    }
+}
+</script>

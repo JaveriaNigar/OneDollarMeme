@@ -700,9 +700,15 @@
     </div>
 </nav>
 
-<!-- Mobile Sidebar Content (Above Bottom Nav) -->
-<div class="d-lg-none mobile-sidebar-content" style="padding: 10px; max-width: 600px; margin: 0 auto;">
-    @include('partials._leaderboard-widget', ['hideBrandWinners' => true])
+<!-- Mobile Sidebar Offcanvas -->
+<div class="offcanvas offcanvas-end d-lg-none" tabindex="-1" id="mobileSidebarOffcanvas" aria-labelledby="mobileSidebarOffcanvasLabel" style="width: 320px;">
+  <div class="offcanvas-header border-bottom">
+    <h5 class="offcanvas-title fw-bold text-uppercase" id="mobileSidebarOffcanvasLabel" style="color: var(--brand-purple); font-size: 1rem;">Actions & Leaderboard</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body" style="padding: 15px; background-color: var(--brand-bg);">
+      @include('partials._leaderboard-widget', ['hideBrandWinners' => true])
+  </div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

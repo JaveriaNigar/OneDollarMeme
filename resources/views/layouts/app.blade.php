@@ -51,14 +51,7 @@
     @include('partials._battle-timer-script')
     @include('partials._terms-modal')
     
-            container.appendChild(toast);
-            
-            setTimeout(() => {
-                toast.classList.add('fade-out');
-                setTimeout(() => toast.remove(), 500);
-            }, 3000);
-        }
-    </script>
+    @include('partials._toast')
 
     <style>
         @keyframes fadeInUp {
