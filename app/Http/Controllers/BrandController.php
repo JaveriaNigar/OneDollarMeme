@@ -159,7 +159,16 @@ class BrandController extends Controller
             })
             ->map(function($brand) {
                 foreach ($brand->memes as $meme) {
-                    $meme->calculated_score = ($meme->reactions->count() * 2) + ($meme->comments->count() * 3) + (($meme->shares_count ?? 0) * 5);
+                    // Ensure relationships are loaded and calculate score
+                    if (!$meme->relationLoaded('reactions')) {
+                        $meme->load('reactions');
+                    }
+                    if (!$meme->relationLoaded('comments')) {
+                        $meme->load('comments');
+                    }
+                    $meme->calculated_score = ($meme->reactions->count() * 2) +
+                                              ($meme->comments->count() * 3) +
+                                              (($meme->shares_count ?? 0) * 5);
                 }
                 return [
                     'brand' => $brand,
@@ -182,8 +191,13 @@ class BrandController extends Controller
     /**
      * Display the specified brand's page with its memes.
      */
-    public function show(Request $request, Brand $brand)
+    public function show(Request $request, $brand)
     {
+        // Handle both ID and Brand model (route model binding)
+        if (!$brand instanceof Brand) {
+            $brand = Brand::findOrFail($brand);
+        }
+
         // Handle highlight parameter from shared links
         $highlightMemeId = $request->input('highlight') ?: session('highlight_meme_id');
 
@@ -198,6 +212,22 @@ class BrandController extends Controller
         }
 
         $memes = $memes->paginate(12);
+
+        // If highlighting a meme, ensure it appears on the first page
+        if ($highlightMemeId) {
+            $highlightedMeme = \App\Models\Meme::find($highlightMemeId);
+            if ($highlightedMeme && $highlightedMeme->brand_id === $brand->id) {
+                // Check if the highlighted meme is already in the collection
+                $hasHighlighted = $memes->contains('id', $highlightedMeme->id);
+                if (!$hasHighlighted) {
+                    // Load relationships and prepend to the collection
+                    $highlightedMeme->load(['user', 'reactions', 'comments']);
+                    $items = $memes->getCollection();
+                    $items->prepend($highlightedMeme);
+                    $memes->setCollection($items);
+                }
+            }
+        }
 
         // Calculate scores for display
         $memes->getCollection()->each(function($meme) {

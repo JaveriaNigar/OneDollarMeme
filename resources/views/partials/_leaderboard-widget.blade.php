@@ -71,20 +71,43 @@
     @if(empty($hideWinnerSpotlight))
     <div class="card border-0 shadow-sm rounded-4">
         <div class="card-header bg-white border-0 py-3 text-center">
-            <h6 class="fw-bold mb-0 text-uppercase small" style="color: var(--brand-purple);">WINNER SPOTLIGHT</h6>
+            <h6 class="fw-bold mb-0 text-uppercase small" style="color: var(--brand-purple);">
+                @if(count($sidebarLastWeekWinners ?? []) > 1)
+                    🏆 BATTLE LEADERBOARD
+                @else
+                    WINNER SPOTLIGHT
+                @endif
+            </h6>
         </div>
         <div class="card-body p-3 pt-0 text-center">
             @if(empty($sidebarLastWeekWinners) || count($sidebarLastWeekWinners) === 0)
                 <div class="text-muted small py-4">No recent winners</div>
             @else
-                @php $spotlight = $sidebarLastWeekWinners[0]; @endphp
-                <div class="p-3 bg-light rounded-3 mb-2 border">
-                    <img src="{{ $spotlight->user_avatar }}" class="rounded-circle shadow-sm mb-2" style="width: 50px; height: 50px; object-fit: cover;">
-                    <div class="fw-bold text-dark">{{ $spotlight->user_name }}</div>
-                </div>
-                <div class="badge bg-white text-dark border shadow-sm px-3 py-2 rounded-pill">
-                    <span class="text-purple fw-bold" style="color: var(--brand-purple);">{{ $spotlight->prize }}</span> Winner
-                </div>
+                @if(count($sidebarLastWeekWinners) === 1)
+                    {{-- Single winner (previous challenge winner) --}}
+                    @php $spotlight = $sidebarLastWeekWinners[0]; @endphp
+                    <div class="p-3 bg-light rounded-3 mb-2 border">
+                        <img src="{{ $spotlight->user_avatar }}" class="rounded-circle shadow-sm mb-2" style="width: 50px; height: 50px; object-fit: cover;">
+                        <div class="fw-bold text-dark">{{ $spotlight->user_name }}</div>
+                    </div>
+                    <div class="badge bg-white text-dark border shadow-sm px-3 py-2 rounded-pill">
+                        <span class="text-purple fw-bold" style="color: var(--brand-purple);">{{ $spotlight->prize }}</span> Winner
+                    </div>
+                @else
+                    {{-- Multiple leaders (current challenge) --}}
+                    <div class="d-flex flex-column gap-2">
+                        @foreach($sidebarLastWeekWinners as $index => $winner)
+                            <div class="d-flex align-items-center justify-content-between p-2 rounded {{ $index === 0 ? 'bg-warning bg-opacity-10 border border-warning' : 'bg-light' }}">
+                                <div class="d-flex align-items-center">
+                                    <span class="badge {{ $index === 0 ? 'bg-warning' : ($index === 1 ? 'bg-secondary' : 'bg-danger') }} rounded-circle me-2 fw-bold" style="width: 24px; height: 24px; padding: 0; line-height: 24px;">{{ $index + 1 }}</span>
+                                    <img src="{{ $winner->user_avatar }}" class="rounded-circle me-2" style="width: 32px; height: 32px; object-fit: cover;">
+                                    <span class="fw-bold small">{{ $winner->user_name }}</span>
+                                </div>
+                                <span class="fw-bold small" style="color: var(--brand-purple);">{{ $winner->prize }}</span>
+                            </div>
+                        @endforeach
+                    </div>
+                @endif
             @endif
         </div>
     </div>

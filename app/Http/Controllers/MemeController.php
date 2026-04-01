@@ -99,10 +99,10 @@ class MemeController extends Controller
                 ];
             });
 
-        // 3. Last Week's Winners
+        // 3. Last Week's Winners (or Current Challenge Leaders if no previous winner)
         $sidebarLastWeekWinners = [];
         $previousChallenge = WeeklyChallenge::previous();
-        
+
         if ($previousChallenge) {
             if ($previousChallenge->winner_meme_id) {
                 $winnerMeme = Meme::find($previousChallenge->winner_meme_id);
@@ -122,6 +122,20 @@ class MemeController extends Controller
                         'user_name' => $leader->user->name,
                          'user_avatar' => $leader->user->profile_photo_url,
                         'prize' => '$' . number_format(($previousChallenge->prize_pool_cents * 0.50) / 100, 0),
+                    ];
+                }
+            }
+        } else {
+            // No previous challenge - show current challenge top 3
+            $currentChallenge = WeeklyChallenge::current();
+            if ($currentChallenge) {
+                $currentLeaders = $currentChallenge->getLeaderboard(3);
+                foreach($currentLeaders as $index => $leader) {
+                    $sidebarLastWeekWinners[] = (object) [
+                        'rank' => $index + 1,
+                        'user_name' => $leader->user->name,
+                        'user_avatar' => $leader->user->profile_photo_url,
+                        'prize' => 'Score: ' . ($leader->score ?? 0),
                     ];
                 }
             }
@@ -156,8 +170,16 @@ class MemeController extends Controller
         })
         ->map(function($brand) {
             foreach ($brand->memes as $meme) {
-                // Ensure reactions and comments are loaded and calculate score
-                $meme->calculated_score = ($meme->reactions->count() * 2) + ($meme->comments->count() * 3) + (($meme->shares_count ?? 0) * 5);
+                // Ensure relationships are loaded and calculate score
+                if (!$meme->relationLoaded('reactions')) {
+                    $meme->load('reactions');
+                }
+                if (!$meme->relationLoaded('comments')) {
+                    $meme->load('comments');
+                }
+                $meme->calculated_score = ($meme->reactions->count() * 2) +
+                                          ($meme->comments->count() * 3) +
+                                          (($meme->shares_count ?? 0) * 5);
             }
             return [
                 'brand' => $brand,
