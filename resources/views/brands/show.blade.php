@@ -23,7 +23,26 @@
 
             <h1 class="display-4 fw-black uppercase italic tracking-tight mb-2">{{ $brand->company_name }}</h1>
             <p class="lead opacity-75 max-w-2xl">{{ $brand->brand_description ?? 'Participate in our brand campaign and win amazing prizes!' }}</p>
-            
+
+            <!-- Campaign Dates -->
+            <div class="d-flex gap-4 justify-content-center mb-3 mt-2">
+                @if($brand->start_date)
+                    <div class="text-center text-white">
+                        <div class="small opacity-75 text-uppercase fw-bold tracking-wider">Start Date</div>
+                        <div class="fw-bold">{{ $brand->start_date->format('M d, Y g:i A') }}</div>
+                    </div>
+                @endif
+                @if($brand->end_date)
+                    <div class="text-center text-white">
+                        <div class="small opacity-75 text-uppercase fw-bold tracking-wider">End Date</div>
+                        <div class="fw-bold">{{ $brand->end_date->format('M d, Y g:i A') }}</div>
+                        @if($brand->end_date->isPast())
+                            <span class="badge bg-danger mt-1">ENDED</span>
+                        @endif
+                    </div>
+                @endif
+            </div>
+
             @if($brand->website)
                 <a href="{{ $brand->website }}" target="_blank" class="btn btn-outline-light rounded-pill px-4 py-2 mt-3 tracking-widest uppercase small fw-bold">
                     Visit Website <i class="bi bi-box-arrow-up-right ms-2"></i>

@@ -391,10 +391,31 @@
             <h1 class="h2 fw-black uppercase italic tracking-tight mb-1" style="font-weight: 900; text-transform: uppercase; font-style: italic; letter-spacing: -0.025em;">{{ $featuredBrand->company_name }}</h1>
             <p class="lead opacity-75 small mb-3" style="max-width: 600px;">{{ $featuredBrand->brand_description ?? 'Participate in our brand campaign and win amazing prizes!' }}</p>
 
+            <!-- Campaign Dates -->
+            <div class="d-flex gap-4 justify-content-center mb-3">
+                @if($featuredBrand->start_date)
+                    <div class="text-center">
+                        <div class="small opacity-75 text-uppercase fw-bold tracking-wider">Start Date</div>
+                        <div class="fw-bold">{{ $featuredBrand->start_date->format('M d, Y g:i A') }}</div>
+                    </div>
+                @endif
+                @if($featuredBrand->end_date)
+                    <div class="text-center">
+                        <div class="small opacity-75 text-uppercase fw-bold tracking-wider">End Date</div>
+                        <div class="fw-bold">{{ $featuredBrand->end_date->format('M d, Y g:i A') }}</div>
+                        @if($featuredBrand->end_date->isPast())
+                            <span class="badge bg-danger mt-1">ENDED</span>
+                        @endif
+                    </div>
+                @endif
+            </div>
+
             <div class="d-flex gap-2">
                 <a href="{{ route('brands.show', $featuredBrand->id) }}"
                    class="btn rounded-pill px-4 fw-bold"
-                   style="background-color: white; color: {{ $featuredBrand->theme_color ?? '#6f42c1' }}; border: none; transition: none;">JOIN CAMPAIGN</a>
+                   style="background-color: white; color: {{ $featuredBrand->theme_color ?? '#6f42c1' }}; border: none; transition: none;">
+                    {{ $featuredBrand->end_date && $featuredBrand->end_date->isPast() ? 'VIEW CAMPAIGN' : 'JOIN CAMPAIGN' }}
+                </a>
                 @if($featuredBrand->website)
                     <a href="{{ $featuredBrand->website }}" target="_blank"
                        class="btn rounded-pill px-4 fw-bold"
