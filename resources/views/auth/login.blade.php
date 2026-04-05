@@ -243,7 +243,7 @@
             <!-- Email -->
             <div class="form-group">
                 <label class="form-label" for="email">Email</label>
-                <input type="email" id="email" name="email" class="form-input" value="{{ old('email', 'javeriangar40@gmail.com') }}" required autofocus>
+                <input type="email" id="email" name="email" class="form-input" value="{{ old('email') }}" required autofocus autocomplete="off">
                 @error('email')
                     <span class="error-msg">{{ $message }}</span>
                 @enderror

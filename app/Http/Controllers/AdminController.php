@@ -12,6 +12,7 @@ use App\Models\Brand;
 use App\Models\IpAddress;
 use App\Models\User;
 use App\Models\EngagementAudit;
+use App\Models\Blog;
 use App\EngagementAuditService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -34,6 +35,9 @@ class AdminController extends Controller
                 ->get()
                 ->count(),
             'flagged_engagements' => \App\Models\EngagementAudit::where('is_flagged', true)->count(),
+            'total_blogs' => Blog::count(),
+            'published_blogs' => Blog::where('status', 'published')->count(),
+            'blog_views' => Blog::sum('views_count'),
         ];
 
         return view('admin.dashboard', compact('stats'));

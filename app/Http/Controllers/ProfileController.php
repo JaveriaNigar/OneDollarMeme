@@ -14,7 +14,7 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): View
     {
-        $user = $request->user()->load(['memes.brand', 'memes.reactions', 'memes.comments', 'challengePayouts']);
+        $user = $request->user()->load(['memes.brand', 'memes.reactions', 'memes.comments', 'challengePayouts', 'blogs']);
 
         // Calculate scores for each meme (ensure shares_count is loaded)
         foreach ($user->memes as $meme) {
@@ -44,7 +44,7 @@ class ProfileController extends Controller
         // + ko space se replace karo
         $name = str_replace('+', ' ', $name);
 
-        $user = \App\Models\User::with(['memes.brand', 'memes.reactions', 'memes.comments', 'challengePayouts'])
+        $user = \App\Models\User::with(['memes.brand', 'memes.reactions', 'memes.comments', 'challengePayouts', 'blogs'])
             ->where('name', $name)
             ->firstOrFail();
 

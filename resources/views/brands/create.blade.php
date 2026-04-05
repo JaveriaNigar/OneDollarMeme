@@ -111,52 +111,37 @@
         </div>
 
         <!-- Progress Steps -->
-        <div class="mb-8">
-            <div class="flex items-center justify-between max-w-3xl mx-auto">
-                <!-- Step 1 -->
-                <div class="flex items-center flex-1">
-                    <div class="flex flex-col items-center">
-                        <div id="step-indicator-1" class="w-12 h-12 rounded-full bg-purple-600 text-white flex items-center justify-center font-bold text-lg shadow-lg transition-all">
-                            1
-                        </div>
-                        <span class="mt-2 text-sm font-semibold text-gray-700">Brand Account</span>
-                    </div>
-                    <div id="line-1" class="flex-1 h-1 bg-gray-300 mx-2"></div>
-                </div>
-
-                <!-- Step 2 -->
-                <div class="flex items-center flex-1">
-                    <div class="flex flex-col items-center">
-                        <div id="step-indicator-2" class="w-12 h-12 rounded-full bg-gray-300 text-gray-600 flex items-center justify-center font-bold text-lg transition-all">
-                            2
-                        </div>
-                        <span class="mt-2 text-sm font-semibold text-gray-600">Campaign Details</span>
-                    </div>
-                    <div id="line-2" class="flex-1 h-1 bg-gray-300 mx-2"></div>
-                </div>
-
-                <!-- Step 3 -->
-                <div class="flex items-center flex-1">
-                    <div class="flex flex-col items-center">
-                        <div id="step-indicator-3" class="w-12 h-12 rounded-full bg-gray-300 text-gray-600 flex items-center justify-center font-bold text-lg transition-all">
-                            3
-                        </div>
-                        <span class="mt-2 text-sm font-semibold text-gray-600">Target & Budget</span>
-                    </div>
-                    <div id="line-3" class="flex-1 h-1 bg-gray-300 mx-2"></div>
-                </div>
-
-                <!-- Step 4 -->
-                <div class="flex items-center">
-                    <div class="flex flex-col items-center">
-                        <div id="step-indicator-4" class="w-12 h-12 rounded-full bg-gray-300 text-gray-600 flex items-center justify-center font-bold text-lg transition-all">
-                            4
-                        </div>
-                        <span class="mt-2 text-sm font-semibold text-gray-600">Campaign Creatives</span>
-                    </div>
-                </div>
-            </div>
+         <div class="mb-8 overflow-hidden">
+<div class="flex items-center justify-between max-w-3xl mx-auto px-2">
+    <div class="flex flex-col items-center flex-1 relative">
+        <div id="step-indicator-1" class="w-8 h-8 md:w-12 md:h-12 rounded-full bg-purple-600 text-white flex items-center justify-center font-bold text-sm md:text-lg shadow-lg z-10 transition-all">
+            1
         </div>
+        <span class="mt-2 text-[10px] md:text-sm font-semibold text-gray-700 text-center whitespace-nowrap">Brand Account</span>
+    </div>
+
+    <div class="flex flex-col items-center flex-1 relative">
+        <div id="step-indicator-2" class="w-8 h-8 md:w-12 md:h-12 rounded-full bg-gray-300 text-gray-600 flex items-center justify-center font-bold text-sm md:text-lg z-10 transition-all">
+            2
+        </div>
+        <span class="mt-2 text-[10px] md:text-sm font-semibold text-gray-600 text-center whitespace-nowrap">Campaign Details</span>
+    </div>
+
+    <div class="flex flex-col items-center flex-1 relative">
+        <div id="step-indicator-3" class="w-8 h-8 md:w-12 md:h-12 rounded-full bg-gray-300 text-gray-600 flex items-center justify-center font-bold text-sm md:text-lg z-10 transition-all">
+            3
+        </div>
+        <span class="mt-2 text-[10px] md:text-sm font-semibold text-gray-600 text-center whitespace-nowrap">Target & Budget</span>
+    </div>
+
+    <div class="flex flex-col items-center flex-none">
+        <div id="step-indicator-4" class="w-8 h-8 md:w-12 md:h-12 rounded-full bg-gray-300 text-gray-600 flex items-center justify-center font-bold text-sm md:text-lg z-10 transition-all">
+            4
+        </div>
+        <span class="mt-2 text-[10px] md:text-sm font-semibold text-gray-600 text-center whitespace-nowrap">Creatives</span>
+    </div>
+</div>
+</div>
 
 
 

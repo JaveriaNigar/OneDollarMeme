@@ -179,7 +179,7 @@ class MemeController extends Controller
                 }
                 $meme->calculated_score = ($meme->reactions->count() * 2) +
                                           ($meme->comments->count() * 3) +
-                                          (($meme->shares_count ?? 0) * 5);
+                                          ($meme->shareEvents->count() * 5);
             }
             return [
                 'brand' => $brand,
@@ -634,7 +634,7 @@ class MemeController extends Controller
     {
         // Check if the authenticated user is the owner of the meme
         if ($meme->user_id !== Auth::id()) {
-            if ($request->expectsJson()) {
+            if ($request->expectsJson() || $request->ajax()) {
                 return response()->json(['success' => false, 'message' => 'Unauthorized to delete this meme'], 403);
             }
             abort(403, 'Unauthorized to delete this meme');
@@ -647,7 +647,8 @@ class MemeController extends Controller
 
         $meme->delete();
 
-        if ($request->expectsJson()) {
+        // Always return JSON for AJAX requests (check multiple conditions for production)
+        if ($request->expectsJson() || $request->ajax() || $request->wantsJson()) {
             return response()->json(['success' => true, 'message' => 'Meme deleted successfully!', 'meme_id' => $meme->id]);
         }
 
@@ -798,7 +799,7 @@ class MemeController extends Controller
             ['title' => 'Upload Meme', 'keywords' => ['upload', 'create', 'new', 'post', 'submit', 'add'], 'route' => 'upload-meme.create', 'desc' => 'Submit your best meme to the platform.', 'icon' => 'bi-cloud-upload'],
             ['title' => 'How It Works', 'keywords' => ['how', 'work', 'rules', 'guide', 'help', 'faq', 'info'], 'route' => 'how-it-works', 'desc' => 'Learn how to earn money and participate.', 'icon' => 'bi-info-circle'],
             ['title' => 'Terms of Service', 'keywords' => ['terms', 'privacy', 'legal', 'condition'], 'route' => 'terms', 'desc' => 'Read our terms and conditions.', 'icon' => 'bi-file-text'],
-            ['title' => 'Blogs', 'keywords' => ['blog', 'news', 'update', 'article'], 'route' => 'blogs', 'desc' => 'Read the latest updates and news.', 'icon' => 'bi-journal-text'],
+            ['title' => 'Blogs', 'keywords' => ['blog', 'news', 'update', 'article'], 'route' => 'blogs.index', 'desc' => 'Read the latest updates and news.', 'icon' => 'bi-journal-text'],
         ];
 
         $matchedPages = collect();

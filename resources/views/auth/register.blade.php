@@ -209,6 +209,23 @@
             display: block;
         }
 
+        /* Role Selection Styles */
+        .role-card {
+            background: white;
+        }
+
+        .role-option input:checked + .role-card {
+            border-color: var(--brand-purple);
+            background: var(--light-purple);
+            box-shadow: 0 4px 12px rgba(91, 46, 145, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .role-option:hover .role-card {
+            border-color: var(--brand-purple);
+            background: #fafafa;
+        }
+
         @media (max-width: 480px) {
             .register-card {
                 padding: 30px 20px;

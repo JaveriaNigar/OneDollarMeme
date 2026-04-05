@@ -145,7 +145,7 @@
             <a href="{{ route('upload-meme.create') }}" class="nav-menu-link">WEEKLY BATTLE</a>
             <span class="nav-divider">|</span>
 
-            <a href="{{ route('blogs') }}" class="nav-menu-link">BLOG</a>
+            <a href="{{ route('blogs.index') }}" class="nav-menu-link">BLOG</a>
         </div>
         
         <!-- Right Actions -->
@@ -909,7 +909,7 @@ document.addEventListener('DOMContentLoaded', function() {
 @include('partials._terms-modal')
 @include('partials._battle-timer-script')
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<script src="{{ asset('js/memes-interactions.js') }}"></script>
+<script src="{{ asset('js/memes-interactions.js?v=' . time()) }}"></script>
 
 @if($highlightMemeId)
 <script>

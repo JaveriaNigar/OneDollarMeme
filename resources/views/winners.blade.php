@@ -569,6 +569,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     @include('partials._battle-timer-script')
     @include('partials._terms-modal')
-    <script src="{{ asset('js/memes-interactions.js') }}"></script>
+    <script src="{{ asset('js/memes-interactions.js?v=' . time()) }}"></script>
 </body>
 </html>

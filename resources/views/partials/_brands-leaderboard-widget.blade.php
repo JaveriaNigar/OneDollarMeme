@@ -21,12 +21,12 @@
     <!-- BOX 2: WINNER SPOTLIGHT -->
     <!-- BOX 1.5: BRAND WINNERS -->
     @if(isset($brandWinners) && count($brandWinners) > 0)
-    <div class="card border-0 shadow-sm rounded-4">
+    <div class="card border-0 shadow-sm rounded-4" id="brand-winners-card">
         <div class="card-header bg-white border-0 py-3 text-center">
             <h6 class="fw-bold mb-0 text-uppercase small" style="color: var(--brand-orange);">🏆 BRAND WINNERS</h6>
         </div>
         <div class="card-body p-2">
-            <div class="list-group list-group-flush">
+            <div class="list-group list-group-flush" id="brand-winners-list">
                 @foreach(array_slice($brandWinners, 0, 3) as $brandId => $brandData)
                     @php
                         $brand = $brandData['brand'];
@@ -212,7 +212,77 @@ function updateLiveScores() {
     });
 }
 
+// Function to update BRAND WINNERS section
+function updateBrandWinners() {
+    console.log('updateBrandWinners called');
+    fetch('/api/brand-winners')
+        .then(response => {
+            if (!response.ok) {
+                return Promise.reject('Response not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Brand winners data received:', data);
+            const listGroup = document.getElementById('brand-winners-list');
+            console.log('brand-winners-list element:', listGroup);
+            if (!listGroup) return;
+
+            if (data.winners && Object.keys(data.winners).length > 0) {
+                console.log('Updating brand winners with data:', Object.keys(data.winners).length, 'brands');
+                // Build new content
+                let html = '';
+                const brandIds = Object.keys(data.winners);
+                const maxBrands = Math.min(3, brandIds.length);
+
+                for (let i = 0; i < maxBrands; i++) {
+                    const brandId = brandIds[i];
+                    const brandData = data.winners[brandId];
+                    const brand = brandData.brand;
+                    const winners = brandData.winners;
+
+                    html += `<div class="list-group-item border-0 p-3 bg-light mb-2 rounded-3">`;
+                    html += `<div class="d-flex align-items-center mb-2 pb-2 border-bottom">`;
+
+                    if (brand.logo) {
+                        html += `<img src="/storage/${brand.logo}" alt="${brand.company_name}" class="rounded me-2" style="width: 30px; height: 30px; object-fit: cover;">`;
+                    } else {
+                        const initial = brand.company_name.charAt(0).toUpperCase();
+                        html += `<div class="rounded me-2 d-flex align-items-center justify-content-center text-white" style="width: 30px; height: 30px; background-color: var(--brand-purple); font-size: 0.8rem;">${initial}</div>`;
+                    }
+
+                    html += `<div>`;
+                    html += `<h6 class="mb-0 fw-bold" style="font-size: 0.85rem;">${brand.company_name}</h6>`;
+                    html += `<small class="text-muted" style="font-size: 0.7rem;">${winners.length} winners</small>`;
+                    html += `</div>`;
+                    html += `</div>`;
+
+                    winners.forEach((winner, index) => {
+                        const badgeClass = index === 0 ? 'bg-warning' : (index === 1 ? 'bg-secondary' : 'bg-danger');
+                        html += `<div class="d-flex align-items-center justify-content-between mb-1">`;
+                        html += `<div class="d-flex align-items-center">`;
+                        html += `<span class="badge ${badgeClass} rounded-circle me-2" style="width: 20px; height: 20px; padding: 0; line-height: 20px; text-align: center;">${index + 1}</span>`;
+                        html += `<span class="fw-bold" style="font-size: 0.8rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100px;">${winner.user_name}</span>`;
+                        html += `</div>`;
+                        html += `<span class="fw-bold" style="color: #fd7e14; font-size: 0.85rem;">Score: ${winner.calculated_score}</span>`;
+                        html += `</div>`;
+                    });
+
+                    html += `</div>`;
+                }
+
+                listGroup.innerHTML = html;
+                console.log('Brand winners updated successfully');
+            }
+        })
+        .catch(error => {
+            console.warn('Could not update brand winners:', error);
+        });
+}
+
 // Update scores every 10 seconds to match live behavior
 setInterval(updateLiveScores, 10000);
+setInterval(updateBrandWinners, 10000);
 updateLiveScores(); // Initial update
+updateBrandWinners(); // Initial update
 </script>

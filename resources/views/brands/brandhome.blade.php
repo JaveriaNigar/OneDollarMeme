@@ -336,30 +336,35 @@
     @include('partials._toast')
 
 <!-- Navbar -->
-<nav class="custom-navbar sticky-top">
-    <div class="container d-flex flex-wrap justify-content-between align-items-center">
-        <!-- Logo -->
-        <a class="brand-logo" href="{{ route('home') }}">
-            <img src="{{ asset('image/my-logo.jpg') }}" width="35" height="35" class="rounded-circle shadow-sm" alt="Logo">
-            OneDollarMeme
+<nav class="custom-navbar sticky-top shadow-sm" style="background: white; border-bottom: 1px solid #edf2f7; padding: 0.75rem 0;">
+    <div class="container d-flex align-items-center justify-content-between">
+        
+        <a class="brand-logo d-flex align-items-center text-decoration-none" href="{{ route('home') }}" style="gap: 8px;">
+            <img src="{{ asset('image/my-logo.jpg') }}" width="35" height="35" class="rounded-circle shadow-sm border border-2 border-white" alt="Logo">
+            <span class="fw-bolder italic" style="color: var(--brand-purple); letter-spacing: -0.5px; font-style: italic; font-size: clamp(1rem, 4vw, 1.4rem);">OneDollarMeme</span>
         </a>
-        
-        <!-- Center Links Removed -->
-        
-        <!-- Right Actions -->
-        <div class="d-flex align-items-center gap-3">
-            <a href="{{ route('brands.index') }}" class="btn btn-sm fw-bold text-white px-3" style="background-color: var(--brand-purple);">FOR BRANDS</a>
-            
-             <!-- User Profile / Auth -->
-            @auth
-                 <x-profile-dropdown :user="auth()->user()" />
-            @else
-                <a href="{{ route('login') }}" class="btn btn-outline-secondary btn-sm rounded-circle"><i class="bi bi-person"></i></a>
-            @endauth
 
-            <!-- Mobile Sidebar Trigger -->
-            <button class="btn btn-link link-dark d-lg-none p-0 ms-1 fs-5 text-decoration-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileSidebarOffcanvas" aria-controls="mobileSidebarOffcanvas">
-                <i class="bi bi-three-dots-vertical" style="color: var(--brand-purple);"></i>
+        <div class="d-flex align-items-center gap-1 gap-md-3">
+            
+            <a href="{{ route('brands.index') }}" class="btn btn-sm fw-bold text-white px-2 px-md-3 d-flex align-items-center" 
+               style="background: linear-gradient(45deg, var(--brand-purple), #7b4397); border-radius: 8px; font-size: 0.65rem; border: none; height: 32px;">
+               <span class="d-none d-md-inline">FOR BRANDS</span>
+               <i class="bi bi-briefcase d-md-none"></i> </a>
+
+            <div class="auth-section ms-1 d-flex align-items-center">
+                @auth
+                    <x-profile-dropdown :user="auth()->user()" />
+                @else
+                    <a href="{{ route('login') }}" class="btn btn-sm p-1 rounded-circle" 
+                       style="color: var(--brand-purple); font-size: 1.2rem;">
+                       <i class="bi bi-person-circle"></i>
+                    </a>
+                @endauth
+            </div>
+
+            <button class="btn btn-link link-dark d-lg-none p-1 text-decoration-none" 
+                    type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileSidebarOffcanvas">
+                <i class="bi bi-list fs-3" style="color: var(--brand-purple);"></i>
             </button>
         </div>
     </div>
@@ -417,7 +422,13 @@
                     {{ $featuredBrand->end_date && $featuredBrand->end_date->isPast() ? 'VIEW CAMPAIGN' : 'JOIN CAMPAIGN' }}
                 </a>
                 @if($featuredBrand->website)
-                    <a href="{{ $featuredBrand->website }}" target="_blank"
+                    @php
+                        $websiteUrl = $featuredBrand->website;
+                        if (!preg_match('#^https?://#i', $websiteUrl)) {
+                            $websiteUrl = 'https://' . $websiteUrl;
+                        }
+                    @endphp
+                    <a href="{{ $websiteUrl }}" target="_blank" rel="noopener noreferrer"
                        class="btn rounded-pill px-4 fw-bold"
                        style="background-color: white; color: {{ $featuredBrand->theme_color ?? '#6f42c1' }}; border: none; transition: none;">Brand Site</a>
                 @endif
@@ -736,13 +747,17 @@
                 <i class="bi bi-fire"></i>
                 <span>Trending</span>
             </a>
-            <a href="{{ route('upload-meme.create') }}" class="nav-item {{ request()->routeIs('upload-meme.create') ? 'active' : '' }}">
-                <i class="bi bi-plus-circle-fill" style="font-size: 1.8rem; color: var(--brand-purple);"></i>
-                <span>Upload</span>
+            <a href="{{ route('blogs.index') }}" class="nav-item {{ request()->routeIs('blogs.*') ? 'active' : '' }}">
+                <i class="bi bi-journal-text"></i>
+                <span>Blog</span>
             </a>
             <a href="{{ route('brands.public') }}" class="nav-item {{ request()->routeIs('brands.public') ? 'active' : '' }}">
                 <i class="bi bi-buildings"></i>
                 <span>Brands</span>
+            </a>
+            <a href="{{ route('upload-meme.create') }}" class="nav-item {{ request()->routeIs('upload-meme.create') ? 'active' : '' }}">
+                <i class="bi bi-plus-circle-fill" style="font-size: 1.8rem; color: var(--brand-purple);"></i>
+                <span>Upload</span>
             </a>
             @auth
             <a href="{{ route('profile.edit') }}" class="nav-item">
@@ -1387,6 +1402,6 @@ document.addEventListener('DOMContentLoaded', function () {
     @endif
 });
 </script>
-<script src="{{ asset('js/memes-interactions.js') }}"></script>
+<script src="{{ asset('js/memes-interactions.js?v=' . time()) }}"></script>
 </body>
 </html>

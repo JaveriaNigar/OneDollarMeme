@@ -364,20 +364,26 @@ document.addEventListener('DOMContentLoaded', function () {
     // Meme Deletion - AJAX for instant UI update
     $(document).on('click', '.delete-meme-btn', function (e) {
         e.preventDefault();
+        e.stopPropagation();
+        
         const form = $(this).closest('form');
         const actionUrl = form.attr('action');
         const memeCard = $(this).closest('.post-card');
         const memeId = memeCard.data('id');
+        
+        console.log('Delete button clicked:', { actionUrl, memeId });
 
         showDeleteConfirmation('Are you sure you want to delete this post?', () => {
             $.ajax({
                 url: actionUrl,
                 method: 'DELETE',
-                headers: { 
+                headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                    'Accept': 'application/json'
+                    'Accept': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest'
                 },
                 success: function (data) {
+                    console.log('Delete success:', data);
                     if (data.success) {
                         // Animate removal for better UX
                         memeCard.fadeOut(300, function() {
@@ -394,9 +400,15 @@ document.addEventListener('DOMContentLoaded', function () {
                     let errorMessage = 'Failed to delete meme';
                     if (xhr.status === 403) {
                         errorMessage = 'You are not authorized to delete this meme';
+                    } else if (xhr.status === 404) {
+                        errorMessage = 'Meme not found';
+                    } else if (xhr.status === 500) {
+                        errorMessage = 'Server error. Please try again.';
                     }
                     if (window.showToast) {
                         window.showToast(errorMessage, 'error');
+                    } else {
+                        alert(errorMessage);
                     }
                 }
             });

@@ -123,6 +123,43 @@
                 </div>
             </div>
         </div>
+
+        <!-- Total Blogs -->
+        <div class="col-12 col-sm-6 col-xl-3 mb-4">
+            <div class="card card-stat border-left-info shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Total Blogs</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $stats['total_blogs'] }}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="bi bi-journal-text fa-2x text-gray-300 fs-1"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer bg-transparent border-0 pt-0">
+                    <a href="{{ route('admin.blogs') }}" class="text-xs text-info text-decoration-none">View Details <i class="bi bi-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Blog Views -->
+        <div class="col-12 col-sm-6 col-xl-3 mb-4">
+            <div class="card card-stat border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Blog Views</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ number_format($stats['blog_views']) }}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="bi bi-eye fa-2x text-gray-300 fs-1"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Active Challenge Info -->

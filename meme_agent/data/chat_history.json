@@ -1352,6 +1352,14 @@
       {
         "role": "assistant",
         "content": "Cousins wale moments ko enjoy karo!"
+      },
+      {
+        "role": "user",
+        "content": "make meme about summer"
+      },
+      {
+        "role": "assistant",
+        "content": "Garmi ka maza lo in memes ke saath!"
       }
     ]
   },

@@ -1,9 +1,14 @@
 <?php
+
 namespace App\Models;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Meme;
+use App\Models\Blog;
+use App\Models\BlogComment;
+
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
@@ -17,6 +22,7 @@ class User extends Authenticatable
         'country',
         'profile_photo_path',
         'status',
+        'role',
     ];
 
     protected $hidden = [
@@ -49,6 +55,36 @@ class User extends Authenticatable
         return $this->hasMany(\App\Models\ChallengePayout::class, 'user_id');
     }
 
+    public function brands()
+    {
+        return $this->hasMany(\App\Models\Brand::class);
+    }
+
+    public function sponsoredSubmissions()
+    {
+        return $this->hasMany(\App\Models\SponsoredSubmission::class);
+    }
+
+    public function blogs()
+    {
+        return $this->hasMany(Blog::class);
+    }
+
+    public function blogComments()
+    {
+        return $this->hasMany(BlogComment::class);
+    }
+
+    public function isBlogger(): bool
+    {
+        return $this->role === 'blogger' || $this->isAdmin();
+    }
+
+    public function isMemeUser(): bool
+    {
+        return $this->role === 'user' || $this->role === null || $this->isAdmin();
+    }
+
     public function isAdmin(): bool
     {
         return in_array($this->email, [
@@ -58,13 +94,8 @@ class User extends Authenticatable
         ]);
     }
 
-    public function brands()
+    public function canAccessAll(): bool
     {
-        return $this->hasMany(\App\Models\Brand::class);
-    }
-
-    public function sponsoredSubmissions()
-    {
-        return $this->hasMany(\App\Models\SponsoredSubmission::class);
+        return $this->isAdmin();
     }
 }

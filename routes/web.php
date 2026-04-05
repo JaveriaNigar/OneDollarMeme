@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\CommentsController;
 use App\Http\Controllers\UserActivityController;
 use App\Http\Controllers\EmailVerificationController;
+use App\Http\Controllers\BlogController;
 
 // ========================
 // PUBLIC ROUTES
@@ -158,10 +159,18 @@ Route::middleware(['auth', 'track.ip'])->group(function () {
     })->name('meme-agent.feedback');
 
 
-    // blogs page — instead of blog
-    Route::get('/blogs', function () {
-        return view('blogs'); // Create resources/views/blogs.blade.php
-    })->name('blogs');
+    // ========================
+    // BLOG ROUTES (Admin Only for Creation/Management)
+    // ========================
+    Route::prefix('blogs')->name('blogs.')->middleware(['admin'])->group(function () {
+        Route::get('/dashboard', [BlogController::class, 'dashboard'])->name('dashboard');
+        Route::get('/my-blogs', [BlogController::class, 'myBlogs'])->name('my-blogs');
+        Route::get('/create', [BlogController::class, 'create'])->name('create');
+        Route::post('/store', [BlogController::class, 'store'])->name('store');
+        Route::get('/{blog}/edit', [BlogController::class, 'edit'])->name('edit');
+        Route::put('/{blog}', [BlogController::class, 'update'])->name('update');
+        Route::delete('/{blog}', [BlogController::class, 'destroy'])->name('destroy');
+    });
 
     // Profile
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -176,8 +185,8 @@ Route::middleware(['auth', 'track.ip'])->group(function () {
     Route::patch('/account-settings', [ProfileController::class, 'updatePassword'])->name('account.settings.update');
     Route::patch('/account-settings/name', [ProfileController::class, 'updateName'])->name('account.settings.username.update');
 
-    // Upload Meme (requires verified email)
-    Route::middleware(['verified'])->group(function () {
+    // Upload Meme (requires verified email, meme users only)
+    Route::middleware(['verified', 'restrict.blogger'])->group(function () {
         Route::get('/upload-meme', [MemeController::class, 'create'])->name('upload-meme.create');
         Route::post('/upload-meme', [MemeController::class, 'store'])->name('upload-meme.store');
     });
@@ -200,49 +209,53 @@ Route::middleware(['auth', 'track.ip'])->group(function () {
     // Comment on Meme (existing route for backward compatibility)
     Route::post('/meme/{meme}/comment', [MemeController::class, 'comment'])->name('meme.comment');
 
-    // New routes for comments with reply and delete functionality
-    Route::prefix('api')->group(function () {
+    // New routes for comments with reply and delete functionality (meme users only)
+    Route::middleware(['restrict.blogger'])->prefix('api')->group(function () {
         Route::post('/meme/{meme}/comments', [CommentsController::class, 'store'])->name('comments.store');
         Route::get('/meme/{meme}/comments', [CommentsController::class, 'getCommentsTree'])->name('comments.tree');
         Route::delete('/comments/{comment}', [CommentsController::class, 'destroy'])->name('comments.destroy');
         Route::get('/user/{id}/activity', [UserActivityController::class, 'getUserActivity'])->name('user.activity');
-        
+
         // Add score route
         Route::get('/meme/{meme}/score', [MemeController::class, 'getScore'])->name('memes.score');
     });
 
-    // Sponsored Campaign routes
-    Route::get('/sponsored/{slug}/submit', [\App\Http\Controllers\SponsoredCampaignController::class, 'showSubmitForm'])->name('sponsored.submit.form');
-    Route::post('/sponsored/{slug}/submit', [\App\Http\Controllers\SponsoredCampaignController::class, 'storeSubmission'])->name('sponsored.submit');
-    Route::get('/sponsored/{slug}/details', [\App\Http\Controllers\SponsoredCampaignController::class, 'getCampaignDetails'])->name('sponsored.details');
-    Route::get('/sponsored/{slug}/winners', [\App\Http\Controllers\SponsoredCampaignController::class, 'getWinners'])->name('sponsored.winners');
+    // Sponsored Campaign routes (meme users only)
+    Route::middleware(['restrict.blogger'])->group(function () {
+        Route::get('/sponsored/{slug}/submit', [\App\Http\Controllers\SponsoredCampaignController::class, 'showSubmitForm'])->name('sponsored.submit.form');
+        Route::post('/sponsored/{slug}/submit', [\App\Http\Controllers\SponsoredCampaignController::class, 'storeSubmission'])->name('sponsored.submit');
+        Route::get('/sponsored/{slug}/details', [\App\Http\Controllers\SponsoredCampaignController::class, 'getCampaignDetails'])->name('sponsored.details');
+        Route::get('/sponsored/{slug}/winners', [\App\Http\Controllers\SponsoredCampaignController::class, 'getWinners'])->name('sponsored.winners');
 
-    // Sponsored Submission routes (authenticated)
-    Route::get('/sponsored/submission/{id}/edit', [\App\Http\Controllers\SponsoredSubmissionController::class, 'edit'])->name('sponsored.submission.edit');
-    Route::put('/sponsored/submission/{id}', [\App\Http\Controllers\SponsoredSubmissionController::class, 'update'])->name('sponsored.submission.update');
-    Route::delete('/sponsored/submission/{id}', [\App\Http\Controllers\SponsoredSubmissionController::class, 'destroy'])->name('sponsored.submission.destroy');
+        // Sponsored Submission routes (authenticated)
+        Route::get('/sponsored/submission/{id}/edit', [\App\Http\Controllers\SponsoredSubmissionController::class, 'edit'])->name('sponsored.submission.edit');
+        Route::put('/sponsored/submission/{id}', [\App\Http\Controllers\SponsoredSubmissionController::class, 'update'])->name('sponsored.submission.update');
+        Route::delete('/sponsored/submission/{id}', [\App\Http\Controllers\SponsoredSubmissionController::class, 'destroy'])->name('sponsored.submission.destroy');
+    });
 
-    // Brand routes that need authentication (except show)
-    Route::get('/work', function () {
-        return view('brands.work');
-    })->name('brands.work');
-    Route::get('/brands/create', [\App\Http\Controllers\BrandController::class, 'create'])->name('brands.create');
-    Route::resource('my-brands', \App\Http\Controllers\BrandController::class)->parameters(['my-brands' => 'brand'])->names('brands')->except(['show', 'create']);
+    // Brand routes that need authentication (except show) - meme users only
+    Route::middleware(['restrict.blogger'])->group(function () {
+        Route::get('/work', function () {
+            return view('brands.work');
+        })->name('brands.work');
+        Route::get('/brands/create', [\App\Http\Controllers\BrandController::class, 'create'])->name('brands.create');
+        Route::resource('my-brands', \App\Http\Controllers\BrandController::class)->parameters(['my-brands' => 'brand'])->names('brands')->except(['show', 'create']);
 
-    // AJAX date validation route
-    Route::post('/my-brands/check-dates', [\App\Http\Controllers\BrandController::class, 'checkDates'])->name('brands.check-dates');
-    
-    // Draft Campaign routes
-    Route::post('/drafts/save', [\App\Http\Controllers\BrandController::class, 'saveDraft'])->name('drafts.save');
-    Route::get('/drafts', [\App\Http\Controllers\BrandController::class, 'getDrafts'])->name('drafts.index');
-    Route::get('/drafts/{draft}', [\App\Http\Controllers\BrandController::class, 'getDraft'])->name('drafts.show');
-    Route::delete('/drafts/{draft}', [\App\Http\Controllers\BrandController::class, 'deleteDraft'])->name('drafts.destroy');
+        // AJAX date validation route
+        Route::post('/my-brands/check-dates', [\App\Http\Controllers\BrandController::class, 'checkDates'])->name('brands.check-dates');
+
+        // Draft Campaign routes
+        Route::post('/drafts/save', [\App\Http\Controllers\BrandController::class, 'saveDraft'])->name('drafts.save');
+        Route::get('/drafts', [\App\Http\Controllers\BrandController::class, 'getDrafts'])->name('drafts.index');
+        Route::get('/drafts/{draft}', [\App\Http\Controllers\BrandController::class, 'getDraft'])->name('drafts.show');
+        Route::delete('/drafts/{draft}', [\App\Http\Controllers\BrandController::class, 'deleteDraft'])->name('drafts.destroy');
+    });
 
     // ========================
-    // Emoji Reaction (AJAX)
+    // Emoji Reaction (AJAX) - meme users only
     // Meme-specific route using route model binding
     // ========================
-    Route::post('/memes/{meme}/reaction', [MemeController::class, 'react'])->name('memes.reaction.store');
+    Route::middleware(['restrict.blogger'])->post('/memes/{meme}/reaction', [MemeController::class, 'react'])->name('memes.reaction.store');
 
     // Share functionality
     Route::post('/api/meme/{meme}/share', [MemeController::class, 'incrementShare'])->name('memes.share.increment');
@@ -298,6 +311,10 @@ Route::middleware(['auth', 'track.ip'])->group(function () {
         Route::post('/engagement/{engagement}/verify', [AdminController::class, 'verifyEngagement'])->name('engagement.verify');
         Route::post('/engagement/{engagement}/remove', [AdminController::class, 'removeEngagement'])->name('engagement.remove');
         Route::post('/engagement/cleanup', [AdminController::class, 'cleanupFlaggedEngagements'])->name('engagement.cleanup');
+
+        // Blog Management routes
+        Route::get('/blogs', [BlogController::class, 'adminIndex'])->name('blogs');
+        Route::post('/blogs/{blog}/status', [BlogController::class, 'adminUpdateStatus'])->name('blogs.status');
     });
 
     // Get winner meme based on scoring algorithm
@@ -317,6 +334,21 @@ Route::get('/brands', [\App\Http\Controllers\BrandController::class, 'publicList
 
 // Public Brand Page
 Route::get('/brands/{brand}', [\App\Http\Controllers\BrandController::class, 'show'])->name('brands.show');
+
+// API for brand winners live updates
+Route::get('/api/brand-winners', [\App\Http\Controllers\BrandController::class, 'getBrandWinners'])->name('api.brand-winners');
+
+// ========================
+// PUBLIC BLOG ROUTES
+// ========================
+Route::get('/blogs', [BlogController::class, 'index'])->name('blogs.index');
+Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('blogs.show');
+
+// Public comment route (requires auth)
+Route::middleware(['auth'])->group(function () {
+    Route::post('/blog/{blog}/comment', [BlogController::class, 'storeComment'])->name('blogs.comment.store');
+    Route::delete('/blog-comment/{comment}', [BlogController::class, 'deleteComment'])->name('blogs.comment.delete');
+});
 
 // ========================
 // LARAVEL BREEZE AUTH

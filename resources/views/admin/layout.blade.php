@@ -320,6 +320,15 @@
                     <i class="bi bi-shield-check me-2"></i> Engagement Audit
                 </a>
             </li>
+
+            <li class="sidebar-section-header">
+                Content
+            </li>
+            <li>
+                <a href="{{ route('admin.blogs') }}" class="nav-link {{ request()->routeIs('admin.blogs') ? 'active' : '' }}">
+                    <i class="bi bi-journal-text me-2"></i> Blog Management
+                </a>
+            </li>
         </ul>
         <hr>
         <div class="dropdown">

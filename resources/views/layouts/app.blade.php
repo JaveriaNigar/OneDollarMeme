@@ -50,8 +50,10 @@
         </div>
     @include('partials._battle-timer-script')
     @include('partials._terms-modal')
-    
+
     @include('partials._toast')
+
+    @include('partials._bottom-nav')
 
     <style>
         @keyframes fadeInUp {

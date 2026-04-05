@@ -15,13 +15,12 @@ use Illuminate\Support\Facades\Auth;
 class BrandController extends Controller
 {
     /**
-     * Show the brand dashboard (Authenticated).
+     * Show the brand dashboard (Authenticated - User's own brands only).
      */
     public function index()
     {
-        // For dashboard, maybe show user's own brands? 
-        // For now, it shows all.
-        $brands = Brand::all();
+        // Show only the authenticated user's own brands
+        $brands = Brand::where('user_id', Auth::id())->orderBy('created_at', 'desc')->get();
         return view('brands.index', compact('brands'));
     }
 
@@ -203,7 +202,7 @@ class BrandController extends Controller
 
         $memes = \App\Models\Meme::where('brand_id', $brand->id)
             ->whereNotIn('status', ['rejected', 'removed', 'hidden'])
-            ->with(['user', 'reactions', 'comments'])
+            ->with(['user', 'reactions', 'comments', 'shareEvents'])
             ->orderBy('score', 'desc');
 
         // Highlight the shared meme at the top
@@ -231,7 +230,7 @@ class BrandController extends Controller
 
         // Calculate scores for display
         $memes->getCollection()->each(function($meme) {
-            $meme->calculated_score = ($meme->reactions->count() * 2) + ($meme->comments->count() * 3) + (($meme->shares_count ?? 0) * 5);
+            $meme->calculated_score = ($meme->reactions->count() * 2) + ($meme->comments->count() * 3) + ($meme->shareEvents->count() * 5);
         });
 
         // Get sidebar data
@@ -522,18 +521,28 @@ class BrandController extends Controller
     }
 
     /**
-     * Show the form for editing the specified brand.
+     * Show the form for editing the specified brand (Owner only).
      */
     public function edit(Brand $brand)
     {
+        // Check if the brand belongs to the authenticated user
+        if ($brand->user_id !== Auth::id()) {
+            abort(403, 'You can only edit your own brands.');
+        }
+
         return view('brands.edit', compact('brand'));
     }
 
     /**
-     * Update the specified brand in storage.
+     * Update the specified brand in storage (Owner only).
      */
     public function update(Request $request, Brand $brand)
     {
+        // Check if the brand belongs to the authenticated user
+        if ($brand->user_id !== Auth::id()) {
+            abort(403, 'You can only update your own brands.');
+        }
+
         $validator = Validator::make($request->all(), [
             'company_name' => 'required|string|max:255',
             'website' => 'nullable|url',
@@ -619,10 +628,15 @@ class BrandController extends Controller
     }
 
     /**
-     * Remove the specified brand from storage.
+     * Remove the specified brand from storage (Owner only).
      */
     public function destroy(Brand $brand)
     {
+        // Check if the brand belongs to the authenticated user
+        if ($brand->user_id !== Auth::id()) {
+            abort(403, 'You can only delete your own brands.');
+        }
+
         if ($brand->logo) {
             Storage::disk('public')->delete($brand->logo);
         }
@@ -765,5 +779,61 @@ class BrandController extends Controller
 
         return redirect()->route('drafts.index')
             ->with('success', 'Draft deleted successfully!');
+    }
+
+    /**
+     * API endpoint to get brand winners data for live updates.
+     */
+    public function getBrandWinners()
+    {
+        $brandWinners = \App\Models\Brand::where('status', 'active')
+            ->with(['memes' => function($q) {
+                $q->where('status', 'active');
+            }, 'memes.user', 'memes.reactions', 'memes.comments'])
+            ->get()
+            ->filter(function($brand) {
+                return $brand->memes->count() > 0;
+            })
+            ->mapWithKeys(function($brand) {
+                foreach ($brand->memes as $meme) {
+                    // Ensure relationships are loaded and calculate score
+                    if (!$meme->relationLoaded('reactions')) {
+                        $meme->load('reactions');
+                    }
+                    if (!$meme->relationLoaded('comments')) {
+                        $meme->load('comments');
+                    }
+                    $meme->calculated_score = ($meme->reactions->count() * 2) +
+                                              ($meme->comments->count() * 3) +
+                                              (($meme->shares_count ?? 0) * 5);
+                }
+                
+                $winners = $brand->memes->sortByDesc('calculated_score')->take(3)->map(function($winner) {
+                    return [
+                        'user_id' => $winner->user->id,
+                        'user_name' => $winner->user->name ?? 'User',
+                        'user_avatar' => $winner->user->profile_photo_url,
+                        'calculated_score' => $winner->calculated_score,
+                        'meme_id' => $winner->id,
+                    ];
+                });
+                
+                return [
+                    $brand->id => [
+                        'brand' => [
+                            'id' => $brand->id,
+                            'company_name' => $brand->company_name,
+                            'logo' => $brand->logo,
+                        ],
+                        'winners' => $winners->values()->all(),
+                    ]
+                ];
+            })
+            ->take(3)
+            ->all();
+
+        return response()->json([
+            'winners' => $brandWinners
+        ]);
     }
 }

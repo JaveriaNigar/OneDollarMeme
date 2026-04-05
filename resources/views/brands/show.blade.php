@@ -1,296 +1,695 @@
 @extends('layouts.brands_app')
 
 @section('content')
-<div class="container py-5">
-    <!-- Brand Header -->
-    <div class="brand-header p-5 rounded-[40px] text-white mb-5 position-relative overflow-hidden" 
-         style="background: linear-gradient(135deg, {{ $brand->theme_color ?? '#6f42c1' }} 0%, #000 100%); min-height: 300px;">
-        
-        <!-- Background Pattern -->
-        <div class="position-absolute top-0 end-0 opacity-10 w-100 h-100" 
-             style="background-image: radial-gradient(#fff 1px, transparent 1px); background-size: 20px 20px;"></div>
-        
-        <div class="position-relative z-1 d-flex flex-column align-items-center text-center">
-            @if($brand->logo)
-                <img src="{{ asset('storage/' . $brand->logo) }}" alt="{{ $brand->company_name }}"
-                     class="rounded-circle shadow-lg mb-4 border border-4 border-white" style="width: 120px; height: 120px; object-fit: cover;">
-            @else
-                <div class="rounded-circle shadow-lg mb-4 bg-white d-flex align-items-center justify-center text-dark fw-black"
-                     style="width: 100px; height: 100px; font-size: 2rem;">
-                    {{ substr($brand->company_name, 0, 1) }}
+<div class="container py-4" style="max-width: 1200px;">
+    <div class="row g-4">
+        <!-- Main Content -->
+        <div class="col-lg-8">
+            <!-- Brand Header Card -->
+            <div class="card border-0 rounded-2 overflow-hidden mb-4" style="box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                <!-- Banner -->
+                <div class="position-relative" style="height: 120px; background: linear-gradient(135deg, {{ $brand->theme_color ?? '#8B5CF6' }} 0%, {{ $brand->theme_color ?? '#8B5CF6' }}dd 50%, {{ $brand->theme_color ?? '#8B5CF6' }}aa 100%);">
+                    <div style="position: absolute; inset: 0; background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,0.1) 10px, rgba(255,255,255,0.1) 20px);"></div>
                 </div>
-            @endif
-
-            <h1 class="display-4 fw-black uppercase italic tracking-tight mb-2">{{ $brand->company_name }}</h1>
-            <p class="lead opacity-75 max-w-2xl">{{ $brand->brand_description ?? 'Participate in our brand campaign and win amazing prizes!' }}</p>
-
-            <!-- Campaign Dates -->
-            <div class="d-flex gap-4 justify-content-center mb-3 mt-2">
-                @if($brand->start_date)
-                    <div class="text-center text-white">
-                        <div class="small opacity-75 text-uppercase fw-bold tracking-wider">Start Date</div>
-                        <div class="fw-bold">{{ $brand->start_date->format('M d, Y g:i A') }}</div>
-                    </div>
-                @endif
-                @if($brand->end_date)
-                    <div class="text-center text-white">
-                        <div class="small opacity-75 text-uppercase fw-bold tracking-wider">End Date</div>
-                        <div class="fw-bold">{{ $brand->end_date->format('M d, Y g:i A') }}</div>
-                        @if($brand->end_date->isPast())
-                            <span class="badge bg-danger mt-1">ENDED</span>
+                
+                <!-- Header Content -->
+                <div class="card-body p-4 pt-0 position-relative">
+                    <!-- Logo -->
+                    <div class="position-absolute" style="top: -40px; left: 24px;">
+                        @if($brand->logo)
+                            <img src="{{ asset('storage/' . $brand->logo) }}" alt="{{ $brand->company_name }}"
+                                 class="rounded-circle border-4 border-white shadow" style="width: 80px; height: 80px; object-fit: cover; background: white;">
+                        @else
+                            <div class="rounded-circle border-4 border-white shadow bg-white d-flex align-items-center justify-content text-dark fw-bold"
+                                 style="width: 80px; height: 80px; font-size: 2rem;">
+                                {{ substr($brand->company_name, 0, 1) }}
+                            </div>
                         @endif
                     </div>
-                @endif
-            </div>
-
-            @if($brand->website)
-                <a href="{{ $brand->website }}" target="_blank" class="btn btn-outline-light rounded-pill px-4 py-2 mt-3 tracking-widest uppercase small fw-bold">
-                    Visit Website <i class="bi bi-box-arrow-up-right ms-2"></i>
-                </a>
-            @endif
-        </div>
-    </div>
-
-    <!-- Campaign Section -->
-    <div class="row mb-5">
-        <div class="col-lg-8">
-            <h2 class="h3 fw-bold italic uppercase mb-4">Campaign Memes</h2>
-            
-            @if($memes->count() > 0)
-                <div class="row g-4" id="meme-grid">
-                    @foreach($memes as $meme)
-                    <div class="col-md-6 col-lg-4" id="meme-{{ $meme->id }}" style="scroll-margin-top: 80px;">
-                        <div class="meme-card h-100" style="
-                            background: white;
-                            border-radius: 20px;
-                            overflow: hidden;
-                            box-shadow: 0 4px 20px rgba(0,0,0,0.07);
-                            border: 1px solid rgba(0,0,0,0.05);
-                            transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
-                            display: flex;
-                            flex-direction: column;
-                        " onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 20px 40px rgba(0,0,0,0.12)';"
-                           onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 4px 20px rgba(0,0,0,0.07)';">
-
-                            {{-- Image Section --}}
-                            @if($meme->image_path)
-                            <div class="position-relative" style="aspect-ratio: 4/3; overflow: hidden; background: #0f0f0f;">
-                                <img src="{{ asset('storage/' . $meme->image_path) }}"
-                                     alt="{{ $meme->title ?? 'Meme' }}"
-                                     style="width:100%; height:100%; object-fit: cover; display: block; transition: transform 0.4s ease;"
-                                     onmouseover="this.style.transform='scale(1.05)'"
-                                     onmouseout="this.style.transform='scale(1)'">
-
-                                {{-- Overlay Badges --}}
-                                @if($loop->first)
-                                    <div style="position:absolute; top:10px; left:10px; background:linear-gradient(135deg,#f59e0b,#d97706); color:white; font-size:0.7rem; font-weight:800; padding:4px 10px; border-radius:20px; text-transform:uppercase; letter-spacing:0.5px; box-shadow:0 2px 8px rgba(0,0,0,0.2);">
-                                        ⭐ TOP
-                                    </div>
-                                @endif
-                                @if($meme->score >= 20)
-                                    <div style="position:absolute; top:10px; right:10px; background:linear-gradient(135deg,#ef4444,#dc2626); color:white; font-size:0.7rem; font-weight:800; padding:4px 10px; border-radius:20px; text-transform:uppercase; box-shadow:0 2px 8px rgba(0,0,0,0.2);">
-                                        🔥 TRENDING
-                                    </div>
-                                @endif
+                    
+                    <!-- Brand Info -->
+                    <div class="mt-12 mb-3">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div>
+                                <h1 class="h4 fw-bold mb-1">r/{{ $brand->company_name }}</h1>
+                                <p class="text-muted small mb-0">{{ $brand->brand_description ?? 'Participate in our brand campaign and win amazing prizes!' }}</p>
                             </div>
-                            @else
-                            {{-- Text-Only Meme Card --}}
-                            <div style="
-                                min-height: 180px;
-                                background: linear-gradient(135deg, {{ $brand->theme_color ?? '#6f42c1' }}22, {{ $brand->theme_color ?? '#6f42c1' }}44);
-                                display: flex;
-                                align-items: center;
-                                justify-content: center;
-                                padding: 24px;
-                                position: relative;
-                                overflow: hidden;
-                            ">
-                                <div style="position:absolute; inset:0; background-image: radial-gradient({{ $brand->theme_color ?? '#6f42c1' }}33 1px, transparent 1px); background-size: 20px 20px; opacity: 0.5;"></div>
-                                <p style="
-                                    font-size: 1.05rem;
-                                    font-weight: 700;
-                                    color: #1e1e2e;
-                                    text-align: center;
-                                    line-height: 1.5;
-                                    position: relative;
-                                    z-index: 1;
-                                    margin: 0;
-                                ">"{{ $meme->title }}"</p>
-                            </div>
+                            @if($brand->end_date && !$brand->end_date->isPast())
+                                <span class="badge bg-danger d-flex align-items-center gap-1">
+                                    <span class="rounded-circle bg-white" style="width: 6px; height: 6px; display: inline-block;"></span>
+                                    LIVE
+                                </span>
                             @endif
-
-                            {{-- Card Body --}}
-                            <div style="padding: 16px 18px 18px; flex: 1; display: flex; flex-direction: column; justify-content: space-between;">
-                                {{-- User Row --}}
-                                <div style="display:flex; align-items:center; gap:10px; margin-bottom: 10px;">
-                                    <img src="{{ $meme->user->profile_photo_url }}"
-                                         alt="{{ $meme->user->name }}"
-                                         style="width:32px; height:32px; border-radius:50%; object-fit:cover; border: 2px solid #f0f0f0;">
-                                    <div>
-                                        <div style="font-weight:700; font-size:0.82rem; color:#1e1e2e;">{{ $meme->user->name ?? 'Anonymous' }}</div>
-                                        <div style="font-size:0.72rem; color:#9ca3af;">{{ $meme->created_at->diffForHumans() }}</div>
-                                    </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Stats Row -->
+                    <div class="d-flex gap-4 mb-3">
+                        <div>
+                            <div class="fw-bold">{{ $memes->total() ?? $memes->count() }}</div>
+                            <div class="text-muted small">ENTRIES</div>
+                        </div>
+                        <div>
+                            <div class="fw-bold">${{ number_format($brand->prize_amount ?? 100) }}</div>
+                            <div class="text-muted small">PRIZE POOL</div>
+                        </div>
+                        <div>
+                            @if($brand->end_date)
+                                <div class="fw-bold">{{ max(0, now()->diffInDays($brand->end_date, false)) }} day{{ max(0, now()->diffInDays($brand->end_date, false)) != 1 ? 's' : '' }}</div>
+                                <div class="text-muted small">LEFT</div>
+                            @endif
+                        </div>
+                    </div>
+                    
+                    <!-- Action Buttons -->
+                    <div class="d-flex gap-2">
+                        <a href="{{ route('sponsored.submit.form', $brand->slug ?? $brand->id) }}" class="btn rounded-pill px-4 fw-bold text-white" style="background: #0079D3; font-size: 0.9rem;">
+                            Join
+                        </a>
+                        @if($brand->website)
+                            @php
+                                $websiteUrl = $brand->website;
+                                if (!preg_match('#^https?://#i', $websiteUrl)) {
+                                    $websiteUrl = 'https://' . $websiteUrl;
+                                }
+                            @endphp
+                            <a href="{{ $websiteUrl }}" target="_blank" rel="noopener noreferrer" 
+                               class="btn rounded-pill px-4 fw-bold" style="border: 2px solid #0079D3; color: #0079D3; font-size: 0.9rem;">
+                                <i class="bi bi-box-arrow-up-right me-1"></i> Website
+                            </a>
+                        @endif
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Sorting Tabs -->
+            <div class="card border-0 rounded-2 mb-4" style="box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                <div class="card-body p-3">
+                    <div class="d-flex gap-4">
+                        <button class="btn btn-link text-decoration-none fw-bold d-flex align-items-center gap-2 px-3 py-2" style="color: #FF4500; background: rgba(255,69,0,0.1); border-radius: 20px;">
+                            <i class="bi bi-fire"></i> Hot
+                        </button>
+                        <button class="btn btn-link text-decoration-none text-muted fw-bold d-flex align-items-center gap-2 px-3 py-2">
+                            <i class="bi bi-stars"></i> New
+                        </button>
+                        <button class="btn btn-link text-decoration-none text-muted fw-bold d-flex align-items-center gap-2 px-3 py-2">
+                            <i class="bi bi-graph-up"></i> Top
+                        </button>
+                        <button class="btn btn-link text-decoration-none text-muted fw-bold d-flex align-items-center gap-2 px-3 py-2">
+                            <i class="bi bi-rocket-takeoff"></i> Rising
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Memes List -->
+            @if($memes->count() > 0)
+                <div id="meme-grid">
+                    @foreach($memes as $meme)
+                    <div class="post-card card border-0 rounded-2 mb-3" id="meme-{{ $meme->id }}" data-id="{{ $meme->id }}" style="scroll-margin-top: 80px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                        <div class="card-body p-0">
+                            <div class="d-flex">
+                                <!-- Vote Column -->
+                                <div class="d-flex flex-column align-items-center py-3 px-2" style="background: #F8F9FA; min-width: 50px;">
+                                    <button class="react-toggle-btn btn btn-sm p-0" style="color: #FF4500; font-size: 1.2rem; background: none; border: none;" type="button" data-meme-id="{{ $meme->id }}">
+                                        <span class="reaction-emoji">{{ $meme->userEmoji ?? '😀' }}</span>
+                                    </button>
+                                    <span class="reaction-count fw-bold my-1" style="font-size: 0.9rem;">{{ $meme->reactions->count() }}</span>
+                                    <button class="btn btn-sm p-0" style="color: #7193FF; font-size: 1.2rem;">
+                                        <i class="bi bi-arrow-down-circle-fill"></i>
+                                    </button>
                                 </div>
-
-                                {{-- Title (if has image) --}}
-                                @if($meme->image_path && $meme->title)
-                                <p style="font-size: 0.88rem; font-weight: 600; color: #374151; margin-bottom: 12px; line-height: 1.4; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">
-                                    {{ $meme->title }}
-                                </p>
-                                @endif
-
-                                {{-- Stats Row --}}
-                                <div style="display:flex; align-items:center; justify-content:space-between; border-top: 1px solid #f3f4f6; padding-top: 12px; margin-top: auto;">
-                                    <div style="display:flex; gap:14px; font-size:0.8rem; color:#6b7280; font-weight:600;">
-                                        <span><i class="bi bi-heart-fill" style="color:#ef4444;"></i> {{ $meme->reactions->count() }}</span>
-                                        <span><i class="bi bi-chat-fill" style="color:#3b82f6;"></i> {{ $meme->comments->count() }}</span>
+                                
+                                <!-- Content Column -->
+                                <div class="flex-grow-1 p-3">
+                                    <!-- Post Header -->
+                                    <div class="d-flex align-items-center gap-2 mb-2 flex-wrap">
+                                        <img src="{{ $meme->user->profile_photo_url }}"
+                                             alt="{{ $meme->user->name }}"
+                                             class="rounded-circle" style="width: 24px; height: 24px; object-fit: cover;">
+                                        <span class="fw-bold small">{{ $meme->user->name ?? 'Anonymous' }}</span>
+                                        <span class="text-muted small">· {{ $meme->created_at->diffForHumans() }}</span>
+                                        @if($loop->first)
+                                            <span class="badge" style="background: #FFE4B5; color: #8B4513; font-size: 0.7rem;">
+                                                <i class="bi bi-trophy-fill me-1"></i>Top Score
+                                            </span>
+                                        @endif
                                     </div>
-                                    <span style="
-                                        background: {{ $brand->theme_color ?? '#6f42c1' }}22;
-                                        color: {{ $brand->theme_color ?? '#6f42c1' }};
-                                        font-size: 0.75rem;
-                                        font-weight: 800;
-                                        padding: 3px 10px;
-                                        border-radius: 20px;
-                                    ">Score: {{ $meme->calculated_score }}</span>
+                                    
+                                    <!-- Post Title -->
+                                    @if($meme->title)
+                                    <h5 class="fw-bold mb-3" style="font-size: 1.1rem;">{{ $meme->title }}</h5>
+                                    @endif
+                                    
+                                    <!-- Post Image -->
+                                    @if($meme->image_path)
+                                    <div class="rounded-2 overflow-hidden mb-3" style="max-height: 500px; background: #FFF8DC;">
+                                        <img src="{{ asset('storage/' . $meme->image_path) }}"
+                                             alt="{{ $meme->title ?? 'Meme' }}"
+                                             class="w-100" style="object-fit: cover;">
+                                    </div>
+                                    @endif
+                                    
+                                    <!-- User Reactions Line -->
+                                    <div class="user-reactions-line mt-2 mb-2" style="display: flex; flex-wrap: wrap; gap: 5px; align-items: center;">
+                                        @php
+                                            $userReactions = [];
+                                            $allReactions = $meme->reactions->groupBy('emoji');
+
+                                            foreach($allReactions as $emoji => $reactions) {
+                                                $count = count($reactions);
+                                                $userReacted = $reactions->contains(function($reaction) {
+                                                    return $reaction->user_id == auth()->id();
+                                                });
+
+                                                $userReactions[] = [
+                                                    'emoji' => $emoji,
+                                                    'count' => $count,
+                                                    'user_reacted' => $userReacted
+                                                ];
+                                            }
+
+                                            usort($userReactions, function($a, $b) {
+                                                if ($a['user_reacted'] && !$b['user_reacted']) return -1;
+                                                if (!$a['user_reacted'] && $b['user_reacted']) return 1;
+                                                return $b['count'] - $a['count'];
+                                            });
+                                        @endphp
+
+                                        @foreach($userReactions as $reactionData)
+                                            <span class="user-reaction-item"
+                                                  style="display: flex; align-items: center; padding: 2px 6px; border-radius: 12px; font-size: 0.8rem;
+                                                         {{ $reactionData['user_reacted'] ? 'background-color: #d1ecf1; border: 1px solid #bee5eb;' : 'background-color: #f8f9fa; border: 1px solid #dee2e6;' }}">
+                                                <span class="reaction-emoji">{{ $reactionData['emoji'] }}</span>
+                                                <span class="reaction-count ms-1">{{ $reactionData['count'] }}</span>
+                                            </span>
+                                        @endforeach
+                                    </div>
+
+                                    <!-- Emoji Picker (Hidden) -->
+                                    <div id="emoji-section-{{ $meme->id }}" style="display:none;" class="mt-2 text-start">
+                                        <emoji-picker id="emoji-picker-{{ $meme->id }}"></emoji-picker>
+                                    </div>
+                                    
+                                    <!-- Post Actions -->
+                                    <div class="d-flex align-items-center gap-3">
+                                        <button class="comment-toggle-btn btn btn-sm text-muted d-flex align-items-center gap-1" type="button" data-meme-id="{{ $meme->id }}" style="font-size: 0.8rem;">
+                                            <i class="bi bi-chat"></i> <span class="comment-count">{{ $meme->comments->count() }}</span> Comments
+                                        </button>
+                                        <button class="meme-share-btn btn btn-sm text-muted d-flex align-items-center gap-1" type="button" data-meme-id="{{ $meme->id }}" style="font-size: 0.8rem;">
+                                            <i class="bi bi-share"></i> Share
+                                        </button>
+                                    </div>
+
+                                    <!-- Comment Section (Hidden) -->
+                                    <div id="comment-section-{{ $meme->id }}" style="display:none;" class="mt-3">
+                                        <!-- Comment Form -->
+                                        <form class="comment-form d-flex mt-2" data-id="{{ $meme->id }}">
+                                            @csrf
+                                            <input type="text" name="content" class="form-control form-control-sm me-2" placeholder="Add a comment" style="border-radius: 20px;">
+                                            <button type="submit" class="btn btn-sm text-white" style="background: {{ $brand->theme_color ?? '#0079D3' }}; border-radius: 20px;">Comment</button>
+                                        </form>
+
+                                        <!-- Comment List -->
+                                        <ul class="comment-list mt-3 list-unstyled">
+                                            @foreach($meme->comments->whereNull('parent_id') as $comment)
+                                                @include('partials._comment_item', ['comment' => $comment, 'meme' => $meme])
+                                            @endforeach
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     @endforeach
                 </div>
-                <div class="mt-5 d-flex justify-content-center">
+                
+                <!-- Pagination -->
+                <div class="mt-4 d-flex justify-content-center">
                     {{ $memes->links() }}
                 </div>
             @else
-                <div class="text-center py-5 rounded-4" style="background: #f8fafc; border: 2px dashed #e2e8f0;">
-                    <div style="font-size: 3rem; margin-bottom: 16px;">🎭</div>
-                    <h5 class="fw-bold text-dark mb-2">No memes yet!</h5>
-                    <p class="text-muted small mb-4">Be the first to submit a meme for this campaign</p>
-                    <a href="{{ route('sponsored.submit.form', $brand->slug ?? $brand->id) }}" class="btn rounded-pill px-4 fw-bold text-white" style="background-color: {{ $brand->theme_color ?? '#6f42c1' }};">
-                        Submit First Meme
-                    </a>
+                <div class="card border-0 rounded-2 text-center py-5" style="box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                    <div class="card-body">
+                        <div style="font-size: 3rem; margin-bottom: 16px;">🎭</div>
+                        <h5 class="fw-bold mb-2">No memes yet!</h5>
+                        <p class="text-muted small mb-4">Be the first to submit a meme for this campaign</p>
+                        <a href="{{ route('sponsored.submit.form', $brand->slug ?? $brand->id) }}" 
+                           class="btn rounded-pill px-4 fw-bold text-white" style="background: #0079D3;">
+                            Submit First Meme
+                        </a>
+                    </div>
                 </div>
             @endif
         </div>
-
+        
+        <!-- Sidebar -->
         <div class="col-lg-4">
-            <div class="card border-0 shadow-sm rounded-4 p-4" style="position: sticky; top: 20px; max-height: calc(100vh - 40px); overflow-y: auto;">
-                <h3 class="h5 fw-bold italic uppercase mb-4" style="color: {{ $brand->theme_color ?? '#6f42c1' }};">Campaign Info</h3>
-
-                <div class="mb-4">
-                    <label class="text-muted small text-uppercase fw-bold tracking-wider mb-1">Campaign Title</label>
-                    <p class="fw-bold text-dark">{{ $brand->campaign_title ?? 'The Great Meme War' }}</p>
-                </div>
-
-                <div class="mb-4">
-                    <label class="text-muted small text-uppercase fw-bold tracking-wider mb-1">Prize Pool</label>
-                    <p class="h4 fw-black" style="color: {{ $brand->theme_color ?? '#6f42c1' }};">${{ number_format($brand->prize_amount ?? 100, 2) }}</p>
-                </div>
-
-                <div class="row mb-4">
-                    <div class="col-6">
-                        <label class="text-muted small text-uppercase fw-bold tracking-wider mb-1">Start Date</label>
-                        <p class="small fw-bold text-dark">{{ $brand->start_date ? $brand->start_date->format('M d, Y h:i A') : '-' }}</p>
+            <!-- Prize Pool Card -->
+            <div class="card border-0 rounded-2 mb-3 text-center" style="box-shadow: 0 1px 3px rgba(0,0,0,0.1); background: #FFF5EB;">
+                <div class="card-body p-4">
+                    <div class="text-muted small fw-bold text-uppercase mb-2" style="color: #D97706;">
+                        <i class="bi bi-trophy-fill me-1"></i> Prize Pool
                     </div>
-                    <div class="col-6">
-                        <label class="text-muted small text-uppercase fw-bold tracking-wider mb-1">End Date</label>
-                        <p class="small fw-bold text-dark">{{ $brand->end_date ? $brand->end_date->format('M d, Y h:i A') : '-' }}</p>
+                    <div class="h1 fw-black mb-2" style="color: #FF4500;">
+                        ${{ number_format($brand->prize_amount ?? 100) }}
+                    </div>
+                    <div class="text-muted small">
+                        {{ $brand->campaign_title ?? $brand->company_name }} Campaign
                     </div>
                 </div>
-
-                <div class="mb-4">
-                    @if($brand->dos_guidelines)
-                        <label class="text-muted small text-uppercase fw-bold tracking-wider mb-2" style="color: {{ $brand->theme_color ?? '#6f42c1' }};">✓ Do's Guidelines</label>
-                        <div class="small text-dark opacity-75 mb-3">
-                            {!! nl2br(e($brand->dos_guidelines)) !!}
+                <div class="px-4 pb-4">
+                    <a href="{{ route('sponsored.submit.form', $brand->slug ?? $brand->id) }}" 
+                       class="btn w-100 rounded-pill fw-bold text-white py-2" style="background: #FF4500;">
+                        <i class="bi bi-plus-circle me-1"></i> Submit a Meme
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Campaign Info Card -->
+            <div class="card border-0 rounded-2 mb-3" style="box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                <div class="card-body p-4">
+                    <h5 class="fw-bold mb-3">
+                        <i class="bi bi-file-earmark-text me-2"></i>Campaign Info
+                    </h5>
+                    
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between align-items-center py-2 border-bottom">
+                            <span class="text-muted small">Campaign</span>
+                            <span class="fw-bold small">{{ $brand->campaign_title ?? $brand->company_name }}</span>
                         </div>
-                    @else
-                        <label class="text-muted small text-uppercase fw-bold tracking-wider mb-2" style="color: {{ $brand->theme_color ?? '#6f42c1' }};">✓ Do's Guidelines</label>
-                        <p class="small text-muted mb-3">No Do's guidelines specified</p>
-                    @endif
-
-                    @if($brand->donts_guidelines)
-                        <label class="text-muted small text-uppercase fw-bold tracking-wider mb-2" style="color: {{ $brand->theme_color ?? '#6f42c1' }};">✗ Don'ts Guidelines</label>
-                        <div class="small text-dark opacity-75">
-                            {!! nl2br(e($brand->donts_guidelines)) !!}
+                        @if($brand->start_date)
+                        <div class="d-flex justify-content-between align-items-center py-2 border-bottom">
+                            <span class="text-muted small">Start</span>
+                            <span class="fw-bold small">{{ $brand->start_date->format('M d, g:i A') }}</span>
                         </div>
-                    @else
-                        <label class="text-muted small text-uppercase fw-bold tracking-wider mb-2" style="color: {{ $brand->theme_color ?? '#6f42c1' }};">✗ Don'ts Guidelines</label>
-                        <p class="small text-muted">No Don'ts guidelines specified</p>
+                        @endif
+                        @if($brand->end_date)
+                        <div class="d-flex justify-content-between align-items-center py-2 border-bottom">
+                            <span class="text-muted small">End</span>
+                            <span class="fw-bold small">{{ $brand->end_date->format('M d, g:i A') }}</span>
+                        </div>
+                        @endif
+                        <div class="d-flex justify-content-between align-items-center py-2">
+                            <span class="text-muted small">Entries</span>
+                            <span class="fw-bold small">{{ $memes->total() ?? $memes->count() }}</span>
+                        </div>
+                    </div>
+                    
+                    @if($brand->website)
+                        @php
+                            $websiteUrl = $brand->website;
+                            if (!preg_match('#^https?://#i', $websiteUrl)) {
+                                $websiteUrl = 'https://' . $websiteUrl;
+                            }
+                        @endphp
+                        <a href="{{ $websiteUrl }}" target="_blank" rel="noopener noreferrer" 
+                           class="btn w-100 rounded-pill fw-bold" style="border: 2px solid #0079D3; color: #0079D3;">
+                            <i class="bi bi-box-arrow-up-right me-1"></i> Visit {{ $brand->company_name }}'s Website
+                        </a>
                     @endif
                 </div>
+            </div>
+            
+            <!-- Leaderboard Card -->
+            <div class="card border-0 rounded-2" style="box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                <div class="card-body p-4">
+                    <h5 class="fw-bold mb-3">
+                        <i class="bi bi-trophy me-2" style="color: #FFD700;"></i>Leaderboard
+                    </h5>
 
-                <!-- Campaign Images -->
-                @if($brand->product_images && is_array($brand->product_images) && count($brand->product_images) > 0)
-                    <div class="mb-4">
-                        <label class="text-muted small text-uppercase fw-bold tracking-wider mb-2" style="color: {{ $brand->theme_color ?? '#6f42c1' }};">Campaign Images</label>
-                        <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
-                            @foreach($brand->product_images as $image)
-                                <div class="relative aspect-square rounded-lg overflow-hidden border-2 border-gray-200 shadow-sm hover:shadow-md transition-shadow">
-                                    <img src="{{ asset('storage/' . $image) }}" class="w-full h-full object-cover" alt="Campaign Image">
-                                </div>
+                    @if($memes->count() > 0)
+                        @php
+                            // Get top memes sorted by score
+                            $topMemes = $memes->sortByDesc('calculated_score')->take(5);
+                        @endphp
+                        <div class="list-group list-group-flush">
+                            @foreach($topMemes as $index => $meme)
+                            <div class="list-group-item px-0 py-2 d-flex align-items-center gap-2">
+                                <span class="fw-bold text-muted" style="min-width: 20px;">{{ $index + 1 }}</span>
+                                <img src="{{ $meme->user->profile_photo_url }}"
+                                     alt="{{ $meme->user->name }}"
+                                     class="rounded-circle" style="width: 24px; height: 24px; object-fit: cover;">
+                                <span class="flex-grow-1 small text-truncate">{{ $meme->user->name ?? 'Anonymous' }}</span>
+                                <span class="fw-bold small" style="color: #FF4500;">{{ $meme->calculated_score }} pts</span>
+                            </div>
                             @endforeach
                         </div>
-                    </div>
-                @endif
-
-                <!-- Image Description -->
-                @if($brand->image_description)
-                    <div class="mb-4">
-                        <label class="text-muted small text-uppercase fw-bold tracking-wider mb-1">Image Description</label>
-                        <p class="small text-dark opacity-75">{{ $brand->image_description }}</p>
-                    </div>
-                @endif
-
-                <hr class="my-4 opacity-10">
-
-                <a href="{{ route('sponsored.submit.form', $brand->slug ?? $brand->id) }}" class="btn w-100 rounded-pill py-3 fw-black uppercase italic tracking-widest text-white" style="background: linear-gradient(135deg, {{ $brand->theme_color ?? '#6f42c1' }} 0%, {{ $brand->theme_color ?? '#6f42c1' }}cc 100%);">
-                    Submit a Meme
-                </a>
+                    @else
+                        <p class="text-muted small mb-0">No entries yet</p>
+                    @endif
+                </div>
             </div>
         </div>
     </div>
 </div>
 
+<!-- Share Modal -->
+<x-share-modal />
+
 <style>
     .fw-black { font-weight: 900; }
-    .uppercase { text-transform: uppercase; }
-    .italic { font-style: italic; }
-    .tracking-tight { letter-spacing: -1.5px; }
-    .tracking-widest { letter-spacing: 2px; }
-    .rounded-4 { border-radius: 1.5rem; }
-    .hover\:-translate-y-1:hover { transform: translateY(-0.25rem); }
-    .transition-transform { transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1); }
+    .rounded-2 { border-radius: 0.5rem; }
+    .post-card { transition: all 0.2s ease; }
+    .post-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
     
-    /* Grid for campaign images */
-    .grid { display: grid; }
-    .grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-    .gap-2 { gap: 0.5rem; }
-    .aspect-square { aspect-ratio: 1 / 1; }
-    .overflow-hidden { overflow: hidden; }
-    .border-2 { border-width: 2px; }
-    .border-gray-200 { border-color: #e5e7eb; }
-    .shadow-sm { box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); }
-    .shadow-md { box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); }
-    .transition-shadow { transition: box-shadow 0.2s ease-in-out; }
-    .object-cover { object-fit: cover; }
-    .w-full { width: 100%; }
-    .h-full { height: 100%; }
-@keyframes meme-pulse {
-    0%   { box-shadow: 0 0 0 0 rgba(91,46,145,0.7); border-color: #5B2E91; }
-    50%  { box-shadow: 0 0 0 12px rgba(91,46,145,0.15), 0 0 25px 5px rgba(91,46,145,0.2); border-color: #5B2E91; }
-    100% { box-shadow: 0 0 0 0 rgba(91,46,145,0); border-color: #5B2E91; }
-}
-.meme-highlighted > .meme-card {
-    border: 3px solid #5B2E91 !important;
-    animation: meme-pulse 1s ease-in-out 3;
-    border-radius: 20px;
-}
+    /* Highlight animation */
+    @keyframes meme-pulse {
+        0%   { box-shadow: 0 0 0 0 rgba(91,46,145,0.7); }
+        50%  { box-shadow: 0 0 0 12px rgba(91,46,145,0.15), 0 0 25px 5px rgba(91,46,145,0.2); }
+        100% { box-shadow: 0 0 0 0 rgba(91,46,145,0); }
+    }
+    .meme-highlighted > .post-card {
+        border: 3px solid #5B2E91 !important;
+        animation: meme-pulse 1s ease-in-out 3;
+    }
 </style>
 
+<script type="module" src="https://cdn.jsdelivr.net/npm/emoji-picker-element@^1/index.js"></script>
+
 <script>
+document.addEventListener('DOMContentLoaded', function() {
+    const loggedIn = {{ auth()->check() ? 'true' : 'false' }};
+    const userId = {{ auth()->id() ?? 'null' }};
+    window.user = { id: userId };
+
+    // Toggle Emoji Section
+    document.querySelectorAll('.react-toggle-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const memeId = btn.dataset.memeId;
+            if (!loggedIn) { window.location = '{{ route("login") }}'; return; }
+            const section = document.getElementById('emoji-section-' + memeId);
+            const isHidden = (section.style.display === 'none' || section.style.display === '');
+            
+            // Close all other emoji sections
+            document.querySelectorAll('[id^="emoji-section-"]').forEach(s => s.style.display = 'none');
+            
+            section.style.display = isHidden ? 'block' : 'none';
+        });
+    });
+
+    // Toggle Comment Section
+    document.querySelectorAll('.comment-toggle-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const memeId = btn.dataset.memeId;
+            if (!loggedIn) { window.location = '{{ route("login") }}'; return; }
+            const section = document.getElementById('comment-section-' + memeId);
+            const isHidden = (section.style.display === 'none' || section.style.display === '');
+            
+            // Close all other comment sections
+            document.querySelectorAll('[id^="comment-section-"]').forEach(s => s.style.display = 'none');
+            
+            section.style.display = isHidden ? 'block' : 'none';
+        });
+    });
+
+    // Emoji Picker click → update only button emoji (wait for custom element to be ready)
+    function initEmojiPickers() {
+        document.querySelectorAll('emoji-picker').forEach(picker => {
+            // Remove existing listeners to avoid duplicates
+            const newPicker = picker.cloneNode(true);
+            picker.parentNode.replaceChild(newPicker, picker);
+            
+            newPicker.addEventListener('emoji-click', event => {
+                const emoji = event.detail.unicode;
+                const postCard = newPicker.closest('.post-card');
+                const memeId = postCard.dataset.id;
+                if (!loggedIn) { window.location = '{{ route("login") }}'; return; }
+
+                const reactBtn = postCard.querySelector('.react-toggle-btn');
+                const emojiSpan = reactBtn.querySelector('.reaction-emoji');
+                if (emojiSpan) emojiSpan.textContent = emoji;
+                else reactBtn.textContent = emoji;
+
+                $.ajax({
+                    url: '/memes/' + memeId + '/reaction',
+                    method: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({ emoji }),
+                    headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                    success: function(res) {
+                        if(res.success) {
+                            $(postCard).find('.reaction-count').text(res.total_count);
+                            $(postCard).find('.user-reactions-line').html(res.reactions_html);
+                        }
+                    },
+                    error: function(xhr) {
+                        console.error('Error:', xhr);
+                        if (window.showToast) {
+                            window.showToast('Failed to add reaction', 'error');
+                        } else {
+                            alert('An error occurred while adding the reaction');
+                        }
+                    }
+                });
+            });
+        });
+    }
+    
+    // Initialize emoji pickers after a short delay to ensure web component loads
+    setTimeout(initEmojiPickers, 100);
+
+    // Comment form submit via AJAX
+    $(document).on('submit', '.comment-form', function(e) {
+        e.preventDefault();
+        let memeId = $(this).data('id');
+        let input = $(this).find('input[name="content"]');
+        let form = $(this);
+        if(input.val().trim() === '') return;
+
+        $.ajax({
+            url: '/meme/' + memeId + '/comment',
+            method: 'POST',
+            data: {
+                _token: $('meta[name="csrf-token"]').attr('content'),
+                content: input.val()
+            },
+            success: function(res) {
+                if(res.success) {
+                    let commentList = form.closest('.post-card').find('.comment-list');
+
+                    // Create new comment element
+                    let newCommentHtml = '<li class="comment-item" data-comment-id="' + res.comment.id + '">';
+                    newCommentHtml += '<div class="comment-content" tabindex="0">';
+                    newCommentHtml += '<strong>' + res.comment.user.name + '</strong>: ' + res.comment.body;
+                    newCommentHtml += '<div class="comment-actions">';
+                    newCommentHtml += '<button class="comment-action-btn reply-btn" data-comment-id="' + res.comment.id + '">Reply</button>';
+                    newCommentHtml += '<button class="comment-action-btn copy-btn" data-comment-body="' + res.comment.body + '" title="Copy comment">📋</button>';
+
+                    // Add delete button if it's the current user's comment
+                    @if(auth()->check() && auth()->id())
+                        if(res.comment.user.id == {{ auth()->id() }}) {
+                            newCommentHtml += '<button class="comment-action-btn delete-btn" data-comment-id="' + res.comment.id + '" title="Delete comment" style="display: none;">🗑️</button>';
+                        }
+                    @endif
+
+                    newCommentHtml += '</div></div>';
+                    newCommentHtml += '<div class="reply-form-container" style="display: none;">';
+                    newCommentHtml += '<form class="reply-form mt-2" data-parent-id="' + res.comment.id + '" data-meme-id="' + memeId + '">';
+                    newCommentHtml += '@csrf';
+                    newCommentHtml += '<input type="hidden" name="parent_id" value="' + res.comment.id + '">';
+                    newCommentHtml += '<input type="text" name="body" class="form-control form-control-sm" placeholder="Write a reply..." required>';
+                    newCommentHtml += '<button type="submit" class="btn btn-sm btn-primary mt-1">Reply</button>';
+                    newCommentHtml += '<button type="button" class="btn btn-sm btn-secondary mt-1 cancel-reply">Cancel</button>';
+                    newCommentHtml += '</form></div>';
+                    newCommentHtml += '<ul class="replies-container mt-2" style="margin-left: 20px; border-left: 1px solid #eee; padding-left: 10px;"></ul>';
+                    newCommentHtml += '</li>';
+
+                    commentList.append(newCommentHtml);
+                    commentList.scrollTop(commentList[0].scrollHeight);
+                    input.val('');
+
+                    // Update comment count
+                    form.closest('.post-card').find('.comment-count').text(res.comments_count);
+                } else {
+                    alert('Failed to submit comment: ' + (res.message || 'Unknown error'));
+                }
+            },
+            error: function(xhr) {
+                console.error('Error:', xhr);
+                let errorMessage = 'An error occurred while submitting the comment';
+                if (xhr.status === 422 && xhr.responseJSON && xhr.responseJSON.errors) {
+                    errorMessage = Object.values(xhr.responseJSON.errors).flat().join('\n');
+                } else if (xhr.responseJSON && xhr.responseJSON.message) {
+                    errorMessage = xhr.responseJSON.message;
+                }
+                alert('Failed to submit comment: ' + errorMessage);
+            }
+        });
+    });
+
+    // Handle reply button clicks
+    $(document).on('click', '.reply-btn', function(e) {
+        e.preventDefault();
+        const commentId = $(this).data('comment-id');
+        const replyFormContainer = $(this).closest('.comment-content').next('.reply-form-container');
+
+        // Hide all other reply forms
+        $('.reply-form-container').hide();
+
+        // Show the reply form for this comment
+        replyFormContainer.show();
+        replyFormContainer.find('input[name="body"]').focus();
+    });
+
+    // Handle cancel reply button clicks
+    $(document).on('click', '.cancel-reply', function(e) {
+        e.preventDefault();
+        const replyFormContainer = $(this).closest('.reply-form-container');
+        replyFormContainer.hide();
+    });
+
+    // Handle reply form submissions
+    $(document).on('submit', '.reply-form', function(e) {
+        e.preventDefault();
+
+        const form = $(this);
+        const parentId = form.data('parent-id');
+        const memeId = form.data('meme-id');
+        const bodyInput = form.find('input[name="body"]');
+        const body = bodyInput.val().trim();
+
+        if (!body) {
+            alert('Please enter a reply');
+            return;
+        }
+
+        $.ajax({
+            url: '/meme/' + memeId + '/comment',
+            method: 'POST',
+            data: {
+                _token: $('meta[name="csrf-token"]').attr('content'),
+                content: body,
+                parent_id: parentId
+            },
+            success: function(res) {
+                if(res.success) {
+                    const repliesContainer = form.closest('.replies-container');
+                    
+                    let newReplyHtml = '<li class="comment-item" data-comment-id="' + res.comment.id + '">';
+                    newReplyHtml += '<div class="comment-content" tabindex="0">';
+                    newReplyHtml += '<strong>' + res.comment.user.name + '</strong>: ' + res.comment.body;
+                    newReplyHtml += '<div class="comment-actions">';
+                    newReplyHtml += '<button class="comment-action-btn copy-btn" data-comment-body="' + res.comment.body + '" title="Copy comment">📋</button>';
+                    
+                    @if(auth()->check() && auth()->id())
+                        if(res.comment.user.id == {{ auth()->id() }}) {
+                            newReplyHtml += '<button class="comment-action-btn delete-btn" data-comment-id="' + res.comment.id + '" title="Delete comment" style="display: none;">🗑️</button>';
+                        }
+                    @endif
+                    
+                    newReplyHtml += '</div></div>';
+                    newReplyHtml += '<div class="reply-form-container" style="display: none;">';
+                    newReplyHtml += '<form class="reply-form mt-2" data-parent-id="' + res.comment.id + '" data-meme-id="' + memeId + '">';
+                    newReplyHtml += '@csrf';
+                    newReplyHtml += '<input type="hidden" name="parent_id" value="' + res.comment.id + '">';
+                    newReplyHtml += '<input type="text" name="body" class="form-control form-control-sm" placeholder="Write a reply..." required>';
+                    newReplyHtml += '<button type="submit" class="btn btn-sm btn-primary mt-1">Reply</button>';
+                    newReplyHtml += '<button type="button" class="btn btn-sm btn-secondary mt-1 cancel-reply">Cancel</button>';
+                    newReplyHtml += '</form></div>';
+                    newReplyHtml += '<ul class="replies-container mt-2" style="margin-left: 20px; border-left: 1px solid #eee; padding-left: 10px;"></ul>';
+                    newReplyHtml += '</li>';
+
+                    repliesContainer.append(newReplyHtml);
+                    bodyInput.val('');
+                    form.closest('.reply-form-container').hide();
+
+                    // Update comment count
+                    form.closest('.post-card').find('.comment-count').text(res.comments_count);
+                }
+            },
+            error: function(xhr) {
+                console.error('Error:', xhr);
+                alert('Failed to submit reply');
+            }
+        });
+    });
+
+    // Handle copy comment button
+    $(document).on('click', '.copy-btn', function(e) {
+        e.preventDefault();
+        const commentBody = $(this).data('comment-body');
+        navigator.clipboard.writeText(commentBody).then(() => {
+            if (window.showToast) {
+                window.showToast('Comment copied!', 'success');
+            }
+        });
+    });
+
+    // Show delete button for owner comments only
+    @if(auth()->check() && auth()->id())
+        const currentUserId = {{ auth()->id() }};
+        document.querySelectorAll('.delete-btn').forEach(btn => {
+            const commentItem = btn.closest('.comment-item');
+            // You'll need to adjust this based on how user_id is stored in your comment data
+            btn.style.display = 'inline-block';
+        });
+    @endif
+
+    // Handle delete comment (if needed)
+    $(document).on('click', '.delete-btn', function(e) {
+        e.preventDefault();
+        if(!confirm('Are you sure you want to delete this comment?')) return;
+        
+        const commentId = $(this).data('comment-id');
+        const commentItem = $(this).closest('.comment-item');
+        const postCard = commentItem.closest('.post-card');
+        const memeId = postCard.data('id');
+
+        $.ajax({
+            url: '/comment/' + commentId,
+            method: 'DELETE',
+            data: {
+                _token: $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function(res) {
+                if(res.success) {
+                    commentItem.remove();
+                    postCard.find('.comment-count').text(res.comments_count);
+                    if (window.showToast) {
+                        window.showToast('Comment deleted', 'success');
+                    }
+                }
+            },
+            error: function(xhr) {
+                console.error('Error:', xhr);
+                alert('Failed to delete comment');
+            }
+        });
+    });
+});
+
+// Share button handler
+$(document).on('click', '.meme-share-btn', function(e) {
+    e.preventDefault();
+    const memeId = $(this).data('meme-id');
+    
+    // Call share API to increment share count
+    $.ajax({
+        url: '/api/meme/' + memeId + '/share',
+        method: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify({ channel: 'copy_link' }),
+        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+        success: function(res) {
+            // Show share modal
+            if(typeof showMemeShareModal === 'function') {
+                showMemeShareModal(e, memeId);
+            }
+        },
+        error: function(xhr) {
+            console.error('Share tracking error:', xhr);
+            // Still show modal even if API fails
+            if(typeof showMemeShareModal === 'function') {
+                showMemeShareModal(e, memeId);
+            }
+        }
+    });
+});
+
+// Highlight animation
 document.addEventListener('DOMContentLoaded', function () {
     @php $highlightId = request()->query('highlight') ?? session('highlight_meme_id'); @endphp
     @if($highlightId ?? false)
