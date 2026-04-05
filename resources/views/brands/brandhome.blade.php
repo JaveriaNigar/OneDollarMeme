@@ -804,7 +804,48 @@
           @endif
 
           <div style="border-top: 1px solid #f3f4f6; margin: 10px 0;"></div>
-          <a href="{{ route('brands.work') }}" class="ls-link" style="color: var(--brand-purple);">How it works</a>
+          
+          <!-- How It Works Collapsible Section -->
+          <div class="px-3 py-2">
+              <a class="ls-link d-flex justify-content-between align-items-center" style="color: var(--brand-purple);" data-bs-toggle="collapse" href="#howItWorksSection" role="button" aria-expanded="false" aria-controls="howItWorksSection">
+                  How it works
+                  <i class="bi bi-chevron-down" id="howItWorksIcon" style="font-size: 0.8rem; transition: transform 0.3s ease;"></i>
+              </a>
+              <div class="collapse" id="howItWorksSection">
+                  <div class="mt-2 p-3 rounded" style="background-color: #f9fafb; font-size: 0.75rem;">
+                      <div class="mb-2">
+                          <div class="d-flex align-items-start gap-2 mb-2">
+                              <div class="rounded-circle d-flex align-items-center justify-content-center text-white flex-shrink-0" style="width: 20px; height: 20px; background-color: var(--brand-purple); font-size: 0.6rem; font-weight: bold;">1</div>
+                              <div>
+                                  <div class="fw-bold" style="font-size: 0.7rem;">Find a Campaign</div>
+                                  <div class="text-muted" style="font-size: 0.65rem; line-height: 1.3;">Browse active brand campaigns with unique challenges and huge prize pools.</div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="mb-2">
+                          <div class="d-flex align-items-start gap-2 mb-2">
+                              <div class="rounded-circle d-flex align-items-center justify-content-center text-white flex-shrink-0" style="width: 20px; height: 20px; background-color: var(--brand-orange); font-size: 0.6rem; font-weight: bold;">2</div>
+                              <div>
+                                  <div class="fw-bold" style="font-size: 0.7rem;">Create & Submit</div>
+                                  <div class="text-muted" style="font-size: 0.65rem; line-height: 1.3;">Design creative memes following brand guidelines and submit them.</div>
+                              </div>
+                          </div>
+                      </div>
+                      <div>
+                          <div class="d-flex align-items-start gap-2">
+                              <div class="rounded-circle d-flex align-items-center justify-content-center text-white flex-shrink-0" style="width: 20px; height: 20px; background-color: #28a745; font-size: 0.6rem; font-weight: bold;">3</div>
+                              <div>
+                                  <div class="fw-bold" style="font-size: 0.7rem;">Win Big Prizes</div>
+                                  <div class="text-muted" style="font-size: 0.65rem; line-height: 1.3;">Get votes and shares. Top memes win prize money from the brand!</div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="mt-2 pt-2 text-center" style="border-top: 1px solid #e5e7eb;">
+                          <a href="{{ route('brands.work') }}" class="fw-bold" style="color: var(--brand-purple); font-size: 0.7rem;">Learn more →</a>
+                      </div>
+                  </div>
+              </div>
+          </div>
 
           <div style="border-top: 1px solid #f3f4f6; margin: 10px 0;"></div>
           <div class="px-3 py-1 text-muted fw-bold small uppercase italic">Trending Tags</div>
@@ -1400,6 +1441,22 @@ document.addEventListener('DOMContentLoaded', function () {
         }, 400);
     }
     @endif
+});
+
+// Rotate chevron icon for How It Works collapsible
+document.addEventListener('DOMContentLoaded', function () {
+    const howItWorksCollapse = document.getElementById('howItWorksSection');
+    const howItWorksIcon = document.getElementById('howItWorksIcon');
+    
+    if (howItWorksCollapse && howItWorksIcon) {
+        howItWorksCollapse.addEventListener('show.bs.collapse', function () {
+            howItWorksIcon.style.transform = 'rotate(180deg)';
+        });
+        
+        howItWorksCollapse.addEventListener('hide.bs.collapse', function () {
+            howItWorksIcon.style.transform = 'rotate(0deg)';
+        });
+    }
 });
 </script>
 <script src="{{ asset('js/memes-interactions.js?v=' . time()) }}"></script>
