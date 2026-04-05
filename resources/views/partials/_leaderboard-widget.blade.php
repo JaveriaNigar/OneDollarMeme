@@ -23,13 +23,13 @@
     <!-- BOX 2: WINNER SPOTLIGHT -->
     <!-- BOX 1.5: BRAND WINNERS -->
     @if(empty($hideBrandWinners))
-    <div class="card border-0 shadow-sm rounded-4">
+    <div class="card border-0 shadow-sm rounded-4" id="brand-winners-card">
         <div class="card-header bg-white border-0 py-3 text-center">
             <h6 class="fw-bold mb-0 text-uppercase small" style="color: var(--brand-orange);">🏆 BRAND WINNERS</h6>
         </div>
         <div class="card-body p-2">
+            <div class="list-group list-group-flush" id="brand-winners-list">
             @if(isset($brandWinners) && count($brandWinners) > 0)
-                <div class="list-group list-group-flush">
                     @foreach(array_slice($brandWinners, 0, 3) as $brandId => $brandData)
                         @php
                             $brand = $brandData['brand'];
@@ -60,10 +60,10 @@
                             @endforeach
                         </div>
                     @endforeach
-                </div>
             @else
                 <div class="text-center py-3 text-muted small">No brand winners yet</div>
             @endif
+            </div>
         </div>
     </div>
     @endif
@@ -71,20 +71,43 @@
     @if(empty($hideWinnerSpotlight))
     <div class="card border-0 shadow-sm rounded-4">
         <div class="card-header bg-white border-0 py-3 text-center">
-            <h6 class="fw-bold mb-0 text-uppercase small" style="color: var(--brand-purple);">WINNER SPOTLIGHT</h6>
+            <h6 class="fw-bold mb-0 text-uppercase small" style="color: var(--brand-purple);">
+                @if(count($sidebarLastWeekWinners ?? []) > 1)
+                    🏆 BATTLE LEADERBOARD
+                @else
+                    WINNER SPOTLIGHT
+                @endif
+            </h6>
         </div>
         <div class="card-body p-3 pt-0 text-center">
             @if(empty($sidebarLastWeekWinners) || count($sidebarLastWeekWinners) === 0)
                 <div class="text-muted small py-4">No recent winners</div>
             @else
-                @php $spotlight = $sidebarLastWeekWinners[0]; @endphp
-                <div class="p-3 bg-light rounded-3 mb-2 border">
-                    <img src="{{ $spotlight->user_avatar }}" class="rounded-circle shadow-sm mb-2" style="width: 50px; height: 50px; object-fit: cover;">
-                    <div class="fw-bold text-dark">{{ $spotlight->user_name }}</div>
-                </div>
-                <div class="badge bg-white text-dark border shadow-sm px-3 py-2 rounded-pill">
-                    <span class="text-purple fw-bold" style="color: var(--brand-purple);">{{ $spotlight->prize }}</span> Winner
-                </div>
+                @if(count($sidebarLastWeekWinners) === 1)
+                    {{-- Single winner (previous challenge winner) --}}
+                    @php $spotlight = $sidebarLastWeekWinners[0]; @endphp
+                    <div class="p-3 bg-light rounded-3 mb-2 border">
+                        <img src="{{ $spotlight->user_avatar }}" class="rounded-circle shadow-sm mb-2" style="width: 50px; height: 50px; object-fit: cover;">
+                        <div class="fw-bold text-dark">{{ $spotlight->user_name }}</div>
+                    </div>
+                    <div class="badge bg-white text-dark border shadow-sm px-3 py-2 rounded-pill">
+                        <span class="text-purple fw-bold" style="color: var(--brand-purple);">{{ $spotlight->prize }}</span> Winner
+                    </div>
+                @else
+                    {{-- Multiple leaders (current challenge) --}}
+                    <div class="d-flex flex-column gap-2">
+                        @foreach($sidebarLastWeekWinners as $index => $winner)
+                            <div class="d-flex align-items-center justify-content-between p-2 rounded {{ $index === 0 ? 'bg-warning bg-opacity-10 border border-warning' : 'bg-light' }}">
+                                <div class="d-flex align-items-center">
+                                    <span class="badge {{ $index === 0 ? 'bg-warning' : ($index === 1 ? 'bg-secondary' : 'bg-danger') }} rounded-circle me-2 fw-bold" style="width: 24px; height: 24px; padding: 0; line-height: 24px;">{{ $index + 1 }}</span>
+                                    <img src="{{ $winner->user_avatar }}" class="rounded-circle me-2" style="width: 32px; height: 32px; object-fit: cover;">
+                                    <span class="fw-bold small">{{ $winner->user_name }}</span>
+                                </div>
+                                <span class="fw-bold small" style="color: var(--brand-purple);">{{ $winner->prize }}</span>
+                            </div>
+                        @endforeach
+                    </div>
+                @endif
             @endif
         </div>
     </div>
@@ -247,9 +270,83 @@ function updateTopCreators() {
         });
 }
 
+// Function to update BRAND WINNERS section
+function updateBrandWinners() {
+    console.log('updateBrandWinners called');
+    fetch('/api/brand-winners')
+        .then(response => {
+            if (!response.ok) {
+                return Promise.reject('Response not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Brand winners data received:', data);
+            const listGroup = document.getElementById('brand-winners-list');
+            console.log('brand-winners-list element:', listGroup);
+            if (!listGroup) return;
+
+            if (data.winners && Object.keys(data.winners).length > 0) {
+                console.log('Updating brand winners with data:', Object.keys(data.winners).length, 'brands');
+                // Build new content
+                let html = '';
+                const brandIds = Object.keys(data.winners);
+                const maxBrands = Math.min(3, brandIds.length);
+
+                for (let i = 0; i < maxBrands; i++) {
+                    const brandId = brandIds[i];
+                    const brandData = data.winners[brandId];
+                    const brand = brandData.brand;
+                    const winners = brandData.winners;
+
+                    html += `<div class="list-group-item border-0 p-3 bg-light mb-2 rounded-3">`;
+                    html += `<div class="d-flex align-items-center mb-2 pb-2 border-bottom">`;
+
+                    if (brand.logo) {
+                        html += `<img src="/storage/${brand.logo}" alt="${brand.company_name}" class="rounded me-2" style="width: 30px; height: 30px; object-fit: cover;">`;
+                    } else {
+                        const initial = brand.company_name.charAt(0).toUpperCase();
+                        html += `<div class="rounded me-2 d-flex align-items-center justify-content-center text-white" style="width: 30px; height: 30px; background-color: var(--brand-purple); font-size: 0.8rem;">${initial}</div>`;
+                    }
+
+                    html += `<div>`;
+                    html += `<h6 class="mb-0 fw-bold" style="font-size: 0.85rem;">${brand.company_name}</h6>`;
+                    html += `<small class="text-muted" style="font-size: 0.7rem;">${winners.length} winners</small>`;
+                    html += `</div>`;
+                    html += `</div>`;
+
+                    winners.forEach((winner, index) => {
+                        const badgeClass = index === 0 ? 'bg-warning' : (index === 1 ? 'bg-secondary' : 'bg-danger');
+                        html += `<div class="d-flex align-items-center justify-content-between mb-1">`;
+                        html += `<div class="d-flex align-items-center">`;
+                        html += `<span class="badge ${badgeClass} rounded-circle me-2" style="width: 20px; height: 20px; padding: 0; line-height: 20px; text-align: center;">${index + 1}</span>`;
+                        html += `<span class="fw-bold" style="font-size: 0.8rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100px;">${winner.user_name}</span>`;
+                        html += `</div>`;
+                        html += `<span class="fw-bold" style="color: #fd7e14; font-size: 0.85rem;">Score: ${winner.calculated_score}</span>`;
+                        html += `</div>`;
+                    });
+
+                    html += `</div>`;
+                }
+
+                listGroup.innerHTML = html;
+                console.log('Brand winners updated successfully');
+            } else {
+                // No winners, show message
+                listGroup.innerHTML = '<div class="text-center py-3 text-muted small">No brand winners yet</div>';
+                console.log('No brand winners to display');
+            }
+        })
+        .catch(error => {
+            console.warn('Could not update brand winners:', error);
+        });
+}
+
 // Update scores every 5 seconds for instant updates
 setInterval(updateLiveScores, 5000);
 setInterval(updateTopCreators, 5000);
+setInterval(updateBrandWinners, 5000);
 updateLiveScores(); // Initial update
 updateTopCreators(); // Initial update
+updateBrandWinners(); // Initial update
 </script>

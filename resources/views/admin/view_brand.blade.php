@@ -75,6 +75,18 @@
                         to
                         {{ $request->end_date ? $request->end_date->format('M d, Y') : 'N/A' }}
                     </dd>
+                    
+                    <dt class="col-sm-5 text-muted fw-normal">Theme Color</dt>
+                    <dd class="col-sm-7">
+                        @if($request->theme_color)
+                            <div class="d-flex align-items-center gap-2">
+                                <div class="rounded border" style="width: 30px; height: 30px; background-color: {{ $request->theme_color }};"></div>
+                                <span class="font-monospace">{{ $request->theme_color }}</span>
+                            </div>
+                        @else
+                            <span class="text-muted">Default (Purple)</span>
+                        @endif
+                    </dd>
                 </dl>
             </div>
         </div>

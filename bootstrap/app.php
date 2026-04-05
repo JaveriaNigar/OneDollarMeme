@@ -18,6 +18,8 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'admin' => \App\Http\Middleware\AdminMiddleware::class,
             'track.ip' => \App\Http\Middleware\TrackIpAddress::class,
+            'blogger' => \App\Http\Middleware\IsBlogger::class,
+            'restrict.blogger' => \App\Http\Middleware\BloggerRestriction::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

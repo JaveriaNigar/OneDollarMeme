@@ -336,26 +336,36 @@
     @include('partials._toast')
 
 <!-- Navbar -->
-<nav class="custom-navbar sticky-top">
-    <div class="container d-flex flex-wrap justify-content-between align-items-center">
-        <!-- Logo -->
-        <a class="brand-logo" href="{{ route('home') }}">
-            <img src="{{ asset('image/my-logo.jpg') }}" width="35" height="35" class="rounded-circle shadow-sm" alt="Logo">
-            OneDollarMeme
+<nav class="custom-navbar sticky-top shadow-sm" style="background: white; border-bottom: 1px solid #edf2f7; padding: 0.75rem 0;">
+    <div class="container d-flex align-items-center justify-content-between">
+        
+        <a class="brand-logo d-flex align-items-center text-decoration-none" href="{{ route('home') }}" style="gap: 8px;">
+            <img src="{{ asset('image/my-logo.jpg') }}" width="35" height="35" class="rounded-circle shadow-sm border border-2 border-white" alt="Logo">
+            <span class="fw-bolder italic" style="color: var(--brand-purple); letter-spacing: -0.5px; font-style: italic; font-size: clamp(1rem, 4vw, 1.4rem);">OneDollarMeme</span>
         </a>
-        
-        <!-- Center Links Removed -->
-        
-        <!-- Right Actions -->
-        <div class="d-flex align-items-center gap-3">
-            <a href="{{ route('brands.index') }}" class="btn btn-sm fw-bold text-white px-3" style="background-color: var(--brand-purple);">FOR BRANDS</a>
+
+        <div class="d-flex align-items-center gap-1 gap-md-3">
             
-             <!-- User Profile / Auth -->
-            @auth
-                 <x-profile-dropdown :user="auth()->user()" />
-            @else
-                <a href="{{ route('login') }}" class="btn btn-outline-secondary btn-sm rounded-circle"><i class="bi bi-person"></i></a>
-            @endauth
+            <a href="{{ route('brands.index') }}" class="btn btn-sm fw-bold text-white px-2 px-md-3 d-flex align-items-center" 
+               style="background: linear-gradient(45deg, var(--brand-purple), #7b4397); border-radius: 8px; font-size: 0.65rem; border: none; height: 32px;">
+               <span class="d-none d-md-inline">FOR BRANDS</span>
+               <i class="bi bi-briefcase d-md-none"></i> </a>
+
+            <div class="auth-section ms-1 d-flex align-items-center">
+                @auth
+                    <x-profile-dropdown :user="auth()->user()" />
+                @else
+                    <a href="{{ route('login') }}" class="btn btn-sm p-1 rounded-circle" 
+                       style="color: var(--brand-purple); font-size: 1.2rem;">
+                       <i class="bi bi-person-circle"></i>
+                    </a>
+                @endauth
+            </div>
+
+            <button class="btn btn-link link-dark d-lg-none p-1 text-decoration-none" 
+                    type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileSidebarOffcanvas">
+                <i class="bi bi-list fs-3" style="color: var(--brand-purple);"></i>
+            </button>
         </div>
     </div>
 </nav>
@@ -386,12 +396,39 @@
             <h1 class="h2 fw-black uppercase italic tracking-tight mb-1" style="font-weight: 900; text-transform: uppercase; font-style: italic; letter-spacing: -0.025em;">{{ $featuredBrand->company_name }}</h1>
             <p class="lead opacity-75 small mb-3" style="max-width: 600px;">{{ $featuredBrand->brand_description ?? 'Participate in our brand campaign and win amazing prizes!' }}</p>
 
+            <!-- Campaign Dates -->
+            <div class="d-flex gap-4 justify-content-center mb-3">
+                @if($featuredBrand->start_date)
+                    <div class="text-center">
+                        <div class="small opacity-75 text-uppercase fw-bold tracking-wider">Start Date</div>
+                        <div class="fw-bold">{{ $featuredBrand->start_date->format('M d, Y g:i A') }}</div>
+                    </div>
+                @endif
+                @if($featuredBrand->end_date)
+                    <div class="text-center">
+                        <div class="small opacity-75 text-uppercase fw-bold tracking-wider">End Date</div>
+                        <div class="fw-bold">{{ $featuredBrand->end_date->format('M d, Y g:i A') }}</div>
+                        @if($featuredBrand->end_date->isPast())
+                            <span class="badge bg-danger mt-1">ENDED</span>
+                        @endif
+                    </div>
+                @endif
+            </div>
+
             <div class="d-flex gap-2">
                 <a href="{{ route('brands.show', $featuredBrand->id) }}"
                    class="btn rounded-pill px-4 fw-bold"
-                   style="background-color: white; color: {{ $featuredBrand->theme_color ?? '#6f42c1' }}; border: none; transition: none;">JOIN CAMPAIGN</a>
+                   style="background-color: white; color: {{ $featuredBrand->theme_color ?? '#6f42c1' }}; border: none; transition: none;">
+                    {{ $featuredBrand->end_date && $featuredBrand->end_date->isPast() ? 'VIEW CAMPAIGN' : 'JOIN CAMPAIGN' }}
+                </a>
                 @if($featuredBrand->website)
-                    <a href="{{ $featuredBrand->website }}" target="_blank"
+                    @php
+                        $websiteUrl = $featuredBrand->website;
+                        if (!preg_match('#^https?://#i', $websiteUrl)) {
+                            $websiteUrl = 'https://' . $websiteUrl;
+                        }
+                    @endphp
+                    <a href="{{ $websiteUrl }}" target="_blank" rel="noopener noreferrer"
                        class="btn rounded-pill px-4 fw-bold"
                        style="background-color: white; color: {{ $featuredBrand->theme_color ?? '#6f42c1' }}; border: none; transition: none;">Brand Site</a>
                 @endif
@@ -710,13 +747,17 @@
                 <i class="bi bi-fire"></i>
                 <span>Trending</span>
             </a>
-            <a href="{{ route('upload-meme.create') }}" class="nav-item {{ request()->routeIs('upload-meme.create') ? 'active' : '' }}">
-                <i class="bi bi-plus-circle-fill" style="font-size: 1.8rem; color: var(--brand-purple);"></i>
-                <span>Upload</span>
+            <a href="{{ route('blogs.index') }}" class="nav-item {{ request()->routeIs('blogs.*') ? 'active' : '' }}">
+                <i class="bi bi-journal-text"></i>
+                <span>Blog</span>
             </a>
             <a href="{{ route('brands.public') }}" class="nav-item {{ request()->routeIs('brands.public') ? 'active' : '' }}">
                 <i class="bi bi-buildings"></i>
                 <span>Brands</span>
+            </a>
+            <a href="{{ route('upload-meme.create') }}" class="nav-item {{ request()->routeIs('upload-meme.create') ? 'active' : '' }}">
+                <i class="bi bi-plus-circle-fill" style="font-size: 1.8rem; color: var(--brand-purple);"></i>
+                <span>Upload</span>
             </a>
             @auth
             <a href="{{ route('profile.edit') }}" class="nav-item">
@@ -733,9 +774,48 @@
     </div>
 </nav>
 
-<!-- Mobile Sidebar Content (Above Bottom Nav) -->
-<div class="d-lg-none mobile-sidebar-content" style="padding: 10px; max-width: 600px; margin: 0 auto;">
-    @include('partials._leaderboard-widget', ['hideTopCreators' => true, 'hideWinnerSpotlight' => true])
+<!-- Mobile Sidebar Offcanvas -->
+<div class="offcanvas offcanvas-end d-lg-none" tabindex="-1" id="mobileSidebarOffcanvas" aria-labelledby="mobileSidebarOffcanvasLabel" style="width: 320px;">
+  <div class="offcanvas-header border-bottom">
+    <h5 class="offcanvas-title fw-bold text-uppercase" id="mobileSidebarOffcanvasLabel" style="color: var(--brand-purple); font-size: 1rem;">Menu & Leaderboard</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body" style="padding: 15px; background-color: var(--brand-bg);">
+      <!-- Mobile Navigation Links (same as desktop left sidebar) -->
+      <div class="left-sidebar-box mb-3">
+          <a href="{{ route('home') }}" class="ls-link">Home</a>
+          <a href="{{ route('brands.index') }}" class="ls-link">For Brands</a>
+
+          <div style="border-top: 1px solid #f3f4f6; margin: 10px 0;"></div>
+          <div class="px-3 py-1 text-muted fw-bold small uppercase italic">Brand Campaigns</div>
+          @if(isset($brands) && count($brands) > 0)
+             @foreach($brands->take(5) as $brand)
+                 <a href="{{ route('brands.show', $brand->id) }}" class="ls-link d-flex align-items-center gap-2">
+                     @if($brand->logo)
+                         <img src="{{ asset('storage/' . $brand->logo) }}" alt="" style="width: 20px; height: 20px; object-fit: cover;" class="rounded-circle">
+                     @else
+                         <div class="rounded-circle bg-purple text-white d-flex align-items-center justify-content-center" style="width: 20px; height: 20px; font-size: 0.6rem;">
+                             {{ strtoupper(substr($brand->company_name, 0, 1)) }}
+                         </div>
+                     @endif
+                     {{ $brand->company_name }}
+                 </a>
+             @endforeach
+          @endif
+
+          <div style="border-top: 1px solid #f3f4f6; margin: 10px 0;"></div>
+          <a href="{{ route('brands.work') }}" class="ls-link" style="color: var(--brand-purple);">How it works</a>
+
+          <div style="border-top: 1px solid #f3f4f6; margin: 10px 0;"></div>
+          <div class="px-3 py-1 text-muted fw-bold small uppercase italic">Trending Tags</div>
+          <a href="#" class="ls-link">#RelatableVibes</a>
+          <a href="#" class="ls-link">#DankHumor</a>
+          <a href="#" class="ls-link">#CatLife</a>
+      </div>
+
+      <!-- Leaderboard Widget -->
+      @include('partials._leaderboard-widget', ['hideTopCreators' => true, 'hideWinnerSpotlight' => true])
+  </div>
 </div>
 
 <div id="toast-container" style="position: fixed; top: 20px; right: 20px; z-index: 9999;"></div>
@@ -1322,6 +1402,6 @@ document.addEventListener('DOMContentLoaded', function () {
     @endif
 });
 </script>
-<script src="{{ asset('js/memes-interactions.js') }}"></script>
+<script src="{{ asset('js/memes-interactions.js?v=' . time()) }}"></script>
 </body>
 </html>

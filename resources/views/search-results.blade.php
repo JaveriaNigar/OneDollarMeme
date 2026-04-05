@@ -128,10 +128,10 @@
                                 @endif
 
                                 <!-- View Details -->
-                                @if($meme->brand_id)
-                                    <a href="{{ route('brands.show', ['brand' => $meme->brand_id, 'highlight' => $meme->id]) }}#meme-{{ $meme->id }}" class="btn btn-sm btn-outline-primary rounded-pill">View</a>
+                                @if($meme->brand_id && $meme->brand)
+                                    <a href="{{ url('/brands/' . $meme->brand_id) }}?highlight={{ $meme->id }}#meme-{{ $meme->id }}" class="btn btn-sm btn-outline-primary rounded-pill">View</a>
                                 @else
-                                    <a href="{{ route('home', ['highlight' => $meme->id]) }}#meme-{{ $meme->id }}" class="btn btn-sm btn-outline-primary rounded-pill">View</a>
+                                    <a href="{{ url('/') }}?highlight={{ $meme->id }}#meme-{{ $meme->id }}" class="btn btn-sm btn-outline-primary rounded-pill">View</a>
                                 @endif
                             </div>
 

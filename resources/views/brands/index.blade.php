@@ -9,7 +9,7 @@
                     <h1 class="text-3xl font-black text-gray-900 mb-2">My Brands</h1>
                     <p class="text-gray-600 font-bold">Manage your brand partnerships and campaigns</p>
                 </div>
-                <a href="{{ route('brands.create') }}" class="bg-gradient-to-r from-purple to-orange text-white px-6 py-3 rounded-2xl font-black uppercase text-sm tracking-widest hover:from-purple-600 hover:to-orange-600 transition-all">
+                <a href="{{ route('brands.create') }}" class="bg-purple  text-white px-6 py-3 rounded-2xl font-black uppercase text-sm tracking-widest hover:from-purple-600  transition-all">
                     Add New Brand
                 </a>
             </div>
@@ -41,8 +41,14 @@
                                 <td class="py-4 px-4 font-bold text-gray-900">{{ $brand->company_name }}</td>
                                 <td class="py-4 px-4">
                                     @if($brand->website)
-                                        <a href="{{ $brand->website }}" target="_blank" class="text-purple hover:text-orange transition-colors">
-                                            {{ parse_url($brand->website, PHP_URL_HOST) ?: $brand->website }}
+                                        @php
+                                            $websiteUrl = $brand->website;
+                                            if (!preg_match('#^https?://#i', $websiteUrl)) {
+                                                $websiteUrl = 'https://' . $websiteUrl;
+                                            }
+                                        @endphp
+                                        <a href="{{ $websiteUrl }}" target="_blank" rel="noopener noreferrer" class="text-purple hover:text-orange transition-colors">
+                                            {{ parse_url($websiteUrl, PHP_URL_HOST) ?: $brand->website }}
                                         </a>
                                     @else
                                         <span class="text-gray-400">-</span>

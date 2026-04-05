@@ -559,35 +559,46 @@
                 </div>
 
                 <!-- Stats / Actions Layout -->
-                <div class="mt-3 d-flex align-items-center gap-3 border-top pt-2">
-                      <!-- Reactions (Standard) -->
-                      <button class="react-toggle-btn btn btn-light btn-sm d-flex align-items-center gap-1 rounded-pill" type="button" data-meme-id="{{ $meme->id }}">
-                          <span class="reaction-emoji">{{ $meme->userEmoji ?? '😀' }}</span>
-                          <span class="reaction-count fw-bold text-dark">{{ $meme->reactions->count() }}</span>
-                      </button>
+                 <!-- Stats / Actions Layout — REPLACE your existing mt-3 div -->
+<div class="mt-3 d-flex align-items-center flex-wrap gap-2 border-top pt-2">
 
-                      <!-- Comments -->
-                      <button class="comment-toggle-btn btn btn-light btn-sm d-flex align-items-center gap-1 rounded-pill" type="button" data-meme-id="{{ $meme->id }}">
-                          <i class="bi bi-chat-fill text-primary"></i>
-                          <span class="comment-count fw-bold text-dark">{{ $meme->comments->count() }}</span>
-                      </button>
-                      
-                       <!-- Share -->
-                       <button class="meme-share-btn bg-gray-100 text-black text-sm md:text-base font-medium py-1 px-4 rounded border hover:bg-gray-200 transition ms-auto" type="button" onclick="showMemeShareModal(event, {{ $meme->id }})">
-                           <i class="bi bi-share-fill text-muted"></i>
-                      </button>
+    <!-- Reactions -->
+    <button class="react-toggle-btn btn btn-light btn-sm d-flex align-items-center gap-1 rounded-pill" 
+            type="button" data-meme-id="{{ $meme->id }}">
+        <span class="reaction-emoji">{{ $meme->userEmoji ?? '😀' }}</span>
+        <span class="reaction-count fw-bold text-dark">{{ $meme->reactions->count() }}</span>
+    </button>
 
-                       @if($meme->is_contest)
-                            <span class="badge bg-warning text-dark border border-warning rounded-pill ms-2" title="Paid Meme" style="font-size: 0.9rem;">⭐</span>
-                       @endif
-                      
-                       <!-- Pay for Meme Button (Restored) -->
-                       @if(auth()->check() && $meme->user_id == auth()->id() && !$meme->is_contest)
-                           <a href="{{ route('memes.pay', $meme->id) }}" class="btn btn-sm text-white fw-bold ms-2" style="background-color: #28a745; font-size: 0.75rem; border-radius: 20px; padding: 5px 12px;">
-                               💰 Enter battle 
-                           </a>
-                       @endif
-                </div>
+    <!-- Comments -->
+    <button class="comment-toggle-btn btn btn-light btn-sm d-flex align-items-center gap-1 rounded-pill" 
+            type="button" data-meme-id="{{ $meme->id }}">
+        <i class="bi bi-chat-fill text-primary"></i>
+        <span class="comment-count fw-bold text-dark">{{ $meme->comments->count() }}</span>
+    </button>
+
+    <!-- Spacer -->
+    <div class="flex-grow-1"></div>
+
+    <!-- Share -->
+    <button class="btn btn-sm btn-light rounded-pill px-2" 
+            type="button" onclick="showMemeShareModal(event, {{ $meme->id }})">
+        <i class="bi bi-share-fill text-muted"></i>
+    </button>
+
+    @if($meme->is_contest)
+        <span class="badge bg-warning text-dark border border-warning rounded-pill" 
+              style="font-size: 0.9rem;">⭐</span>
+    @endif
+
+    <!-- ✅ Green Enter Battle button -->
+    @if(auth()->check() && $meme->user_id == auth()->id() && !$meme->is_contest)
+        <a href="{{ route('memes.pay', $meme->id) }}" 
+           class="btn btn-sm text-white fw-bold rounded-pill px-3" 
+           style="background-color: #28a745; font-size: 0.72rem; white-space: nowrap;">
+            💰 Enter Battle
+        </a>
+    @endif
+</div>
 
                 <!-- Hidden sections (Comment/Emoji/Share) kept for functionality -->
                 
@@ -677,13 +688,17 @@
                 <i class="bi bi-fire"></i>
                 <span>Trending</span>
             </a>
-            <a href="{{ route('upload-meme.create') }}" class="nav-item {{ request()->routeIs('upload-meme.create') ? 'active' : '' }}">
-                <i class="bi bi-plus-circle-fill" style="font-size: 1.8rem; color: var(--brand-purple);"></i>
-                <span>Upload</span>
+            <a href="{{ route('blogs.index') }}" class="nav-item {{ request()->routeIs('blogs.*') ? 'active' : '' }}">
+                <i class="bi bi-journal-text"></i>
+                <span>Blog</span>
             </a>
             <a href="{{ route('brands.public') }}" class="nav-item {{ request()->routeIs('brands.public') ? 'active' : '' }}">
                 <i class="bi bi-buildings"></i>
                 <span>Brands</span>
+            </a>
+            <a href="{{ route('upload-meme.create') }}" class="nav-item {{ request()->routeIs('upload-meme.create') ? 'active' : '' }}">
+                <i class="bi bi-plus-circle-fill" style="font-size: 1.8rem; color: var(--brand-purple);"></i>
+                <span>Upload</span>
             </a>
             @auth
             <a href="{{ route('profile.edit') }}" class="nav-item">
@@ -700,9 +715,15 @@
     </div>
 </nav>
 
-<!-- Mobile Sidebar Content (Above Bottom Nav) -->
-<div class="d-lg-none mobile-sidebar-content" style="padding: 10px; max-width: 600px; margin: 0 auto;">
-    @include('partials._leaderboard-widget', ['hideBrandWinners' => true])
+<!-- Mobile Sidebar Offcanvas -->
+<div class="offcanvas offcanvas-end d-lg-none" tabindex="-1" id="mobileSidebarOffcanvas" aria-labelledby="mobileSidebarOffcanvasLabel" style="width: 320px;">
+  <div class="offcanvas-header border-bottom">
+    <h5 class="offcanvas-title fw-bold text-uppercase" id="mobileSidebarOffcanvasLabel" style="color: var(--brand-purple); font-size: 1rem;">Actions & Leaderboard</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body" style="padding: 15px; background-color: var(--brand-bg);">
+      @include('partials._leaderboard-widget', ['hideBrandWinners' => true])
+  </div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -1238,7 +1259,7 @@ $(document).ready(function() {
     });
 
 </script>
-<script src="{{ asset('js/memes-interactions.js') }}"></script>
+<script src="{{ asset('js/memes-interactions.js?v=' . time()) }}"></script>
 
 <style>
 @keyframes meme-pulse {
