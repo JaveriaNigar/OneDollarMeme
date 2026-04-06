@@ -31,7 +31,7 @@
                     <div style="margin-top: 44px;" class="mb-3">
                         <div class="d-flex align-items-start justify-content-between flex-wrap gap-2">
                             <div>
-                                <h1 class="h5 fw-bold mb-1">r/{{ $brand->company_name }}</h1>
+                                <h1 class="h5 fw-bold mb-1">{{ $brand->company_name }}</h1>
                                 <p class="text-muted small mb-0">{{ $brand->brand_description ?? 'Participate in our brand campaign and win amazing prizes!' }}</p>
                             </div>
                             @if($brand->end_date && !$brand->end_date->isPast())
@@ -245,10 +245,10 @@
                     </div>
                 </div>
                 <div class="px-3 px-md-4 pb-3 pb-md-4">
-                    <a href="{{ route('sponsored.submit.form', $brand->slug ?? $brand->id) }}"
-                       class="btn w-100 rounded-pill fw-bold text-white py-2" style="background: #FF4500;">
-                        <i class="bi bi-plus-circle me-1"></i> Submit a Meme
-                    </a>
+<a href="{{ route('sponsored.submit.form', $brand->slug ?? $brand->id) }}"
+   class="btn w-100 rounded-pill fw-bold text-white py-2 d-none d-md-block" style="background: #FF4500;">
+    <i class="bi bi-plus-circle me-1"></i> Submit a Meme
+</a>
                 </div>
             </div>
 
