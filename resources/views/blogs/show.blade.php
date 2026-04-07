@@ -34,20 +34,21 @@
                 @endif
                 <div class="p-4 sm:p-8">
                     <!-- Meta Info -->
-                    <div class="flex flex-wrap items-center gap-2 sm:gap-4 text-xs sm:text-sm text-gray-500 mb-4 sm:mb-6">
-                        <div class="flex items-center gap-2">
-                            <img src="{{ $blog->author->profile_photo_url }}"
-                                 alt="{{ $blog->author->name }}"
-                                 class="w-7 h-7 sm:w-8 sm:h-8 rounded-full">
-                            <span class="truncate max-w-[120px] sm:max-w-none">{{ $blog->author->name }}</span>
-                        </div>
-                        <span class="hidden sm:inline">·</span>
-                        <span>{{ $blog->published_at->format('M j, Y') }}</span>
-                        <span class="hidden sm:inline">·</span>
-                        <span class="hidden sm:inline">{{ $blog->reading_time }} min read</span>
-                        <span class="sm:hidden">·</span>
-                        <span>{{ $blog->views_count }} views</span>
-                    </div>
+              <!-- Meta Info -->
+<div class="flex flex-wrap items-center gap-2 sm:gap-4 text-xs sm:text-sm text-gray-500 mb-4 sm:mb-6">
+    <div class="flex items-center gap-2">
+        <img src="{{ $blog->author->profile_photo_url }}"
+             alt="{{ $blog->author->name }}"
+             class="w-7 h-7 sm:w-8 sm:h-8 rounded-full flex-shrink-0">
+        <span class="font-bold text-gray-800">{{ $blog->author->name }}</span>
+    </div>
+    <span>·</span>
+    <span class="font-bold text-gray-800">{{ $blog->published_at->format('M j, Y') }}</span>
+    <span>·</span>
+    <span class="font-bold text-gray-800">{{ $blog->reading_time }} min read</span>
+    <span>·</span>
+    <span class="font-bold text-gray-800">{{ $blog->views_count }} views</span>
+</div>
 
                     <!-- Content -->
                     <div class="prose prose-sm sm:prose-lg max-w-none blog-content">
@@ -187,6 +188,11 @@
 
                                             @auth
                                                 <div class="flex gap-3 sm:gap-4 mt-2">
+                                                    @can('updateComment', $comment)
+                                                        <button onclick="toggleEditForm({{ $comment->id }})" class="text-blue-600 hover:text-blue-700 text-xs sm:text-sm">
+                                                            Edit
+                                                        </button>
+                                                    @endcan
                                                     @can('deleteComment', $comment)
                                                         <form action="{{ route('blogs.comment.delete', $comment) }}" method="POST"
                                                               onsubmit="return confirm('Delete this comment?');">
@@ -197,6 +203,23 @@
                                                             </button>
                                                         </form>
                                                     @endcan
+                                                </div>
+
+                                                <!-- Edit Form (Hidden by default) -->
+                                                <div id="edit-form-{{ $comment->id }}" class="hidden mt-3">
+                                                    <form action="{{ route('blogs.comment.update', $comment) }}" method="POST">
+                                                        @csrf
+                                                        @method('PUT')
+                                                        <textarea name="comment" rows="2" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm">{{ $comment->comment }}</textarea>
+                                                        <div class="flex gap-2 mt-2">
+                                                            <button type="submit" class="px-3 py-1 bg-blue-600 text-white text-xs rounded-md hover:bg-blue-700">
+                                                                Save
+                                                            </button>
+                                                            <button type="button" onclick="toggleEditForm({{ $comment->id }})" class="px-3 py-1 bg-gray-300 text-gray-700 text-xs rounded-md hover:bg-gray-400">
+                                                                Cancel
+                                                            </button>
+                                                        </div>
+                                                    </form>
                                                 </div>
                                             @endauth
 
@@ -215,16 +238,40 @@
                                                                 </div>
                                                                 <p class="text-gray-700 mt-1 text-xs sm:text-sm break-words">{{ $reply->comment }}</p>
                                                                 @auth
-                                                                    @can('deleteComment', $reply)
-                                                                        <form action="{{ route('blogs.comment.delete', $reply) }}" method="POST"
-                                                                              onsubmit="return confirm('Delete this comment?');" class="mt-2">
-                                                                            @csrf
-                                                                            @method('DELETE')
-                                                                            <button type="submit" class="text-red-600 hover:text-red-700 text-xs sm:text-sm">
-                                                                                Delete
+                                                                    <div class="flex gap-3 sm:gap-4 mt-2">
+                                                                        @can('updateComment', $reply)
+                                                                            <button onclick="toggleEditForm({{ $reply->id }})" class="text-blue-600 hover:text-blue-700 text-xs">
+                                                                                Edit
                                                                             </button>
+                                                                        @endcan
+                                                                        @can('deleteComment', $reply)
+                                                                            <form action="{{ route('blogs.comment.delete', $reply) }}" method="POST"
+                                                                                  onsubmit="return confirm('Delete this comment?');" class="mt-1">
+                                                                                @csrf
+                                                                                @method('DELETE')
+                                                                                <button type="submit" class="text-red-600 hover:text-red-700 text-xs">
+                                                                                    Delete
+                                                                                </button>
+                                                                            </form>
+                                                                        @endcan
+                                                                    </div>
+
+                                                                    <!-- Edit Form (Hidden by default) -->
+                                                                    <div id="edit-form-{{ $reply->id }}" class="hidden mt-2">
+                                                                        <form action="{{ route('blogs.comment.update', $reply) }}" method="POST">
+                                                                            @csrf
+                                                                            @method('PUT')
+                                                                            <textarea name="comment" rows="2" class="w-full px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-xs">{{ $reply->comment }}</textarea>
+                                                                            <div class="flex gap-2 mt-1">
+                                                                                <button type="submit" class="px-2 py-1 bg-blue-600 text-white text-xs rounded-md hover:bg-blue-700">
+                                                                                    Save
+                                                                                </button>
+                                                                                <button type="button" onclick="toggleEditForm({{ $reply->id }})" class="px-2 py-1 bg-gray-300 text-gray-700 text-xs rounded-md hover:bg-gray-400">
+                                                                                    Cancel
+                                                                                </button>
+                                                                            </div>
                                                                         </form>
-                                                                    @endcan
+                                                                    </div>
                                                                 @endauth
                                                             </div>
                                                         </div>
@@ -268,4 +315,11 @@
             overflow: hidden;
         }
     </style>
+
+    <script>
+        function toggleEditForm(commentId) {
+            const form = document.getElementById(`edit-form-${commentId}`);
+            form.classList.toggle('hidden');
+        }
+    </script>
 </x-app-layout>
