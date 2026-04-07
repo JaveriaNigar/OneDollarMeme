@@ -63,7 +63,7 @@
 
                     <!-- Action Buttons -->
                     <div class="d-flex flex-wrap gap-2">
-                        <a href="{{ route('sponsored.submit.form', $brand->slug ?? $brand->id) }}" class="btn rounded-pill px-4 fw-bold text-white" style="background: #0079D3; font-size: 0.9rem;">
+                        <a href="{{ route('sponsored.submit.form', $brand->slug ?? $brand->id) }}" class="btn rounded-pill px-4 fw-bold text-white d-none d-md-inline-block" style="background: #0079D3; font-size: 0.9rem;">
                             Join
                         </a>
                         @if($brand->website)
@@ -79,6 +79,51 @@
                             </a>
                         @endif
                     </div>
+                </div>
+            </div>
+
+            <!-- ===================== -->
+            <!-- Campaign Info - MOBILE ONLY (shows right below header) -->
+            <!-- ===================== -->
+            <div class="d-block d-lg-none card border-0 rounded-2 mb-3" style="box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                <div class="card-body p-3">
+                    <h5 class="fw-bold mb-3">
+                        <i class="bi bi-file-earmark-text me-2"></i>Campaign Info
+                    </h5>
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between align-items-center py-2 border-bottom">
+                            <span class="text-muted small">Campaign</span>
+                            <span class="fw-bold small text-end" style="max-width: 60%;">{{ $brand->campaign_title ?? $brand->company_name }}</span>
+                        </div>
+                        @if($brand->start_date)
+                        <div class="d-flex justify-content-between align-items-center py-2 border-bottom">
+                            <span class="text-muted small">Start</span>
+                            <span class="fw-bold small">{{ $brand->start_date->format('M d, g:i A') }}</span>
+                        </div>
+                        @endif
+                        @if($brand->end_date)
+                        <div class="d-flex justify-content-between align-items-center py-2 border-bottom">
+                            <span class="text-muted small">End</span>
+                            <span class="fw-bold small">{{ $brand->end_date->format('M d, g:i A') }}</span>
+                        </div>
+                        @endif
+                        <div class="d-flex justify-content-between align-items-center py-2">
+                            <span class="text-muted small">Entries</span>
+                            <span class="fw-bold small">{{ $memes->total() ?? $memes->count() }}</span>
+                        </div>
+                    </div>
+                    @if($brand->website)
+                        @php
+                            $websiteUrl = $brand->website;
+                            if (!preg_match('#^https?://#i', $websiteUrl)) {
+                                $websiteUrl = 'https://' . $websiteUrl;
+                            }
+                        @endphp
+                        <a href="{{ $websiteUrl }}" target="_blank" rel="noopener noreferrer"
+                           class="btn w-100 rounded-pill fw-bold" style="border: 2px solid #0079D3; color: #0079D3; font-size: 0.85rem;">
+                            <i class="bi bi-box-arrow-up-right me-1"></i> Visit {{ $brand->company_name }}'s Website
+                        </a>
+                    @endif
                 </div>
             </div>
 
@@ -169,7 +214,7 @@
 
                             <!-- Post Actions Bar -->
                             <div class="d-flex align-items-center gap-1 gap-sm-2 px-2 px-sm-3 py-2 flex-wrap border-top mt-2" style="border-color: #f0f0f0 !important;">
-                                <!-- React Button (moved here) -->
+                                <!-- React Button -->
                                 <button class="react-toggle-btn action-btn btn btn-sm d-flex align-items-center gap-1 text-muted"
                                         type="button" data-meme-id="{{ $meme->id }}" title="React">
                                     <span class="reaction-emoji" style="font-size: 1rem;">{{ $meme->userEmoji ?? '😀' }}</span>
@@ -221,7 +266,7 @@
                         <h5 class="fw-bold mb-2">No memes yet!</h5>
                         <p class="text-muted small mb-4">Be the first to submit a meme for this campaign</p>
                         <a href="{{ route('sponsored.submit.form', $brand->slug ?? $brand->id) }}"
-                           class="btn rounded-pill px-4 fw-bold text-white" style="background: #0079D3;">
+                           class="btn rounded-pill px-4 fw-bold text-white d-none d-md-inline-block mx-auto" style="background: #0079D3;">
                             Submit First Meme
                         </a>
                     </div>
@@ -231,6 +276,7 @@
 
         <!-- Sidebar -->
         <div class="col-12 col-lg-4">
+
             <!-- Prize Pool Card -->
             <div class="card border-0 rounded-2 mb-3 text-center" style="box-shadow: 0 1px 3px rgba(0,0,0,0.1); background: #FFF5EB;">
                 <div class="card-body p-3 p-md-4">
@@ -245,15 +291,15 @@
                     </div>
                 </div>
                 <div class="px-3 px-md-4 pb-3 pb-md-4">
-<a href="{{ route('sponsored.submit.form', $brand->slug ?? $brand->id) }}"
-   class="btn w-100 rounded-pill fw-bold text-white py-2 d-none d-md-block" style="background: #FF4500;">
-    <i class="bi bi-plus-circle me-1"></i> Submit a Meme
-</a>
+                    <a href="{{ route('sponsored.submit.form', $brand->slug ?? $brand->id) }}"
+                       class="btn w-100 rounded-pill fw-bold text-white py-2 d-none d-md-block" style="background: #FF4500;">
+                        <i class="bi bi-plus-circle me-1"></i> Submit a Meme
+                    </a>
                 </div>
             </div>
 
-            <!-- Campaign Info Card -->
-            <div class="card border-0 rounded-2 mb-3" style="box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+            <!-- Campaign Info Card - DESKTOP ONLY (hidden on mobile, shown inline above instead) -->
+            <div class="d-none d-lg-block card border-0 rounded-2 mb-3" style="box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
                 <div class="card-body p-3 p-md-4">
                     <h5 class="fw-bold mb-3">
                         <i class="bi bi-file-earmark-text me-2"></i>Campaign Info
@@ -320,6 +366,7 @@
                     @endif
                 </div>
             </div>
+
         </div>
     </div>
 </div>
@@ -333,7 +380,6 @@
     .post-card { transition: all 0.2s ease; }
     .post-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.15) !important; }
 
-    /* Action button shared style */
     .action-btn {
         border-radius: 20px;
         padding: 4px 10px;
@@ -347,7 +393,6 @@
         color: #333 !important;
     }
 
-    /* Highlight animation */
     @keyframes meme-pulse {
         0%   { box-shadow: 0 0 0 0 rgba(91,46,145,0.7); }
         50%  { box-shadow: 0 0 0 12px rgba(91,46,145,0.15), 0 0 25px 5px rgba(91,46,145,0.2); }
@@ -358,15 +403,8 @@
         animation: meme-pulse 1s ease-in-out 3;
     }
 
-    /* Hide scrollbar on tab row */
     .overflow-auto::-webkit-scrollbar { display: none; }
 
-    /* Mobile: sidebar goes below main on small screens */
-    @media (max-width: 991.98px) {
-        .col-lg-4 { margin-top: 0; }
-    }
-
-    /* Tighter container padding on very small screens */
     @media (max-width: 575.98px) {
         .container { padding-left: 12px; padding-right: 12px; }
         .action-btn { padding: 4px 8px; }
