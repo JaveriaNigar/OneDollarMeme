@@ -347,6 +347,7 @@ Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('blogs.show');
 // Public comment route (requires auth)
 Route::middleware(['auth'])->group(function () {
     Route::post('/blog/{blog}/comment', [BlogController::class, 'storeComment'])->name('blogs.comment.store');
+    Route::put('/blog-comment/{comment}', [BlogController::class, 'updateComment'])->name('blogs.comment.update');
     Route::delete('/blog-comment/{comment}', [BlogController::class, 'deleteComment'])->name('blogs.comment.delete');
 });
 

@@ -92,4 +92,13 @@ class BlogPolicy
         // Admins can delete any comment
         return $user->isAdmin();
     }
+
+    /**
+     * Determine if the user can update a comment.
+     */
+    public function updateComment(User $user, \App\Models\BlogComment $comment): bool
+    {
+        // Comment authors can edit their own comments
+        return $user->id === $comment->user_id;
+    }
 }

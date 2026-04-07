@@ -51,7 +51,13 @@ class BlogController extends Controller
      */
     public function show($slug)
     {
-        $blog = Blog::with(['author', 'comments.user', 'comments.replies.user'])
+        $blog = Blog::with([
+            'author', 
+            'comments.user', 
+            'comments.replies.user',
+            'comments.blog',
+            'comments.replies.blog',
+        ])
             ->where('slug', $slug)
             ->published()
             ->firstOrFail();
@@ -277,11 +283,30 @@ class BlogController extends Controller
     }
 
     /**
+     * Update a comment.
+     */
+    public function updateComment(Request $request, BlogComment $comment)
+    {
+        $this->authorize('updateComment', $comment);
+
+        $request->validate([
+            'comment' => 'required|string|max:2000',
+        ]);
+
+        $comment->update([
+            'comment' => $request->comment,
+        ]);
+
+        return redirect()->route('blogs.show', $comment->blog->slug)
+            ->with('success', 'Comment updated successfully!');
+    }
+
+    /**
      * Delete a comment.
      */
     public function deleteComment(BlogComment $comment)
     {
-        $this->authorize('delete', $comment);
+        $this->authorize('deleteComment', $comment);
 
         $blog = $comment->blog;
         $comment->delete();

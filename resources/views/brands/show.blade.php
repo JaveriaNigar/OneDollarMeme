@@ -62,10 +62,11 @@
                     </div>
 
                     <!-- Action Buttons -->
-                    <div class="d-flex flex-wrap gap-2">
-                        <a href="{{ route('sponsored.submit.form', $brand->slug ?? $brand->id) }}" class="btn rounded-pill px-4 fw-bold text-white d-none d-md-inline-block" style="background: #0079D3; font-size: 0.9rem;">
-                            Join
-                        </a>
+<!-- Action Buttons -->
+<div class="d-flex flex-wrap gap-2">
+    <a href="{{ route('sponsored.submit.form', $brand->slug ?? $brand->id) }}" class="btn rounded-pill px-4 fw-bold text-white" style="background: #0079D3; font-size: 0.9rem;">
+        Join
+    </a>
                         @if($brand->website)
                             @php
                                 $websiteUrl = $brand->website;
@@ -645,7 +646,7 @@ document.addEventListener('DOMContentLoaded', function () {
     @if($highlightId ?? false)
     const el = document.getElementById('meme-{{ $highlightId }}');
     if (el) {
-        setTimeout(() => {
+        setTimeout(() => {<!-- Action Buttons -->
             el.scrollIntoView({ behavior: 'smooth', block: 'center' });
             el.classList.add('meme-highlighted');
             setTimeout(() => el.classList.remove('meme-highlighted'), 4000);
