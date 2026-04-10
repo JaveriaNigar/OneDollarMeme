@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
-            <h2 class="font-semibold text-lg sm:text-xl text-gray-800 leading-tight line-clamp-2">
+            <h2 class="font-semibold text-lg sm:text-lg text-gray-800 leading-tight line-clamp-2">
                 {{ $blog->title }}
             </h2>
             @can('update', $blog)
@@ -35,20 +35,21 @@
                 <div class="p-4 sm:p-8">
                     <!-- Meta Info -->
               <!-- Meta Info -->
-<div class="flex flex-wrap items-center gap-2 sm:gap-4 text-xs sm:text-sm text-gray-500 mb-4 sm:mb-6">
-    <div class="flex items-center gap-2">
+<!-- <div class="flex flex-wrap items-center gap-2 sm:gap-4 text-xs sm:text-sm text-gray-500 mb-4 sm:mb-6"> -->
+    <!-- <div class="flex items-center gap-2">
         <img src="{{ $blog->author->profile_photo_url }}"
              alt="{{ $blog->author->name }}"
              class="w-7 h-7 sm:w-8 sm:h-8 rounded-full flex-shrink-0">
-        <span class="font-bold text-gray-800">{{ $blog->author->name }}</span>
-    </div>
-    <span>·</span>
+        
+    </div> -->
+
+    <!-- <span class="font-bold text-gray-800">{{ $blog->author->name }}</span>
     <span class="font-bold text-gray-800">{{ $blog->published_at->format('M j, Y') }}</span>
     <span>·</span>
     <span class="font-bold text-gray-800">{{ $blog->reading_time }} min read</span>
     <span>·</span>
     <span class="font-bold text-gray-800">{{ $blog->views_count }} views</span>
-</div>
+</div> -->
 
                     <!-- Content -->
                     <div class="prose prose-sm sm:prose-lg max-w-none blog-content">
@@ -141,6 +142,21 @@
                     @endif
                 </div>
             </div>
+            <div class="flex flex-wrap items-center gap-2 sm:gap-4 text-xs sm:text-sm text-gray-500 mb-4 sm:mb-6">
+    <!-- <div class="flex items-center gap-2">
+        <img src="{{ $blog->author->profile_photo_url }}"
+             alt="{{ $blog->author->name }}"
+             class="w-7 h-7 sm:w-8 sm:h-8 rounded-full flex-shrink-0">
+        
+    </div> -->
+
+    <span class="font-bold text-gray-800">OneDollarMeme</span>
+    <span class="font-bold text-gray-800">{{ $blog->published_at->format('M j, Y') }}</span>
+    <span>·</span>
+
+    <span>·</span>
+   
+</div>
 
             <!-- Comments Section -->
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">

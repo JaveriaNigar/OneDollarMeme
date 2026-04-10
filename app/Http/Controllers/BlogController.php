@@ -189,6 +189,12 @@ class BlogController extends Controller
         $allowedTags = '<a><p><br><strong><em><u><ul><ol><li><h1><h2><h3><h4><h5><h6><img><blockquote><pre><code><table><thead><tbody><tr><th><td><hr><span><div><iframe>';
         $data['content'] = strip_tags($data['content'], $allowedTags);
 
+        // Handle featured image removal
+        if ($request->input('remove_featured_image') && $blog->featured_image) {
+            Storage::disk('public')->delete($blog->featured_image);
+            $data['featured_image'] = null;
+        }
+
         // Handle featured image upload
         if ($request->hasFile('featured_image')) {
             // Delete old image
