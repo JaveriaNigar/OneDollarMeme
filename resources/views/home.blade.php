@@ -6,8 +6,8 @@
     <title>OneDollarMeme</title>
 
     <!-- Favicon -->
-    <link rel="icon" type="image/jpeg" href="{{ asset('image/my-logo.jpg') }}">
-    <link rel="shortcut icon" type="image/jpeg" href="{{ asset('image/my-logo.jpg') }}">
+    <link rel="icon" type="image/jpeg" href="{{ asset('image/my-logo.png') }}">
+    <link rel="shortcut icon" type="image/jpeg" href="{{ asset('image/my-logo.png') }}">
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -679,10 +679,14 @@
 <!-- Mobile Bottom Navigation -->
 <nav class="mobile-bottom-nav d-lg-none">
     <div class="container-fluid">
-        <div class="d-flex justify-content-around align-items-center">
+        <div class="d-flex justify-content-between align-items-center">
             <a href="{{ route('home') }}" class="nav-item {{ request()->routeIs('home') ? 'active' : '' }}">
                 <i class="bi bi-house-door-fill"></i>
                 <span>Home</span>
+            </a>
+            <a href="{{ route('meme-agent') }}" class="nav-item {{ request()->routeIs('meme-agent') ? 'active' : '' }}">
+                <i class="bi bi-robot"></i>
+                <span>Agent</span>
             </a>
             <a href="{{ route('memes.index', ['sort' => 'trending']) }}" class="nav-item {{ request()->routeIs('memes.index') ? 'active' : '' }}">
                 <i class="bi bi-fire"></i>

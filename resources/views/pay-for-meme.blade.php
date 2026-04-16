@@ -6,7 +6,7 @@
     <title>Pay for Meme</title>
     
     <!-- Favicon -->
-    <link rel="icon" type="image/jpeg" href="{{ asset('image/my-logo.jpg') }}">
+    <link rel="icon" type="image/jpeg" href="{{ asset('image/my-logo.png') }}">
     
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <!-- Bootstrap CSS -->

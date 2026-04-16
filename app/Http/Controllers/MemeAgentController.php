@@ -65,7 +65,7 @@ class MemeAgentController extends Controller
                 ];
             }
         }
-        
+
         // STRIKE RULE: Exactly 3 memes
         $memes = array_slice($memes, 0, 3);
         while (count($memes) < 3) {
@@ -98,7 +98,7 @@ class MemeAgentController extends Controller
         }
 
         $conversations = Conversation::where('user_id', $user_id)
-            ->has('messages') // Only return conversations that have messages
+            ->has('messages')
             ->orderBy('updated_at', 'desc')
             ->get(['id', 'title', 'created_at']);
 
@@ -164,7 +164,7 @@ class MemeAgentController extends Controller
         $tone = $request->input('tone', 'funny');
         $template = $request->input('template', 'AUTO');
 
-        set_time_limit(180); // Increase to 3 minutes
+        set_time_limit(180);
         $client = new Client();
         try {
             $response = $client->post('http://127.0.0.1:8003/chat', [
@@ -187,10 +187,29 @@ class MemeAgentController extends Controller
                 throw new \Exception('Invalid JSON from backend');
             }
 
-            // Extract data from backend response
+            // ✅ FIX: Handle new server.py response format
+            // Server returns: {success, type, items, conversation_id}
+            // Old format was: {memes, reply, meme_intent}
+            $type = $result['type'] ?? 'content';
+            $items = $result['items'] ?? [];
+            $memeIntent = $type === 'content';
+
+            // Convert items array to memes format
             $memes = $result['memes'] ?? [];
-            $reply = $result['reply'] ?? "Meme hazir hai! 😂";
-            $memeIntent = $result['meme_intent'] ?? true; // Default to true if not present for compatibility
+            if (empty($memes) && !empty($items)) {
+                foreach ($items as $item) {
+                    $memes[] = [
+                        'style' => 'relatable',
+                        'caption' => $item,
+                        'template' => 'auto'
+                    ];
+                }
+            }
+
+            // Reply: for chat mode show first item, for content mode show intro
+            $reply = $result['reply'] ?? ($type === 'chat'
+                ? ($items[0] ?? "Meme hazir hai! 😂")
+                : "Ye dekho! 😂");
 
             \Log::info('[CONTROLLER] Meme intent: ' . ($memeIntent ? 'YES' : 'NO'));
             \Log::info('[CONTROLLER] Meme count from backend: ' . count($memes));
@@ -220,7 +239,7 @@ class MemeAgentController extends Controller
             }
 
             // Return structured JSON matching frontend expectation
-            $response = [
+            $responseData = [
                 'success' => true,
                 'response' => [
                     'reply' => $reply,
@@ -236,17 +255,17 @@ class MemeAgentController extends Controller
                         'user_id' => Auth::id(),
                         'brand_id' => $request->brand_id,
                         'title' => is_array($memeData) ? ($memeData['caption'] ?? '') : $memeData,
-                        'status' => 'pending', // Admins will see this in the new Brand Memes section
+                        'status' => 'pending',
                         'template' => is_array($memeData) ? ($memeData['template'] ?? null) : null,
                     ]);
                 }
             }
 
-            return response()->json($response);
+            return response()->json($responseData);
+
         } catch (\Exception $e) {
             \Log::error('[CONTROLLER] Chat error: ' . $e->getMessage());
 
-            // Fallback with exactly 3 memes using topic-aware text
             $fallbackMemes = [
                 ['style' => 'relatable', 'caption' => "When {$message} hits different! 😂", 'template' => 'auto'],
                 ['style' => 'savage', 'caption' => "{$message} walla epic moment! 💀", 'template' => 'auto'],
@@ -280,18 +299,15 @@ class MemeAgentController extends Controller
             abort(403, 'Unauthorized');
         }
 
-        // Get the conversation context to generate a relevant meme
         $messages = $conversation->messages()
             ->orderBy('created_at', 'asc')
             ->get()
             ->pluck('content')
             ->join(' ');
 
-        // Prepare the topic for meme generation based on the conversation
         $topic = substr($messages, 0, 200) . ' ' . $request->request_message;
 
-        set_time_limit(180); // Increase to 3 minutes
-        // Call the synchronous meme generation API
+        set_time_limit(180);
         $client = new Client();
         try {
             $response = $client->post('http://127.0.0.1:8003/generate-meme', [
@@ -308,13 +324,11 @@ class MemeAgentController extends Controller
             $result = json_decode($response->getBody()->getContents(), true);
             $success = $result['success'] ?? false;
 
-            // Extract memes from the response
             $memes = [];
             if ($success && isset($result['data']['memes'])) {
                 $memes = array_slice($result['data']['memes'], 0, 3);
             }
-            
-            // Padding to exactly 3
+
             while (count($memes) < 3) {
                 $memes[] = [
                     'style' => 'relatable',
@@ -323,7 +337,6 @@ class MemeAgentController extends Controller
                 ];
             }
 
-            // AUTO-SAVE to Meme model if brand_id is provided
             if ($request->filled('brand_id')) {
                 foreach ($memes as $memeData) {
                     \App\Models\Meme::create([
@@ -374,10 +387,8 @@ class MemeAgentController extends Controller
             abort(403, 'Unauthorized');
         }
 
-        // Messages will be deleted automatically if cascade on delete is set in DB,
-        // but let's be safe and delete them manually if needed or just rely on the model.
         $conversation->delete();
 
         return response()->json(['success' => true]);
     }
-}
+}    

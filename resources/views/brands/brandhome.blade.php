@@ -6,8 +6,8 @@
     <title>OneDollarMeme</title>
 
     <!-- Favicon -->
-    <link rel="icon" type="image/jpeg" href="{{ asset('image/my-logo.jpg') }}">
-    <link rel="shortcut icon" type="image/jpeg" href="{{ asset('image/my-logo.jpg') }}">
+    <link rel="icon" type="image/jpeg" href="{{ asset('image/my-logo.png') }}">
+    <link rel="shortcut icon" type="image/jpeg" href="{{ asset('image/my-logo.png') }}">
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -340,7 +340,7 @@
     <div class="container d-flex align-items-center justify-content-between">
         
         <a class="brand-logo d-flex align-items-center text-decoration-none" href="{{ route('home') }}" style="gap: 8px;">
-            <img src="{{ asset('image/my-logo.jpg') }}" width="35" height="35" class="rounded-circle shadow-sm border border-2 border-white" alt="Logo">
+            <img src="{{ asset('image/my-logo.png') }}" width="35" height="35" class="rounded-circle shadow-sm border border-2 border-white" alt="Logo">
             <span class="fw-bolder italic" style="color: var(--brand-purple); letter-spacing: -0.5px; font-style: italic; font-size: clamp(1rem, 4vw, 1.4rem);">OneDollarMeme</span>
         </a>
 
@@ -445,7 +445,7 @@
              style="background-image: radial-gradient(#fff 1px, transparent 1px); background-size: 20px 20px;"></div>
 
         <div class="position-relative z-1 d-flex flex-column align-items-center text-center">
-            <img src="{{ asset('image/my-logo.jpg') }}" alt="OneDollarMeme"
+            <img src="{{ asset('image/my-logo.png') }}" alt="OneDollarMeme"
                  class="rounded-circle shadow-lg mb-3 border border-4 border-white" style="width: 100px; height: 100px; object-fit: cover;">
 
             <h1 class="h2 fw-black uppercase italic tracking-tight mb-1" style="font-weight: 900; text-transform: uppercase; font-style: italic; letter-spacing: -0.025em;">OneDollarMeme</h1>
