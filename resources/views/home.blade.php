@@ -692,6 +692,10 @@
                 <i class="bi bi-fire"></i>
                 <span>Trending</span>
             </a>
+              <a href="{{ route('upload-meme.create') }}" class="nav-item {{ request()->routeIs('upload-meme.create') ? 'active' : '' }}">
+                <i class="bi bi-plus-circle-fill" style="font-size: 1.8rem; color: var(--brand-purple);"></i>
+                <span>Upload</span>
+            </a>
             <a href="{{ route('blogs.index') }}" class="nav-item {{ request()->routeIs('blogs.*') ? 'active' : '' }}">
                 <i class="bi bi-journal-text"></i>
                 <span>Blog</span>
@@ -700,10 +704,7 @@
                 <i class="bi bi-buildings"></i>
                 <span>Brands</span>
             </a>
-            <a href="{{ route('upload-meme.create') }}" class="nav-item {{ request()->routeIs('upload-meme.create') ? 'active' : '' }}">
-                <i class="bi bi-plus-circle-fill" style="font-size: 1.8rem; color: var(--brand-purple);"></i>
-                <span>Upload</span>
-            </a>
+          
             @auth
             <a href="{{ route('profile.edit') }}" class="nav-item">
                 <i class="bi bi-person-circle"></i>

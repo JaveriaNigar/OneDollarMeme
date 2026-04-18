@@ -738,14 +738,22 @@
 <!-- Mobile Bottom Navigation -->
 <nav class="mobile-bottom-nav d-lg-none">
     <div class="container-fluid">
-        <div class="d-flex justify-content-around align-items-center">
+        <div class="d-flex justify-content-between align-items-center">
             <a href="{{ route('home') }}" class="nav-item {{ request()->routeIs('home') ? 'active' : '' }}">
                 <i class="bi bi-house-door-fill"></i>
                 <span>Home</span>
             </a>
+            <a href="{{ route('meme-agent') }}" class="nav-item {{ request()->routeIs('meme-agent') ? 'active' : '' }}">
+                <i class="bi bi-robot"></i>
+                <span>Agent</span>
+            </a>
             <a href="{{ route('memes.index', ['sort' => 'trending']) }}" class="nav-item {{ request()->routeIs('memes.index') ? 'active' : '' }}">
                 <i class="bi bi-fire"></i>
                 <span>Trending</span>
+            </a>
+              <a href="{{ route('upload-meme.create') }}" class="nav-item {{ request()->routeIs('upload-meme.create') ? 'active' : '' }}">
+                <i class="bi bi-plus-circle-fill" style="font-size: 1.8rem; color: var(--brand-purple);"></i>
+                <span>Upload</span>
             </a>
             <a href="{{ route('blogs.index') }}" class="nav-item {{ request()->routeIs('blogs.*') ? 'active' : '' }}">
                 <i class="bi bi-journal-text"></i>
@@ -755,10 +763,7 @@
                 <i class="bi bi-buildings"></i>
                 <span>Brands</span>
             </a>
-            <a href="{{ route('upload-meme.create') }}" class="nav-item {{ request()->routeIs('upload-meme.create') ? 'active' : '' }}">
-                <i class="bi bi-plus-circle-fill" style="font-size: 1.8rem; color: var(--brand-purple);"></i>
-                <span>Upload</span>
-            </a>
+          
             @auth
             <a href="{{ route('profile.edit') }}" class="nav-item">
                 <i class="bi bi-person-circle"></i>
