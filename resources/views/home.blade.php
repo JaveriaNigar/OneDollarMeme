@@ -703,17 +703,7 @@
                 <span>Brands</span>
             </a>
           
-            @auth
-            <a href="{{ route('profile.edit') }}" class="nav-item">
-                <i class="bi bi-person-circle"></i>
-                <span>Profile</span>
-            </a>
-            @else
-            <a href="{{ route('login') }}" class="nav-item">
-                <i class="bi bi-person"></i>
-                <span>Login</span>
-            </a>
-            @endauth
+          
         </div>
     </div>
 </nav>

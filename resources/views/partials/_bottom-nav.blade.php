@@ -46,6 +46,17 @@
         color: #5B2E91;
     }
 
+    /* Purple color for Home and Upload icons always */
+    .bottom-nav-link.nav-home i,
+    .bottom-nav-link.nav-upload i {
+        color: #572792;
+    }
+
+    /* Upload icon slightly bigger */
+    .bottom-nav-link.nav-upload i {
+        font-size: 1.8rem;
+    }
+
     @media (max-width: 768px) {
         .bottom-nav {
             display: block !important;
@@ -60,44 +71,29 @@
 
 <nav class="bottom-nav">
     <div class="bottom-nav-container">
-        <a href="{{ route('home') }}" class="bottom-nav-link">
+        <a href="{{ route('home') }}" class="bottom-nav-link nav-home">
             <i class="bi bi-house-door"></i>
             <span>Home</span>
         </a>
 
-
         <a href="{{ route('meme-agent') }}" class="bottom-nav-link {{ request()->routeIs('meme-agent') ? 'active' : '' }}">
-                <i class="bi bi-robot"></i>
-                <span>Agent</span>
+            <i class="bi bi-robot"></i>
+            <span>Agent</span>
         </a>
-        
-        <a href="{{ route('upload-meme.create') }}" class="bottom-nav-link">
-            <i class="bi bi-plus-circle "></i>
+
+        <a href="{{ route('upload-meme.create') }}" class="bottom-nav-link nav-upload">
+            <i class="bi bi-plus-circle"></i>
             <span>Upload</span>
-
         </a>
 
-                <a href="{{ route('memes.index') }}" class="bottom-nav-link ">
+        <a href="{{ route('memes.index') }}" class="bottom-nav-link">
             <i class="bi bi-fire"></i>
             <span>Trending</span>
         </a>
 
-      
         <a href="{{ route('brands.public') }}" class="bottom-nav-link">
             <i class="bi bi-buildings"></i>
             <span>Brands</span>
         </a>
-      
-        @auth
-            <a href="{{ route('account.settings') }}" class="bottom-nav-link">
-                <i class="bi bi-person-circle"></i>
-                <span>Profile</span>
-            </a>
-        @else
-            <a href="{{ route('login') }}" class="bottom-nav-link">
-                <i class="bi bi-box-arrow-in-right"></i>
-                <span>Login</span>
-            </a>
-        @endauth
     </div>
 </nav>
