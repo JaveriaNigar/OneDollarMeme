@@ -6,8 +6,8 @@
     <title>OneDollarMeme</title>
 
     <!-- Favicon -->
-    <link rel="icon" type="image/jpeg" href="{{ asset('image/my-logo.jpg') }}">
-    <link rel="shortcut icon" type="image/jpeg" href="{{ asset('image/my-logo.jpg') }}">
+    <link rel="icon" type="image/jpeg" href="{{ asset('image/my-logo.png') }}">
+    <link rel="shortcut icon" type="image/jpeg" href="{{ asset('image/my-logo.png') }}">
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -679,27 +679,30 @@
 <!-- Mobile Bottom Navigation -->
 <nav class="mobile-bottom-nav d-lg-none">
     <div class="container-fluid">
-        <div class="d-flex justify-content-around align-items-center">
+        <div class="d-flex justify-content-between align-items-center">
             <a href="{{ route('home') }}" class="nav-item {{ request()->routeIs('home') ? 'active' : '' }}">
                 <i class="bi bi-house-door-fill"></i>
                 <span>Home</span>
             </a>
-            <a href="{{ route('memes.index', ['sort' => 'trending']) }}" class="nav-item {{ request()->routeIs('memes.index') ? 'active' : '' }}">
+            <a href="{{ route('meme-agent') }}" class="nav-item {{ request()->routeIs('meme-agent') ? 'active' : '' }}">
+                <i class="bi bi-robot"></i>
+                <span>Agent</span>
+            </a>
+         
+              <a href="{{ route('upload-meme.create') }}" class="nav-item {{ request()->routeIs('upload-meme.create') ? 'active' : '' }}">
+                <i class="bi bi-plus-circle-fill" style="font-size: 2.6rem; color: var(--brand-purple);"></i>
+                <span>Upload</span>
+            </a>
+               <a href="{{ route('memes.index', ['sort' => 'trending']) }}" class="nav-item {{ request()->routeIs('memes.index') ? 'active' : '' }}">
                 <i class="bi bi-fire"></i>
                 <span>Trending</span>
             </a>
-            <a href="{{ route('blogs.index') }}" class="nav-item {{ request()->routeIs('blogs.*') ? 'active' : '' }}">
-                <i class="bi bi-journal-text"></i>
-                <span>Blog</span>
-            </a>
+
             <a href="{{ route('brands.public') }}" class="nav-item {{ request()->routeIs('brands.public') ? 'active' : '' }}">
                 <i class="bi bi-buildings"></i>
                 <span>Brands</span>
             </a>
-            <a href="{{ route('upload-meme.create') }}" class="nav-item {{ request()->routeIs('upload-meme.create') ? 'active' : '' }}">
-                <i class="bi bi-plus-circle-fill" style="font-size: 1.8rem; color: var(--brand-purple);"></i>
-                <span>Upload</span>
-            </a>
+          
             @auth
             <a href="{{ route('profile.edit') }}" class="nav-item">
                 <i class="bi bi-person-circle"></i>
@@ -720,6 +723,7 @@
   <div class="offcanvas-header border-bottom">
     <h5 class="offcanvas-title fw-bold text-uppercase" id="mobileSidebarOffcanvasLabel" style="color: var(--brand-purple); font-size: 1rem;">Actions & Leaderboard</h5>
     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+
   </div>
   <div class="offcanvas-body" style="padding: 15px; background-color: var(--brand-bg);">
       @include('partials._leaderboard-widget', ['hideBrandWinners' => true])

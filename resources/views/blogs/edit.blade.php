@@ -37,14 +37,24 @@
                             </label>
                             @if($blog->featured_image)
                                 <div class="mb-4">
-                                    <img src="{{ asset('storage/' . $blog->featured_image) }}" 
+                                    <img src="{{ asset('storage/' . $blog->featured_image) }}"
                                          alt="Current image"
                                          class="max-h-48 rounded-lg">
                                     <p class="text-sm text-gray-500 mt-2">Current featured image</p>
+                                    <label class="inline-flex items-center mt-3">
+                                        <input type="checkbox"
+                                               name="remove_featured_image"
+                                               id="remove_featured_image"
+                                               value="1"
+                                               class="rounded border-gray-300 text-red-600 focus:ring-red-500">
+                                        <span class="ml-2 text-sm text-red-600 font-medium">
+                                            <i class="bi bi-trash me-1"></i>Remove current image
+                                        </span>
+                                    </label>
                                 </div>
                             @endif
-                            <input type="file" 
-                                   name="featured_image" 
+                            <input type="file"
+                                   name="featured_image"
                                    id="featured_image"
                                    accept="image/*"
                                    class="w-full border-gray-300 rounded-lg focus:ring-purple-500 focus:border-purple-500 @error('featured_image') border-red-500 @enderror"
@@ -276,6 +286,23 @@
 
         // App link counter
         let appLinkCount = {{ count($appLinks) }};
+
+        // Handle remove featured image checkbox
+        const removeImageCheckbox = document.getElementById('remove_featured_image');
+        if (removeImageCheckbox) {
+            removeImageCheckbox.addEventListener('change', function() {
+                const imagePreview = this.closest('.mb-4');
+                const fileInput = document.getElementById('featured_image');
+                
+                if (this.checked) {
+                    imagePreview.querySelector('img').style.opacity = '0.5';
+                    fileInput.disabled = true;
+                } else {
+                    imagePreview.querySelector('img').style.opacity = '1';
+                    fileInput.disabled = false;
+                }
+            });
+        }
 
         // Add app link function
         function addAppLink() {

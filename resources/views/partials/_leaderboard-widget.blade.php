@@ -17,7 +17,22 @@
             </a>
             @endauth
         </div>
+        
     </div>
+
+<div class="card border-0 shadow-sm rounded-4">
+    <div class="card-body p-3 text-center">
+        <a href="{{ route('blogs.index') }}" 
+           class="fw-bold text-decoration-none"
+           style="color: var(--brand-purple);">
+            📝 Blog
+        </a>
+    </div>
+</div>
+
+
+
+
     @endif
 
     <!-- BOX 2: WINNER SPOTLIGHT -->

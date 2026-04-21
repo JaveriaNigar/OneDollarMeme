@@ -60,13 +60,13 @@
                                     {{ $blog->excerpt }}
                                 </p>
                                 <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center text-sm text-gray-500 gap-1 sm:gap-0">
-                                    <span class="truncate">By {{ $blog->author->name }}</span>
+                                    <span class="truncate">By OneDollarMeme</span>
                                     <span class="text-xs sm:text-sm">{{ $blog->published_at->diffForHumans() }}</span>
                                 </div>
                                 <div class="mt-3 sm:mt-4 flex justify-between items-center">
-                                    <span class="text-xs text-gray-400">
+                                    <!-- <span class="text-xs text-gray-400">
                                         {{ $blog->reading_time }} min · {{ $blog->views_count }} views
-                                    </span>
+                                    </span> -->
                                     <a href="{{ route('blogs.show', $blog->slug) }}"
                                        class="text-purple-600 hover:text-purple-700 font-medium text-sm">
                                         Read More →

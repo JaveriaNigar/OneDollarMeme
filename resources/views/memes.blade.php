@@ -7,8 +7,8 @@
     <title>OneDollarMeme - Memes</title>
 
     <!-- Favicon -->
-    <link rel="icon" type="image/jpeg" href="{{ asset('image/my-logo.jpg') }}">
-    <link rel="shortcut icon" type="image/jpeg" href="{{ asset('image/my-logo.jpg') }}">
+    <link rel="icon" type="image/jpeg" href="{{ asset('image/my-logo.png') }}">
+    <link rel="shortcut icon" type="image/jpeg" href="{{ asset('image/my-logo.png') }}">
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -132,7 +132,7 @@
     <div class="container d-flex flex-wrap justify-content-between align-items-center">
         <!-- Logo -->
         <a class="brand-logo" href="{{ route('home') }}">
-            <img src="{{ asset('image/my-logo.jpg') }}" width="35" height="35" class="rounded-circle shadow-sm" alt="Logo">
+            <img src="{{ asset('image/my-logo.png') }}" width="35" height="35" class="rounded-circle shadow-sm" alt="Logo">
             OneDollarMeme
         </a>
         

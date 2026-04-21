@@ -189,6 +189,12 @@ class BlogController extends Controller
         $allowedTags = '<a><p><br><strong><em><u><ul><ol><li><h1><h2><h3><h4><h5><h6><img><blockquote><pre><code><table><thead><tbody><tr><th><td><hr><span><div><iframe>';
         $data['content'] = strip_tags($data['content'], $allowedTags);
 
+        // Handle featured image removal
+        if ($request->input('remove_featured_image') && $blog->featured_image) {
+            Storage::disk('public')->delete($blog->featured_image);
+            $data['featured_image'] = null;
+        }
+
         // Handle featured image upload
         if ($request->hasFile('featured_image')) {
             // Delete old image
@@ -278,6 +284,27 @@ class BlogController extends Controller
             'is_approved' => true,
         ]);
 
+        // Load user relationship for response
+        $comment->load('user');
+
+        // Return JSON for AJAX requests
+        if ($request->expectsJson() || $request->ajax()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Comment added successfully!',
+                'comment' => [
+                    'id' => $comment->id,
+                    'comment' => $comment->comment,
+                    'user' => [
+                        'name' => $comment->user->name,
+                        'profile_photo_url' => $comment->user->profile_photo_url,
+                    ],
+                    'created_at' => $comment->created_at->diffForHumans(),
+                    'parent_id' => $comment->parent_id,
+                ],
+            ]);
+        }
+
         return redirect()->route('blogs.show', $blog->slug)
             ->with('success', 'Comment added successfully!');
     }
@@ -297,6 +324,19 @@ class BlogController extends Controller
             'comment' => $request->comment,
         ]);
 
+        // Return JSON for AJAX requests
+        if ($request->expectsJson() || $request->ajax()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Comment updated successfully!',
+                'comment' => [
+                    'id' => $comment->id,
+                    'comment' => $comment->comment,
+                    'updated_at' => now()->diffForHumans(),
+                ],
+            ]);
+        }
+
         return redirect()->route('blogs.show', $comment->blog->slug)
             ->with('success', 'Comment updated successfully!');
     }
@@ -310,6 +350,15 @@ class BlogController extends Controller
 
         $blog = $comment->blog;
         $comment->delete();
+
+        // Return JSON for AJAX requests
+        if (request()->expectsJson() || request()->ajax()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Comment deleted successfully!',
+                'comment_id' => $comment->id,
+            ]);
+        }
 
         return redirect()->route('blogs.show', $blog->slug)
             ->with('success', 'Comment deleted successfully!');

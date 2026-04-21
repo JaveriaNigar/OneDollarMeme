@@ -64,22 +64,30 @@
             <i class="bi bi-house-door"></i>
             <span>Home</span>
         </a>
-        <a href="{{ route('memes.index') }}" class="bottom-nav-link">
+
+
+        <a href="{{ route('meme-agent') }}" class="bottom-nav-link {{ request()->routeIs('meme-agent') ? 'active' : '' }}">
+                <i class="bi bi-robot"></i>
+                <span>Agent</span>
+        </a>
+        
+        <a href="{{ route('upload-meme.create') }}" class="bottom-nav-link">
+            <i class="bi bi-plus-circle "></i>
+            <span>Upload</span>
+
+        </a>
+
+                <a href="{{ route('memes.index') }}" class="bottom-nav-link ">
             <i class="bi bi-fire"></i>
             <span>Trending</span>
         </a>
-        <a href="{{ route('blogs.index') }}" class="bottom-nav-link {{ request()->routeIs('blogs.*') ? 'active' : '' }}">
-            <i class="bi bi-journal-text"></i>
-            <span>Blog</span>
-        </a>
+
+      
         <a href="{{ route('brands.public') }}" class="bottom-nav-link">
             <i class="bi bi-buildings"></i>
             <span>Brands</span>
         </a>
-        <a href="{{ route('upload-meme.create') }}" class="bottom-nav-link">
-            <i class="bi bi-plus-circle"></i>
-            <span>Upload</span>
-        </a>
+      
         @auth
             <a href="{{ route('account.settings') }}" class="bottom-nav-link">
                 <i class="bi bi-person-circle"></i>
