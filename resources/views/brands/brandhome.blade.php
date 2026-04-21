@@ -747,18 +747,16 @@
                 <i class="bi bi-robot"></i>
                 <span>Agent</span>
             </a>
-            <a href="{{ route('memes.index', ['sort' => 'trending']) }}" class="nav-item {{ request()->routeIs('memes.index') ? 'active' : '' }}">
+
+              <a href="{{ route('upload-meme.create') }}" class="nav-item {{ request()->routeIs('upload-meme.create') ? 'active' : '' }}">
+                <i class="bi bi-plus-circle-fill" style="font-size: 2.6rem; color: var(--brand-purple);"></i>
+                <span>Upload</span>
+            </a>
+                        <a href="{{ route('memes.index', ['sort' => 'trending']) }}" class="nav-item {{ request()->routeIs('memes.index') ? 'active' : '' }}">
                 <i class="bi bi-fire"></i>
                 <span>Trending</span>
             </a>
-              <a href="{{ route('upload-meme.create') }}" class="nav-item {{ request()->routeIs('upload-meme.create') ? 'active' : '' }}">
-                <i class="bi bi-plus-circle-fill" style="font-size: 1.8rem; color: var(--brand-purple);"></i>
-                <span>Upload</span>
-            </a>
-            <a href="{{ route('blogs.index') }}" class="nav-item {{ request()->routeIs('blogs.*') ? 'active' : '' }}">
-                <i class="bi bi-journal-text"></i>
-                <span>Blog</span>
-            </a>
+
             <a href="{{ route('brands.public') }}" class="nav-item {{ request()->routeIs('brands.public') ? 'active' : '' }}">
                 <i class="bi bi-buildings"></i>
                 <span>Brands</span>
